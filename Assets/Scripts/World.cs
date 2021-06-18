@@ -26,6 +26,7 @@ public class World : MonoBehaviour
 
     private void Update()
     {
+        Data.UI.Update();
         Data.Player.Update();
         Data.Farm.Update();
         Data.AI.Update();

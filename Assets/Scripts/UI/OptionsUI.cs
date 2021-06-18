@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class OptionsUI
+public class OptionsUI : UIElement
 {
-    private Transform viewer;
 
-    public OptionsUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

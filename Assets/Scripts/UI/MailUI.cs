@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class MailUI
+public class MailUI : UIElement
 {
-    private Transform viewer;
 
-    public MailUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class FarmUI
+public class FarmUI : UIElement
 {
-    private Transform viewer;
 
-    public FarmUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class StandUI
+public class StandUI : UIElement
 {
-    private Transform viewer;
 
-    public StandUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

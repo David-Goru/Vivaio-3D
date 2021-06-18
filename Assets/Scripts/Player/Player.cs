@@ -43,6 +43,15 @@ public class Player
             lastFrameMovement = Vector3.zero;
             // Stop animation
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Physics.CheckSphere(mousePos, 1 << LayerMask.NameToLayer("Ground")))
+            {
+
+            }
+        }
     }
 
     public void FixedUpdate()

@@ -47,6 +47,7 @@ public class GameData
         BinaryFormatter bf = new BinaryFormatter();
         SurrogateSelector surrogateSelector = new SurrogateSelector();
         surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+        surrogateSelector.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector2SerializationSurrogate());
         bf.SurrogateSelector = surrogateSelector;
 
         GameData data = (GameData)bf.Deserialize(file);

@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class FarmazonUI
+public class FarmazonUI : UIElement
 {
-    private Transform viewer;
 
-    public FarmazonUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class TutorialUI
+public class TutorialUI : UIElement
 {
-    private Transform viewer;
 
-    public TutorialUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

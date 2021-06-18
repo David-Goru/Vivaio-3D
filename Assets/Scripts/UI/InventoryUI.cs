@@ -1,11 +1,6 @@
 using UnityEngine;
 
-public class InventoryUI
+public class InventoryUI : UIElement
 {
-    private Transform viewer;
 
-    public InventoryUI(Transform viewer)
-    {
-        this.viewer = viewer;
-    }
 }

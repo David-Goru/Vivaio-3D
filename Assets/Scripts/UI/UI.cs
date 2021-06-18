@@ -1,43 +1,49 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public class UI : MonoBehaviour
 {
-    private FarmUI farmUI;
-    private FarmazonUI farmazonUI;
-    private InventoryUI inventoryUI;
-    private MailUI mailUI;
-    private OptionsUI optionsUI;
-    private StandUI standUI;
-    private TutorialUI tutorialUI;
+    private List<UIElement> elements;
 
     private void Start()
     {
+        loadElements();
+    }
+
+    public void Update()
+    {
+        foreach (UIElement element in elements)
+        {
+            element.Update();
+        }
+    }
+
+    private void loadElements()
+    {
+        elements = new List<UIElement>();
         foreach (Transform child in transform)
         {
-            switch (child.name)
+            UIElement element = getUIElement(child);
+            if (element != null)
             {
-                case "Farm":
-                    farmUI = new FarmUI(child);
-                    break;
-                case "Farmazon":
-                    farmazonUI = new FarmazonUI(child);
-                    break;
-                case "Inventory":
-                    inventoryUI = new InventoryUI(child);
-                    break;
-                case "Mail":
-                    mailUI = new MailUI(child);
-                    break;
-                case "Options":
-                    optionsUI = new OptionsUI(child);
-                    break;
-                case "Stand":
-                    standUI = new StandUI(child);
-                    break;
-                case "Tutorial":
-                    tutorialUI = new TutorialUI(child);
-                    break;
+                element.Initialize();
+                elements.Add(element);
             }
         }
+    }
+
+    private UIElement getUIElement(Transform viewer)
+    {
+        try
+        {
+            Type type = Type.GetType(viewer.name);
+            UIElement element = (UIElement)Activator.CreateInstance(type);
+            element.SetViewer(viewer);
+            return element;
+        }
+        catch (UnityException e) { Debug.Log("Couldn't create UI element with name " + viewer.name + ". Error: " + e); }
+
+        return null;
     }
 }
