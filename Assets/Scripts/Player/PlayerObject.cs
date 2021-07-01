@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public class PlayerObject : MonoBehaviour
 {
-    public Player Data;
     public LayerMask PlowableLayer;
-    public GameObject[] BodyParts;
+    public GameObject[] AppearanceElements;
     public Transform RightHand;
     public Transform LeftHand;
     public Transform PlayerModel;
     public Animator Animator;
 
+    [System.NonSerialized] public Player Data;
     private string lastAnimation = "IDLE";
 
     public void UpdatePosition(Vector3 position)

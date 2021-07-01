@@ -35,11 +35,7 @@ public class GameData
 
     public static bool Serialize(GameData data, string path)
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        SurrogateSelector surrogateSelector = new SurrogateSelector();
-        surrogateSelector.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
-        bf.SurrogateSelector = surrogateSelector;
-
+        BinaryFormatter bf = GetBinaryFormatter();
         FileStream file = File.Create(path);
         bf.Serialize(file, data);
         file.Close();
@@ -49,15 +45,21 @@ public class GameData
 
     public static GameData Deserialize(FileStream file)
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        SurrogateSelector surrogateSelector = new SurrogateSelector();
-        surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
-        surrogateSelector.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector2SerializationSurrogate());
-        bf.SurrogateSelector = surrogateSelector;
-
+        BinaryFormatter bf = GetBinaryFormatter();
         GameData data = (GameData)bf.Deserialize(file);
         file.Close();
 
         return data;
+    }
+
+    public static BinaryFormatter GetBinaryFormatter()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        SurrogateSelector surrogateSelector = new SurrogateSelector();
+        surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+        surrogateSelector.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+        bf.SurrogateSelector = surrogateSelector;
+
+        return bf;
     }
 }

@@ -49,7 +49,7 @@ MonoBehaviour:
   PlowableLayer:
     serializedVersion: 2
     m_Bits: 64
-  BodyParts:
+  AppearanceElements:
   - {fileID: 1018960461977284940}
   - {fileID: 1018960461791416138}
   - {fileID: 1018960462919096325}
