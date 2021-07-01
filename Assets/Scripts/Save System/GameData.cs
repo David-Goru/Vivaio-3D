@@ -16,16 +16,21 @@ public class GameData
     public AI AI { get => ai; set => ai = value; }
     public UI UI { get => ui; set => ui = value; }
 
+    public void Create()
+    {
+        player = new Player();
+        farm = new Farm();
+        ai = new AI();
+    }
+
     public void Instantiate()
     {
         if (World.Instance.UI != null) ui = Object.Instantiate(World.Instance.UI).GetComponent<UI>();
         else Debug.Log("UI prefab not found on World instance.");
-        if (World.Instance.Player != null) player = new Player(Object.Instantiate(World.Instance.Player));
-        else Debug.Log("Player prefab not found on World instance.");
-        if (World.Instance.Farm != null) farm = new Farm(Object.Instantiate(World.Instance.Farm));
-        else Debug.Log("Farm prefab not found on World instance.");
-        if (World.Instance.AI != null) ai = new AI(Object.Instantiate(World.Instance.AI));
-        else Debug.Log("AI prefab not found on World instance.");
+
+        player.Instantiate();
+        farm.Instantiate();
+        ai.Instantiate();
     }
 
     public static bool Serialize(GameData data, string path)

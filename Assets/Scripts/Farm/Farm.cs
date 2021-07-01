@@ -3,26 +3,47 @@ using UnityEngine;
 [System.Serializable]
 public class Farm
 {
-    private FarmGround ground;
+    private FarmMeshes meshes;
     private FarmObject farmObject;
 
-    public Farm(GameObject model)
+    public void Instantiate()
     {
-        if (ground == null) ground = new FarmGround();
+        if (meshes == null) meshes = new FarmMeshes();
 
-        farmObject = model.GetComponent<FarmObject>();
-
-        if (farmObject != null)
+        if (World.Instance.Farm != null)
         {
-            farmObject.FarmScript = this;
-            farmObject.Ground.mesh = ground.Initialize(farmObject.Ground.transform.localScale);
+            GameObject model = Object.Instantiate(World.Instance.Farm);
+            farmObject = model.GetComponent<FarmObject>();
+
+            if (farmObject != null)
+            {
+                farmObject.FarmScript = this;
+                meshes.Initialize(farmObject.Ground.transform.localScale);
+                farmObject.Ground.mesh = meshes.Ground;
+            }
+            else Debug.Log("FarmObject component not found in Farm model.");
         }
-        else Debug.Log("FarmObject component not found in Farm model.");
+        else Debug.Log("Farm prefab not found on World instance.");
     }
 
-    public void PlowAt(Vector3 position)
+    public bool PlowAt(Vector3 position)
     {
-        farmObject.Ground.mesh = ground.Plow(position);
+        if (meshes.Plow(position))
+        {
+            farmObject.Ground.mesh = meshes.Ground;
+            return true;
+        }
+        return false;
+    }
+
+    public static GameObject GetRidgePrefab()
+    {
+        return World.Instance.Data.Farm.RidgePrefab();
+    }
+
+    public GameObject RidgePrefab()
+    {
+        return farmObject.RidgePrefab;
     }
 
     public void Update()

@@ -18,7 +18,11 @@ public class World : MonoBehaviour
     {
         Instance = this;
 
-        if (GameFile == null) data = new GameData();
+        if (GameFile == null)
+        {
+            data = new GameData();
+            data.Create();
+        }
         else data = GameData.Deserialize(GameFile);
 
         data.Instantiate();
@@ -26,7 +30,6 @@ public class World : MonoBehaviour
 
     private void Update()
     {
-        Data.UI.Update();
         Data.Player.Update();
         Data.Farm.Update();
         Data.AI.Update();

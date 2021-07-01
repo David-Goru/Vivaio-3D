@@ -2,19 +2,15 @@ using UnityEngine;
 
 public class FarmObject : MonoBehaviour
 {
+    public GameObject RidgePrefab;
     public MeshFilter Ground;
 
     private Farm farmScript;
     public Farm FarmScript { set => farmScript = value; }
 
-    private void OnMouseDown()
+    public bool PlowAt(Vector3 position)
     {
-        if (farmScript != null)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit)) farmScript.PlowAt(hit.point);
-        }
+        if (farmScript != null) return farmScript.PlowAt(position);
+        return false;
     }
 }
