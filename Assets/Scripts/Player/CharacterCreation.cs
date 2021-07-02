@@ -6,6 +6,7 @@ public class CharacterCreation : MonoBehaviour
 {
     [SerializeField] private Transform appearanceElementsContainer;
     [SerializeField] private GameObject appearanceElementPrefab;
+    [SerializeField] private GameObject appearanceColorPrefab;
     [SerializeField] private GameObject characterModelPrefab;
 
     public static PlayerObject CharacterObject;
@@ -15,19 +16,28 @@ public class CharacterCreation : MonoBehaviour
     private void Start()
     {
         CharacterObject = Instantiate(characterModelPrefab).GetComponent<PlayerObject>();
+        initializeSelectors();
+    }
 
-        GameObject[] appearanceElements = CharacterObject.AppearanceElements;
+    private void initializeSelectors()
+    {
+        AppearanceElementSelector[] appearanceElements = CharacterObject.AppearanceElementSelectors;
         AppearanceElementsAndOptions = new List<KeyValuePair<string, List<string>>>();
         SelectedAppearance = new List<KeyValuePair<string, string>>();
+
         for (int i = 0; i < appearanceElements.Length; i++)
         {
-            string partName = appearanceElements[i].name;
-            List<string> elements = getElementsFrom(appearanceElements[i].transform);
-            AppearanceElementsAndOptions.Add(new KeyValuePair<string, List<string>>(partName, elements));
-            SelectedAppearance.Add(new KeyValuePair<string, string>(partName, "None"));
+            initializeSelector(appearanceElements[i]);
         }
+    }
 
-        setUpAppearanceUI();
+    private void initializeSelector(AppearanceElementSelector element)
+    {
+        string partName = element.BodyPart.name;
+        List<string> elements = getElementsFrom(element.BodyPart.transform);
+        AppearanceElementsAndOptions.Add(new KeyValuePair<string, List<string>>(partName, elements));
+        SelectedAppearance.Add(new KeyValuePair<string, string>(partName, "None"));
+        element.SetUpSelector(appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
     }
 
     private List<string> getElementsFrom(Transform bodyPart)
@@ -38,15 +48,6 @@ public class CharacterCreation : MonoBehaviour
         return elements;
     }
 
-    private void setUpAppearanceUI()
-    {
-        foreach (KeyValuePair<string, List<string>> element in AppearanceElementsAndOptions)
-        {
-            AppearanceElementSelector selector = new AppearanceElementSelector();
-            selector.SetUpSelector(element.Key, Instantiate(appearanceElementPrefab), appearanceElementsContainer);
-        }
-    }
-
     // TEST //
     public void TestPlay()
     {
@@ -54,28 +55,47 @@ public class CharacterCreation : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class AppearanceElementSelector
 {
-    private string bodyPart;
-    private Text optionText;
+    [SerializeField] private GameObject bodyPart;
+    [SerializeField] private List<Color> colors;
+    [SerializeField] private Transform uiPanel;
+    [SerializeField] private Text optionText;
 
-    public void SetUpSelector(string bodyPart, GameObject uiPanel, Transform parent)
+    public GameObject BodyPart { get => bodyPart; set => bodyPart = value; }
+
+    public void SetUpSelector(GameObject prefab, GameObject colorPrefab, Transform parent)
     {
-        this.bodyPart = bodyPart;
-
-        uiPanel.transform.Find("Element name").GetComponent<Text>().text = bodyPart;
+        uiPanel = Object.Instantiate(prefab).transform;
+        uiPanel.transform.Find("Element name").GetComponent<Text>().text = bodyPart.name; // Localization required
         optionText = uiPanel.transform.Find("Option name").GetComponent<Text>();
         optionText.text = "None";
         uiPanel.transform.Find("Next option").GetComponent<Button>().onClick.AddListener(() => changeElement(1));
         uiPanel.transform.Find("Previus option").GetComponent<Button>().onClick.AddListener(() => changeElement(-1));
 
+        if (colors.Count > 0)
+        {
+            Transform colorPanel = uiPanel.transform.Find("Colors").Find("Viewport").Find("Content");
+            foreach (Color color in colors) createColorButton(color, colorPrefab, colorPanel);
+            changeColor(colors[0]);
+        }
+
         uiPanel.transform.SetParent(parent);
+    }
+
+    private void createColorButton(Color color, GameObject prefab, Transform parent)
+    {
+        GameObject colorButton = Object.Instantiate(prefab);
+        colorButton.GetComponent<Image>().color = color;
+        colorButton.GetComponent<Button>().onClick.AddListener(() => changeColor(color));
+        colorButton.transform.SetParent(parent);
     }
 
     private void changeElement(int increment)
     {
-        KeyValuePair<string, List<string>> bodyElement = CharacterCreation.AppearanceElementsAndOptions.Find(x => x.Key == bodyPart);
-        KeyValuePair<string, string> characterBodyElement = CharacterCreation.SelectedAppearance.Find(x => x.Key == bodyPart);
+        KeyValuePair<string, List<string>> bodyElement = CharacterCreation.AppearanceElementsAndOptions.Find(x => x.Key == bodyPart.name);
+        KeyValuePair<string, string> characterBodyElement = CharacterCreation.SelectedAppearance.Find(x => x.Key == bodyPart.name);
         int characterBodyElementID = CharacterCreation.SelectedAppearance.IndexOf(characterBodyElement);
 
         CharacterCreation.CharacterObject.HideBodyElement(characterBodyElement);
@@ -87,10 +107,18 @@ public class AppearanceElementSelector
         if (currentID < 0) currentID = maxID;
         else if (currentID > maxID) currentID = 0;
 
-        characterBodyElement = new KeyValuePair<string, string>(bodyPart, bodyElement.Value[currentID]);
+        characterBodyElement = new KeyValuePair<string, string>(bodyPart.name, bodyElement.Value[currentID]);
         CharacterCreation.SelectedAppearance[characterBodyElementID] = characterBodyElement;
         optionText.text = characterBodyElement.Value;
 
         CharacterCreation.CharacterObject.ShowBodyElement(characterBodyElement);
+    }
+
+    private void changeColor(Color color)
+    {
+        foreach (Transform element in bodyPart.transform)
+        {
+            element.GetComponent<SkinnedMeshRenderer>().material.color = color;
+        }
     }
 }

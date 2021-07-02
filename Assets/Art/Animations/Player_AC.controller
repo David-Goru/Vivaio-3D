@@ -73,7 +73,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 381d0e38f5306584ca7021abc31ac056, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: Left
+  m_MirrorParameter: LeftHand
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1107 &-5288959925186852392
@@ -179,7 +179,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: cca760b9c080d9e45b0150673fa98d2c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: Left
+  m_MirrorParameter: LeftHand
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &-1197439680564436907
@@ -205,7 +205,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 1f1075233f68b7e4f9e31eb94ea853ac, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: Left
+  m_MirrorParameter: LeftHand
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!206 &-25783684851736120
@@ -237,31 +237,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WALK
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WATER
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PLOW
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Left
+    m_Controller: {fileID: 9100000}
+  - m_Name: LeftHand
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -289,7 +289,7 @@ AnimatorController:
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 1
+    m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -317,7 +317,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: a9d260bf81429c74aa8f576844df2313, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: Left
+  m_MirrorParameter: LeftHand
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &2192292068439078698
@@ -464,7 +464,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: a9d260bf81429c74aa8f576844df2313, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: Left
+  m_MirrorParameter: LeftHand
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &7874352943570473931

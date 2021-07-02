@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appearanceElementsContainer: {fileID: 7789580185144156447}
   appearanceElementPrefab: {fileID: 7111386203806574323, guid: a425700e2f7902640a48bf67b9c24ca3, type: 3}
+  appearanceColorPrefab: {fileID: 4679050727173889092, guid: 5f5d0010b40093e4fa5ac8523a978ec5, type: 3}
   characterModelPrefab: {fileID: 243026747723229190, guid: c8e8ea3cc46e254479a99d3bf86256f9, type: 3}
 --- !u!4 &664504957
 Transform:
@@ -358,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542956623}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0.75, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -612,10 +613,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6339158999534870924, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 664504956}
+    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8235019873876837875, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_Camera
       value: 

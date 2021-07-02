@@ -1,17 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 
 public class PlayerObject : MonoBehaviour
 {
     public LayerMask PlowableLayer;
-    public GameObject[] AppearanceElements;
+    public AppearanceElementSelector[] AppearanceElementSelectors;
     public Transform RightHand;
     public Transform LeftHand;
     public Transform PlayerModel;
-    public Animator Animator;
 
     [System.NonSerialized] public Player Data;
     private string lastAnimation = "IDLE";
+    private Animator animator;
+    private int handLayer;
+    private bool mainHandIsLeft;
+
+    private void Start()
+    {
+        animator = PlayerModel.GetComponent<Animator>();
+        handLayer = animator.GetLayerIndex("MainHandInUse");
+    }
 
     public void UpdatePosition(Vector3 position)
     {
@@ -34,7 +43,7 @@ public class PlayerObject : MonoBehaviour
     {
         if (lastAnimation == animation) return;
 
-        Animator.SetTrigger(animation);
+        animator.SetTrigger(animation);
         lastAnimation = animation;
     }
 
@@ -66,5 +75,29 @@ public class PlayerObject : MonoBehaviour
 
         Transform model = transform.Find("Player model");
         model.Find(bodyElement.Key).Find(bodyElement.Value).gameObject.SetActive(true);
+    }
+
+    public void SetHandInUse()
+    {
+        changeHandWeight(1.0f);
+    }
+
+    public void UnSetHandInUse()
+    {
+        changeHandWeight(0.0f);
+    }
+
+    public void ChangeMainHand(string type = "Default")
+    {
+        if (type == "Left") mainHandIsLeft = true;
+        else if (type == "Right") mainHandIsLeft = false;
+        else mainHandIsLeft = !mainHandIsLeft;
+
+        animator.SetBool("LeftHand", mainHandIsLeft);
+    }
+
+    private void changeHandWeight(float weightValue)
+    {
+        animator.SetLayerWeight(handLayer, weightValue);
     }
 }
