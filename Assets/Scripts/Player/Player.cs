@@ -8,7 +8,7 @@ public class Player
     public const float runSpeed = 2.75f;
 
     private Vector3 position = new Vector3(0, 0, 0);
-    private List<KeyValuePair<string, string>> characterBodyElements;
+    private List<AppearanceElement> appearanceElements;
 
     [System.NonSerialized] private bool canMove = true;
     [System.NonSerialized] private Vector3 lastFrameMovement;
@@ -26,8 +26,8 @@ public class Player
             {
                 playerObject.Data = this;
                 playerObject.UpdatePosition(position);
-                if (characterBodyElements == null && CharacterCreation.SelectedAppearance != null) characterBodyElements = CharacterCreation.SelectedAppearance;
-                if (characterBodyElements != null) playerObject.SetModel(characterBodyElements);
+                if (appearanceElements == null && CharacterCreation.SelectedAppearance != null) appearanceElements = CharacterCreation.SelectedAppearance;
+                if (appearanceElements != null) playerObject.SetModel(appearanceElements);
             }
             else Debug.Log("PlayerObject component not found in Player model.");
         }
@@ -83,7 +83,7 @@ public class Player
         }
     }
 
-    // How.CheckDistance():
+    // Hoe.CheckDistance():
     public bool CheckDistance(Vector3 targetPosition)
     {
         float maxDistance = 2.5f;

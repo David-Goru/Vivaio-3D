@@ -1,14 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 
 public class PlayerObject : MonoBehaviour
 {
     public LayerMask PlowableLayer;
-    public AppearanceElementSelector[] AppearanceElementSelectors;
     public Transform RightHand;
     public Transform LeftHand;
     public Transform PlayerModel;
+    public AppearanceElementSelector[] AppearanceElementSelectors;
 
     [System.NonSerialized] public Player Data;
     private string lastAnimation = "IDLE";
@@ -52,29 +51,31 @@ public class PlayerObject : MonoBehaviour
         return Vector3.Distance(transform.position, targetPosition);
     }
 
-    public void SetModel(List<KeyValuePair<string, string>> bodyElements)
+    public void SetModel(List<AppearanceElement> elements)
     {
-        foreach (KeyValuePair<string, string> bodyElement in bodyElements)
+        foreach (AppearanceElement element in elements)
         {
-            if (bodyElement.Value == "None") continue;
-            PlayerModel.Find(bodyElement.Key).Find(bodyElement.Value).gameObject.SetActive(true);
+            if (element.OptionSelected == "None") continue;
+            GameObject elementObject = PlayerModel.Find(element.BodyPartName).Find(element.OptionSelected).gameObject;
+            elementObject.SetActive(true);
+            elementObject.GetComponent<SkinnedMeshRenderer>().material.color = element.Color;
         }
     }
 
-    public void HideBodyElement(KeyValuePair<string, string> bodyElement)
+    public void HideBodyElement(AppearanceElement element)
     {
-        if (bodyElement.Value == "None") return;
+        if (element.OptionSelected == "None") return;
 
         Transform model = transform.Find("Player model");
-        model.Find(bodyElement.Key).Find(bodyElement.Value).gameObject.SetActive(false);
+        model.Find(element.BodyPartName).Find(element.OptionSelected).gameObject.SetActive(false);
     }
 
-    public void ShowBodyElement(KeyValuePair<string, string> bodyElement)
+    public void ShowBodyElement(AppearanceElement element)
     {
-        if (bodyElement.Value == "None") return;
+        if (element.OptionSelected == "None") return;
 
         Transform model = transform.Find("Player model");
-        model.Find(bodyElement.Key).Find(bodyElement.Value).gameObject.SetActive(true);
+        model.Find(element.BodyPartName).Find(element.OptionSelected).gameObject.SetActive(true);
     }
 
     public void SetHandInUse()
