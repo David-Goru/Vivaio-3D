@@ -3,22 +3,27 @@ using System.Collections.Generic;
 
 public class PlayerObject : MonoBehaviour
 {
-    public LayerMask PlowableLayer;
-    public Transform RightHand;
-    public Transform LeftHand;
-    public Transform PlayerModel;
     public AppearanceElementSelector[] AppearanceElementSelectors;
+    public LayerMask PlowableLayer;
+    public Transform RightHandModel;
+    public Transform LeftHandModel;
+    public Transform PlayerModel;
 
     [System.NonSerialized] public Player Data;
     private string lastAnimation = "IDLE";
     private Animator animator;
+
+    // Hands
     private int handLayer;
     private bool mainHandIsLeft;
+    private Transform mainHandModel;
+    private Item currentItem;
 
     private void Start()
     {
         animator = PlayerModel.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
+        ChangeMainHand(HandType.RIGHT);
     }
 
     public void UpdatePosition(Vector3 position)
@@ -88,11 +93,30 @@ public class PlayerObject : MonoBehaviour
         changeHandWeight(0.0f);
     }
 
-    public void ChangeMainHand(string type = "Default")
+    public void ChangeMainHand(HandType type = HandType.DEFAULT)
     {
-        if (type == "Left") mainHandIsLeft = true;
-        else if (type == "Right") mainHandIsLeft = false;
+        if (type == HandType.LEFT) mainHandIsLeft = true;
+        else if (type == HandType.RIGHT) mainHandIsLeft = false;
         else mainHandIsLeft = !mainHandIsLeft;
+
+        if (mainHandIsLeft)
+        {
+            mainHandModel = LeftHandModel;
+            if (currentItem != null)
+            {
+                LeftHandModel.Find(currentItem.Name).gameObject.SetActive(true);
+                RightHandModel.Find(currentItem.Name).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            mainHandModel = RightHandModel;
+            if (currentItem != null)
+            {
+                RightHandModel.Find(currentItem.Name).gameObject.SetActive(true);
+                LeftHandModel.Find(currentItem.Name).gameObject.SetActive(false);
+            }
+        }
 
         animator.SetBool("LeftHand", mainHandIsLeft);
     }
@@ -100,5 +124,53 @@ public class PlayerObject : MonoBehaviour
     private void changeHandWeight(float weightValue)
     {
         animator.SetLayerWeight(handLayer, weightValue);
+    }
+
+    public void PickUpItem(Item newItem)
+    {
+        if (currentItem != null) return; // Check if can stack
+
+        newItem.PickUp();
+        mainHandModel.transform.Find(newItem.Name).gameObject.SetActive(true);
+
+        currentItem = newItem;
+    }
+
+    public void DropCurrentItem()
+    {
+        currentItem.Drop(transform.position);
+        mainHandModel.transform.Find(currentItem.Name).gameObject.SetActive(false);
+    }
+}
+
+public enum HandType
+{
+    RIGHT,
+    LEFT,
+    DEFAULT
+}
+
+public class Item
+{
+    private string name;
+    private GameObject model;
+
+    public string Name { get => name; }
+    public GameObject Model { get => model; }
+
+    public Item(GameObject model)
+    {
+        name = model.name;
+        this.model = model;
+    }
+
+    public void PickUp()
+    {
+        MonoBehaviour.Destroy(model);
+    }
+
+    public void Drop(Vector3 playerPosition)
+    {
+        // Instantiate model on floor?
     }
 }

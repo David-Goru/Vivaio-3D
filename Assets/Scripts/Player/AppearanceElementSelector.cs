@@ -7,8 +7,8 @@ public class AppearanceElementSelector
 {
     [SerializeField] private GameObject bodyPart;
     [SerializeField] private List<Color> colors;
-    [SerializeField] private Transform uiPanel;
-    [SerializeField] private Text optionText;
+    [System.NonSerialized] private Transform uiPanel;
+    [System.NonSerialized] private Text optionText;
     [System.NonSerialized] private List<string> options;
 
     public GameObject BodyPart { get => bodyPart; set => bodyPart = value; }
