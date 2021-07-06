@@ -317,8 +317,8 @@ Camera:
   m_GameObject: {fileID: 1542956623}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.5070675, g: 0.6226415, b: 0.43761125, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -509,10 +509,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1959646836194376301, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2545895714333629086, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -597,34 +593,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3464979365549682663, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3464979365549682663, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3464979365549682663, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3464979365549682663, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6339158999534870924, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 664504956}
+    - target: {fileID: 6339158999534870924, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TestPlay
+      objectReference: {fileID: 0}
     - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -637,10 +613,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8235019873876837875, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1542956625}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
 --- !u!224 &7789580185144156447 stripped
