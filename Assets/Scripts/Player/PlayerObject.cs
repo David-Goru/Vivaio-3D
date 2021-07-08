@@ -24,6 +24,8 @@ public class PlayerObject : MonoBehaviour
         animator = PlayerModel.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
         ChangeMainHand(HandType.RIGHT);
+        
+        if (World.Instance != null) setUpItemsHandModels();
     }
 
     public void UpdatePosition(Vector3 position)
@@ -126,20 +128,28 @@ public class PlayerObject : MonoBehaviour
         animator.SetLayerWeight(handLayer, weightValue);
     }
 
+    private void setUpItemsHandModels()
+    {
+        foreach (ItemModels itemModels in World.Instance.ItemModels)
+        {
+            itemModels.HandModel = mainHandModel.Find(itemModels.Name).gameObject;
+        }
+    }
+
     public void PickUpItem(Item newItem)
     {
         if (currentItem != null) return; // Check if can stack
 
         newItem.PickUp();
-        mainHandModel.transform.Find(newItem.Name).gameObject.SetActive(true);
-
         currentItem = newItem;
     }
 
     public void DropCurrentItem()
     {
-        currentItem.Drop(transform.position);
-        mainHandModel.transform.Find(currentItem.Name).gameObject.SetActive(false);
+        if (currentItem == null) return;
+
+        currentItem.Drop(transform.position + Vector3.up * 0.5f + Vector3.forward * 0.25f + Vector3.right * (mainHandIsLeft ? -0.5f : 0.5f), transform.Find("Player model").rotation);
+        currentItem = null;
     }
 }
 
@@ -150,27 +160,50 @@ public enum HandType
     DEFAULT
 }
 
+[System.Serializable]
 public class Item
 {
     private string name;
-    private GameObject model;
+    [System.NonSerialized] private GameObject worldObject;
+    [System.NonSerialized] private ItemModels itemModels;
 
-    public string Name { get => name; }
-    public GameObject Model { get => model; }
+    public string Name { get => name; set => name = value; }
 
-    public Item(GameObject model)
+    public Item(string name, ItemModels itemModels)
     {
-        name = model.name;
-        this.model = model;
+        this.name = name;
+        this.itemModels = itemModels;
     }
 
     public void PickUp()
     {
-        MonoBehaviour.Destroy(model);
+        if (worldObject != null) Object.Destroy(worldObject);
+        itemModels.HandModel.SetActive(true);
     }
 
-    public void Drop(Vector3 playerPosition)
+    public void Drop(Vector3 position, Quaternion rotation)
     {
-        // Instantiate model on floor?
+        worldObject = Object.Instantiate(itemModels.WorldModel, position, rotation);
+        worldObject.GetComponent<WorldItem>().Item = this;
+        itemModels.HandModel.SetActive(false);
+    }
+}
+
+[System.Serializable]
+public class ItemModels
+{
+    [SerializeField] private string name;
+    [SerializeField] private GameObject worldModel;
+    private GameObject handModel;
+
+    public string Name { get => name; set => name = value; }
+    public GameObject WorldModel { get => worldModel; set => worldModel = value; }
+    public GameObject HandModel { get => handModel; set => handModel = value; }
+
+    public ItemModels(string name, GameObject worldModel, GameObject handModel)
+    {
+        this.name = name;
+        this.worldModel = worldModel;
+        this.handModel = handModel;
     }
 }

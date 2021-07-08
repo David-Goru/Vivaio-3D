@@ -57,7 +57,10 @@ public class Player
         if (Input.GetMouseButtonDown(0))
         {
             // if has tool in hands, Tool.Use();
-            TryPlow();
+
+            playerObject.PickUpItem(new Item("Hoe", World.GetItemModels("Hoe")));
+            playerObject.DropCurrentItem();
+            //TryPlow();
         }
     }
 
