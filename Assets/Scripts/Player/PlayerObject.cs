@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 public class PlayerObject : MonoBehaviour
 {
-    public AppearanceElementSelector[] AppearanceElementSelectors;
     public LayerMask PlowableLayer;
     public Transform RightHandModel;
     public Transform LeftHandModel;
     public Transform PlayerModel;
+    public CharacterAppearance Appearance;
 
     [System.NonSerialized] public Player Data;
-    private string lastAnimation = "IDLE";
     private Animator animator;
 
     // Hands
@@ -47,44 +46,21 @@ public class PlayerObject : MonoBehaviour
 
     public void SetAnimation(string animation)
     {
-        if (lastAnimation == animation) return;
-
         animator.SetTrigger(animation);
-        lastAnimation = animation;
     }
 
     public float DistanceFrom(Vector3 targetPosition)
     {
         return Vector3.Distance(transform.position, targetPosition);
     }
-
-    public void SetModel(List<AppearanceElement> elements)
+    
+    public void SetAppearance(List<AppearanceElement> appearanceElements)
     {
-        foreach (AppearanceElement element in elements)
-        {
-            if (element.OptionSelected == "None") continue;
-            GameObject elementObject = PlayerModel.Find(element.BodyPartName).Find(element.OptionSelected).gameObject;
-            elementObject.SetActive(true);
-            elementObject.GetComponent<SkinnedMeshRenderer>().material.color = element.Color;
-        }
-    }
-
-    public void HideBodyElement(AppearanceElement element)
-    {
-        if (element.OptionSelected == "None") return;
-
         Transform model = transform.Find("Player model");
-        model.Find(element.BodyPartName).Find(element.OptionSelected).gameObject.SetActive(false);
+        Appearance.SetAppearance(model, appearanceElements);
     }
 
-    public void ShowBodyElement(AppearanceElement element)
-    {
-        if (element.OptionSelected == "None") return;
-
-        Transform model = transform.Find("Player model");
-        model.Find(element.BodyPartName).Find(element.OptionSelected).gameObject.SetActive(true);
-    }
-
+    // PlayerHand
     public void SetHandInUse()
     {
         changeHandWeight(1.0f);
@@ -151,6 +127,11 @@ public class PlayerObject : MonoBehaviour
         currentItem.Drop(transform.position + Vector3.up * 0.5f + Vector3.forward * 0.25f + Vector3.right * (mainHandIsLeft ? -0.5f : 0.5f), transform.Find("Player model").rotation);
         currentItem = null;
     }
+
+    public void UnblockMovement()
+    {
+        Data.UnblockMovement();
+    }
 }
 
 public enum HandType
@@ -160,50 +141,9 @@ public enum HandType
     DEFAULT
 }
 
-[System.Serializable]
-public class Item
+public enum Animations
 {
-    private string name;
-    [System.NonSerialized] private GameObject worldObject;
-    [System.NonSerialized] private ItemModels itemModels;
-
-    public string Name { get => name; set => name = value; }
-
-    public Item(string name, ItemModels itemModels)
-    {
-        this.name = name;
-        this.itemModels = itemModels;
-    }
-
-    public void PickUp()
-    {
-        if (worldObject != null) Object.Destroy(worldObject);
-        itemModels.HandModel.SetActive(true);
-    }
-
-    public void Drop(Vector3 position, Quaternion rotation)
-    {
-        worldObject = Object.Instantiate(itemModels.WorldModel, position, rotation);
-        worldObject.GetComponent<WorldItem>().Item = this;
-        itemModels.HandModel.SetActive(false);
-    }
-}
-
-[System.Serializable]
-public class ItemModels
-{
-    [SerializeField] private string name;
-    [SerializeField] private GameObject worldModel;
-    private GameObject handModel;
-
-    public string Name { get => name; set => name = value; }
-    public GameObject WorldModel { get => worldModel; set => worldModel = value; }
-    public GameObject HandModel { get => handModel; set => handModel = value; }
-
-    public ItemModels(string name, GameObject worldModel, GameObject handModel)
-    {
-        this.name = name;
-        this.worldModel = worldModel;
-        this.handModel = handModel;
-    }
+    IDLE,
+    WALK,
+    PLOW
 }

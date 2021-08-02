@@ -1006,7 +1006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3791522169618375815}
   m_Layer: 0
-  m_Name: Shirts
+  m_Name: SHIRTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,7 +1038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3791522169841982081}
   m_Layer: 0
-  m_Name: Hair
+  m_Name: HAIR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,7 +1070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3791522170125783101}
   m_Layer: 0
-  m_Name: Shoes
+  m_Name: SHOES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1102,7 +1102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3791522170779481034}
   m_Layer: 0
-  m_Name: Trousers
+  m_Name: TROUSERS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
