@@ -10,8 +10,7 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private CharacterAppearance characterModel;
 
     private Transform model;
-    private List<AppearanceElement> selectedAppearance;
-    public List<AppearanceElement> SelectedAppearance { get => selectedAppearance; set => selectedAppearance = value; }
+    public static List<AppearanceElement> SelectedAppearance;
 
     public static CharacterCreation Instance;
 
@@ -22,10 +21,19 @@ public class CharacterCreation : MonoBehaviour
         initializeSelectors();
     }
 
+    private void Update()
+    {
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            float angle = -Input.GetAxis("Horizontal") / 3.0f;
+            model.Rotate(Vector3.up, angle);
+        }
+    }
+
     private void initializeSelectors()
     {
         AppearanceElementSelector[] appearanceElements = characterModel.AppearanceElementSelectors;
-        selectedAppearance = new List<AppearanceElement>();
+        SelectedAppearance = new List<AppearanceElement>();
 
         for (int i = 0; i < appearanceElements.Length; i++)
         {
@@ -43,18 +51,10 @@ public class CharacterCreation : MonoBehaviour
         characterModel.ShowBodyElement(model, appearanceElement);
     }
 
-    public static List<AppearanceElement> GetSelectedAppearance()
-    {
-        if (Instance == null) return null;
-        return Instance.SelectedAppearance;
-    }
-
     public static void AddSelectedAppearance(AppearanceElement appearanceElement)
     {
-        if (Instance == null) return;
-
-        if (Instance.SelectedAppearance == null) Instance.SelectedAppearance = new List<AppearanceElement>();
-        Instance.SelectedAppearance.Add(appearanceElement);
+        if (SelectedAppearance == null) SelectedAppearance = new List<AppearanceElement>();
+        SelectedAppearance.Add(appearanceElement);
     }
 
     // TEST

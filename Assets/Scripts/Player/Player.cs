@@ -26,7 +26,7 @@ public class Player
             {
                 playerObject.Data = this;
                 playerObject.UpdatePosition(position);
-                if (appearanceElements == null) appearanceElements = CharacterCreation.GetSelectedAppearance();
+                if (appearanceElements == null) appearanceElements = CharacterCreation.SelectedAppearance;
                 if (appearanceElements != null) playerObject.SetAppearance(appearanceElements);
             }
             else Debug.Log("PlayerObject component not found in Player model.");

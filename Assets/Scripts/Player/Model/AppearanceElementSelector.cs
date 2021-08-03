@@ -60,8 +60,8 @@ public class AppearanceElementSelector
 
     private void changeElement(int increment)
     {
-        AppearanceElement appearanceElement = CharacterCreation.Instance.SelectedAppearance.Find(x => x.BodyPartName == bodyPart);
-        int characterBodyElementID = CharacterCreation.Instance.SelectedAppearance.IndexOf(appearanceElement);
+        AppearanceElement appearanceElement = CharacterCreation.SelectedAppearance.Find(x => x.BodyPartName == bodyPart);
+        int characterBodyElementID = CharacterCreation.SelectedAppearance.IndexOf(appearanceElement);
 
         CharacterCreation.Instance.HideBodyElement(appearanceElement);
 
@@ -72,7 +72,7 @@ public class AppearanceElementSelector
         if (currentID < 0) currentID = maxID;
         else if (currentID > maxID) currentID = 0;
 
-        CharacterCreation.Instance.SelectedAppearance[characterBodyElementID].OptionSelected = options[currentID];
+        CharacterCreation.SelectedAppearance[characterBodyElementID].OptionSelected = options[currentID];
         optionText.text = options[currentID];
 
         CharacterCreation.Instance.ShowBodyElement(appearanceElement);
@@ -85,6 +85,6 @@ public class AppearanceElementSelector
             element.GetComponent<SkinnedMeshRenderer>().material.color = color;
         }
 
-        CharacterCreation.Instance.SelectedAppearance.Find(x => x.BodyPartName == bodyPart).Color = color;
+        CharacterCreation.SelectedAppearance.Find(x => x.BodyPartName == bodyPart).Color = color;
     }
 }

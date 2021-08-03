@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [System.Serializable]
 public class Tile
@@ -24,7 +25,7 @@ public class Tile
     {
         if (plowed == true) return false;
 
-        createRidge();
+        World.Instance.StartCoroutine(delayRidgeCreation(0.4f));
         plowed = true;
         return true;
     }
@@ -36,6 +37,12 @@ public class Tile
         removeRidge();
         plowed = false;
         return true;
+    }
+
+    private IEnumerator delayRidgeCreation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        createRidge();
     }
 
     private void createRidge()
