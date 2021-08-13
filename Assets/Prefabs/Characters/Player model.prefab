@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 183154961384960881}
   - component: {fileID: 3388543236574124501}
   m_Layer: 0
-  m_Name: Sneakers 1
+  m_Name: Sneakers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,8 @@ Transform:
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7928825367783039623}
   m_Father: {fileID: 7172256721535910739}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2646,12 +2647,12 @@ GameObject:
   - component: {fileID: 7928825367783039623}
   - component: {fileID: 3557972634778590331}
   m_Layer: 0
-  m_Name: Sneakers 2
+  m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7928825367783039623
 Transform:
   m_ObjectHideFlags: 0
@@ -2659,12 +2660,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788712240686206922}
-  m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7172256721535910739}
-  m_RootOrder: 3
+  m_Father: {fileID: 183154961384960881}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3557972634778590331
 SkinnedMeshRenderer:
@@ -3454,7 +3455,6 @@ Transform:
   - {fileID: 9078969599272090245}
   - {fileID: 8169084396554986616}
   - {fileID: 183154961384960881}
-  - {fileID: 7928825367783039623}
   m_Father: {fileID: 7206392730634866923}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
