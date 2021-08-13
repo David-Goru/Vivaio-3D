@@ -9,7 +9,9 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private GameObject characterModelPrefab;
     [SerializeField] private CharacterAppearance characterModel;
 
+    private string lastAnimation = "IDLE";
     private Transform model;
+    private Animator animator;
     public static List<AppearanceElement> SelectedAppearance;
 
     public static CharacterCreation Instance;
@@ -18,16 +20,47 @@ public class CharacterCreation : MonoBehaviour
     {
         Instance = this;
         model = Instantiate(characterModelPrefab).transform.Find("Player model");
+        animator = model.GetComponent<Animator>();
         initializeSelectors();
     }
 
     private void Update()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (isRotatingModel()) rotateModel();
+
+        if (!isMovingModel()) changeAnimation("IDLE");
+        else if (isRunning()) changeAnimation("RUN");
+        else changeAnimation("WALK");
+    }
+
+    private void changeAnimation(string newAnimation)
+    {
+        if (lastAnimation != newAnimation)
         {
-            float angle = -Input.GetAxis("Horizontal") / 3.0f;
-            model.Rotate(Vector3.up, angle);
+            lastAnimation = newAnimation;
+            animator.SetTrigger(newAnimation);
         }
+    }
+
+    private bool isRotatingModel()
+    {
+        return Input.GetAxis("Horizontal") != 0;
+    }
+
+    private bool isMovingModel()
+    {
+        return Input.GetAxis("Vertical") > 0;
+    }
+
+    private bool isRunning()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+
+    private void rotateModel()
+    {
+        float angle = -Input.GetAxis("Horizontal") / 3.0f;
+        model.Rotate(Vector3.up, angle);
     }
 
     private void initializeSelectors()

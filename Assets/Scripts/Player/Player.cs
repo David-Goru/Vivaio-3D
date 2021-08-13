@@ -14,6 +14,7 @@ public class Player
     [System.NonSerialized] private Vector3 lastFrameMovement;
     [System.NonSerialized] private float lastFrameSpeed;
     [System.NonSerialized] private PlayerObject playerObject;
+    [System.NonSerialized] private string lastAnimation = "IDLE";
 
     public void Instantiate()
     {
@@ -45,7 +46,12 @@ public class Player
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            if (lastFrameMovement == Vector3.zero) playerObject.SetAnimation("WALK");
+            string newAnimation = Input.GetButton("Run") ? "RUN" : "WALK";
+            if (lastAnimation != newAnimation)
+            {
+                playerObject.SetAnimation(newAnimation);
+                lastAnimation = newAnimation;
+            }
 
             lastFrameMovement = Vector3.ClampMagnitude(Vector3.right * Input.GetAxis("Horizontal") + Vector3.forward * Input.GetAxis("Vertical"), 1.0f); // Clamp to avoid faster diagonal movement
             lastFrameSpeed = Input.GetButton("Run") ? runSpeed : defaultSpeed;            
