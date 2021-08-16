@@ -37,5 +37,7 @@ public enum BodyPart
     HAIR,
     SHIRTS,
     TROUSERS,
-    SHOES
+    SHOES,
+    BODY,
+    EYES
 }
