@@ -594,34 +594,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769194480395118873, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6339158999534870924, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 664504956}
-    - target: {fileID: 6339158999534870924, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TestPlay
-      objectReference: {fileID: 0}
-    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7299703120777060844, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
 --- !u!224 &7789580185144156447 stripped

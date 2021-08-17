@@ -3110,7 +3110,7 @@ Transform:
   m_Children:
   - {fileID: 6511605541164301626}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6457424821502077153
 GameObject:
@@ -3325,7 +3325,7 @@ Transform:
   - {fileID: 8045926620522951159}
   - {fileID: 7034732446278906071}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7172256719825372606
 GameObject:
@@ -3390,7 +3390,7 @@ Transform:
   - {fileID: 5414268905437977689}
   - {fileID: 1279716590911933246}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7172256721404645261
 GameObject:
@@ -3422,7 +3422,7 @@ Transform:
   - {fileID: 8329855743861368110}
   - {fileID: 1878910965235248501}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7172256721524547783
 GameObject:
@@ -3487,7 +3487,7 @@ Transform:
   - {fileID: 8169084396554986616}
   - {fileID: 183154961384960881}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7550023501579016802
 GameObject:
@@ -3789,7 +3789,7 @@ Transform:
   m_Children:
   - {fileID: 3313997401525651451}
   m_Father: {fileID: 7206392730634866923}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7977095731877207056
 GameObject:
@@ -3881,12 +3881,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5386919114351637050}
+  - {fileID: 2454777368208638935}
+  - {fileID: 6646427157127052762}
   - {fileID: 7172256719719122267}
   - {fileID: 7172256721177662089}
   - {fileID: 7172256721404645262}
   - {fileID: 7172256721535910739}
-  - {fileID: 2454777368208638935}
-  - {fileID: 6646427157127052762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
