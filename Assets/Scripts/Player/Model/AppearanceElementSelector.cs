@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class AppearanceElementSelector
 {
     [SerializeField] private BodyPart bodyPart;
+    [SerializeField] private bool canBeNone = false;
     [SerializeField] private List<Color> colors;
     [System.NonSerialized] private Transform model;
     [System.NonSerialized] private Transform uiPanel;
@@ -17,11 +18,11 @@ public class AppearanceElementSelector
     public void SetUpSelector(Transform model, GameObject panelPrefab, GameObject colorPrefab, Transform parent)
     {
         this.model = model;
+        loadElements();
         loadPanel(panelPrefab, parent);
         loadColors(colorPrefab);
-        loadElements();
 
-        CharacterCreation.AddSelectedAppearance(new AppearanceElement(bodyPart, "None", colors[0]));
+        CharacterCreation.AddSelectedAppearance(new AppearanceElement(bodyPart, options[0], colors[0]));
         changeColor(colors[0]);
     }
 
@@ -30,7 +31,7 @@ public class AppearanceElementSelector
         uiPanel = Object.Instantiate(prefab).transform;
         uiPanel.transform.Find("Element name").GetComponent<Text>().text = bodyPart.ToString(); // Localization required
         optionText = uiPanel.transform.Find("Option name").GetComponent<Text>();
-        optionText.text = "None";
+        optionText.text = options[0]; // Localization required
         uiPanel.transform.Find("Next option").GetComponent<Button>().onClick.AddListener(() => changeElement(1));
         uiPanel.transform.Find("Previus option").GetComponent<Button>().onClick.AddListener(() => changeElement(-1));
         uiPanel.transform.SetParent(parent);
@@ -46,8 +47,10 @@ public class AppearanceElementSelector
     private void loadElements()
     {
         options = new List<string>();
-        options.Add("None");
+        if (canBeNone) options.Add("None");
         foreach (Transform element in model.Find(bodyPart.ToString())) options.Add(element.name);
+
+        if (options.Count == 0) options.Add("None");
     }
 
     private void createColorButton(Color color, GameObject prefab, Transform parent)

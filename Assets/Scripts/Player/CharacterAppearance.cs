@@ -34,10 +34,10 @@ public class CharacterAppearance : ScriptableObject
 
 public enum BodyPart
 {
+    BODY,
+    EYES,
     HAIR,
     SHIRTS,
     TROUSERS,
-    SHOES,
-    BODY,
-    EYES
+    SHOES
 }
