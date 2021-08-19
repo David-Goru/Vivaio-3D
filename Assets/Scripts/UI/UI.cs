@@ -34,26 +34,12 @@ public class UI : GameElement
         elements = new List<UIElement>();
         foreach (Transform child in uiObject.transform)
         {
-            UIElement element = getUIElement(child);
+            UIElement element = UIElement.GetUIElementFromTransform(child);
             if (element != null)
             {
                 element.Initialize();
                 elements.Add(element);
             }
         }
-    }
-
-    private UIElement getUIElement(Transform viewer)
-    {
-        try
-        {
-            System.Type type = System.Type.GetType(viewer.name);
-            UIElement element = (UIElement)System.Activator.CreateInstance(type);
-            element.SetViewer(viewer);
-            return element;
-        }
-        catch (UnityException e) { Debug.Log("Couldn't create UI element with name " + viewer.name + ". Error: " + e); }
-
-        return null;
     }
 }

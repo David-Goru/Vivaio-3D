@@ -1,14 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PerformanceUI : UIElement
 {
-    /* FPS counter */
-    private Text fpsCounter;
-    private int frameCount = 0;
-    private float deltaTime = 0.0f;
-    private float fps = 0.0f;
-    private float updateRate = 4.0f;  // 4 updates per second
+    private List<UIElement> subElements;
 
     public override void Initialize()
     {
@@ -18,27 +13,25 @@ public class PerformanceUI : UIElement
             return;
         }
 
-        /* FPS counter */
-        if (viewer.Find("Panel") && viewer.Find("Panel").Find("FPS counter")) fpsCounter = viewer.Find("Panel").Find("FPS counter").GetComponent<Text>();
-        else Debug.Log("FPS counter not found in PerformanceUI.");
+        subElements = new List<UIElement>();
+        foreach (Transform element in viewer)
+        {
+            UIElement uiElement = GetUIElementFromTransform(element, false);
+            if (uiElement != null)
+            {
+                uiElement.Initialize();
+                subElements.Add(uiElement);
+            }
+        }
     }
 
     public override void Update()
     {
         if (viewer == null) return;
 
-        /* FPS counter */
-        if (fpsCounter != null)
+        foreach (UIElement uiElement in subElements)
         {
-            frameCount++;
-            deltaTime += Time.deltaTime;
-            if (deltaTime > 1.0 / updateRate)
-            {
-                fps = frameCount / deltaTime;
-                frameCount = 0;
-                deltaTime -= 1.0f / updateRate;
-                fpsCounter.text = fps.ToString("0.00").Replace(",", ".");
-            }
+            uiElement.Update();
         }
     }
 }

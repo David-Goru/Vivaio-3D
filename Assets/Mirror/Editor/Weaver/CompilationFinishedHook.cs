@@ -92,7 +92,7 @@ namespace Mirror.Weaver
             // Do nothing if there were compile errors on the target
             if (CompilerMessagesContainError(messages))
             {
-                Debug.Log("Weaver: stop because compile errors on target");
+                //Debug.Log("Weaver: stop because compile errors on target");
                 return;
             }
 
