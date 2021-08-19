@@ -7,16 +7,13 @@ public class Game : MonoBehaviour
     public static Game Instance;
     public static FileStream GameFile;
 
-    [SerializeField] private List<ItemModels> itemModels = null;
-    public List<ItemModels> ItemModels { get => itemModels; set => itemModels = value; }
+    [SerializeField] private ItemModelsList itemModelsList = null;
+    public List<ItemModels> ItemModels { get => itemModelsList.ItemModels; }
 
     private GameData data;
     public GameData Data { get => data; set => data = value; }
 
-    public GameObject Player;
-    public GameObject Farm;
-    public GameObject UI;
-    public GameObject AI;
+    public GameObject[] GameElementGameObjects;
 
     private void Start()
     {
@@ -39,14 +36,17 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        Data.Player.Update();
-        Data.Farm.Update();
-        Data.UI.Update();
-        Data.AI.Update();
+        foreach (GameElement gameElement in Data.GameElements)
+        {
+            gameElement.Update();
+        }
     }
 
     private void FixedUpdate()
     {
-        Data.Player.FixedUpdate();
+        foreach (GameElement gameElement in Data.GameElements)
+        {
+            gameElement.FixedUpdate();
+        }
     }
 }

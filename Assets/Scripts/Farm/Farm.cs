@@ -11,20 +11,16 @@ public class Farm : GameElement
 
     public override void Instantiate()
     {
-        if (Game.Instance.Farm != null)
-        {
-            GameObject model = Object.Instantiate(Game.Instance.Farm);
-            farmObject = model.GetComponent<FarmObject>();
+        GameObject model = Object.Instantiate(Prefab);
+        farmObject = model.GetComponent<FarmObject>();
 
-            if (farmObject != null)
-            {
-                farmObject.FarmScript = this;
-                if (tiles == null) initializeTiles();
-                else loadTiles();
-            }
-            else Debug.Log("FarmObject component not found in Farm model.");
+        if (farmObject != null)
+        {
+            farmObject.FarmScript = this;
+            if (tiles == null) initializeTiles();
+            else loadTiles();
         }
-        else Debug.Log("Farm prefab not found on Game instance.");
+        else Debug.Log("FarmObject component not found in Farm model.");
     }
 
     public bool PlowAt(Vector3 position)
@@ -37,12 +33,8 @@ public class Farm : GameElement
 
     public static GameObject GetRidgePrefab()
     {
-        return Game.Instance.Data.Farm.RidgePrefab();
-    }
-
-    public GameObject RidgePrefab()
-    {
-        return farmObject.RidgePrefab;
+        //return Farm.RidgePrefab();
+        return null;
     }
 
     private void initializeTiles()

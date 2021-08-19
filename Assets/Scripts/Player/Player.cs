@@ -18,21 +18,17 @@ public class Player : GameElement
 
     public override void Instantiate()
     {
-        if (Game.Instance.Player != null)
-        {
-            GameObject player = Object.Instantiate(Game.Instance.Player);
-            playerObject = player.GetComponent<PlayerObject>();
+        GameObject player = Object.Instantiate(Prefab);
+        playerObject = player.GetComponent<PlayerObject>();
 
-            if (playerObject != null)
-            {
-                playerObject.Data = this;
-                playerObject.UpdatePosition(position);
-                if (appearanceElements == null) appearanceElements = CharacterCreation.SelectedAppearance;
-                if (appearanceElements != null) playerObject.SetAppearance(appearanceElements);
-            }
-            else Debug.Log("PlayerObject component not found in Player model.");
+        if (playerObject != null)
+        {
+            playerObject.Data = this;
+            playerObject.UpdatePosition(position);
+            if (appearanceElements == null) appearanceElements = CharacterCreation.SelectedAppearance;
+            if (appearanceElements != null) playerObject.SetAppearance(appearanceElements);
         }
-        else Debug.Log("Player prefab not found on Game instance.");
+        else Debug.Log("PlayerObject component not found in Player model.");
     }
 
     public override void Update()
@@ -65,7 +61,7 @@ public class Player : GameElement
         }
     }
 
-    public void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (lastFrameMovement != Vector3.zero)
         {

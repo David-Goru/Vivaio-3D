@@ -2,34 +2,42 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class GameData
 {
-    private Player player;
-    private Farm farm;
-    private UI ui;
-    private AI ai;
+    private List<GameElement> gameElements;
 
-    public Player Player { get => player; set => player = value; }
-    public Farm Farm { get => farm; set => farm = value; }
-    public UI UI { get => ui; set => ui = value; }
-    public AI AI { get => ai; set => ai = value; }
+    public List<GameElement> GameElements { get => gameElements; set => gameElements = value; }
 
     public void Create()
     {
-        player = new Player();
-        farm = new Farm();
-        ui = new UI();
-        ai = new AI();
+        foreach (GameObject gameElementGameObject in Game.Instance.GameElementGameObjects)
+        {
+            try
+            {
+                gameElements.Add(createGameElementFromGameObject(gameElementGameObject));
+            }
+            catch (UnityException e) { Debug.LogError(string.Format("Couldn't create {0} class. Error: {1}", gameElementGameObject.name, e));  }
+        }
     }
 
     public void Instantiate()
     {
-        player.Instantiate();
-        farm.Instantiate();
-        ui.Instantiate();
-        ai.Instantiate();
+        foreach (GameElement gameElement in gameElements)
+        {
+            gameElement.Instantiate();
+        }
+    }
+
+    private GameElement createGameElementFromGameObject(GameObject gameObject)
+    {
+        System.Type type = System.Type.GetType(gameObject.name);
+        GameElement gameElement = (GameElement)System.Activator.CreateInstance(type);
+        gameElement.Prefab = gameObject;
+
+        return gameElement;
     }
 
     public static bool Serialize(GameData data, string path)

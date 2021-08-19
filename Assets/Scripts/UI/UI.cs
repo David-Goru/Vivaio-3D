@@ -9,20 +9,16 @@ public class UI : GameElement
 
     public override void Instantiate()
     {
-        if (Game.Instance.UI != null)
+        GameObject ui = Object.Instantiate(Prefab);
+        uiObject = ui.GetComponent<UIObject>();
+
+        if (uiObject != null)
         {
-            GameObject ui = Object.Instantiate(Game.Instance.UI);
-            uiObject = ui.GetComponent<UIObject>();
-
-            if (uiObject != null)
-            {
-                uiObject.Data = this;
-            }
-            else Debug.Log("UIObject component not found in UI model.");
-
-            loadElements();
+            uiObject.Data = this;
         }
-        else Debug.Log("UI prefab not found on Game instance.");
+        else Debug.Log("UIObject component not found in UI model.");
+
+        loadElements();
     }
 
     public override void Update()
