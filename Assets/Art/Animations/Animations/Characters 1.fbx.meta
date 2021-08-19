@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 562b92abf58bdeb419219b1d3870596e
+guid: fcfb2126720280143b9774fce66bd16f
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -42,94 +42,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'rig|Idle' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'DEF-thigh.L' has scale animation that will
-      be discarded.\n\t'DEF-shin.L' has scale animation that will be discarded.\n\t'DEF-foot.L'
-      has scale animation that will be discarded.\n\t'DEF-thigh.R' has scale animation
-      that will be discarded.\n\t'DEF-shin.R' has scale animation that will be discarded.\n\t'DEF-foot.R'
-      has scale animation that will be discarded.\n\t'DEF-spine.001' has scale animation
-      that will be discarded.\n\t'DEF-spine.002' has scale animation that will be
-      discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
-      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
-      that will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will
-      be discarded.\n\t'DEF-forearm.R' has scale animation that will be discarded.\n\t'DEF-hand.R'
-      has scale animation that will be discarded.\n\nClip 'rig|Plow' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation
-      DOF on avatar to improve retargeting quality.\n\t'DEF-thigh.L' has scale animation
-      that will be discarded.\n\t'DEF-shin.L' has scale animation that will be discarded.\n\t'DEF-foot.L'
-      has scale animation that will be discarded.\n\t'DEF-thigh.R' has scale animation
-      that will be discarded.\n\t'DEF-shin.R' has scale animation that will be discarded.\n\t'DEF-foot.R'
-      has scale animation that will be discarded.\n\t'DEF-upper_arm.L' has scale
-      animation that will be discarded.\n\t'DEF-forearm.L' has scale animation that
-      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'ORG-palm.02.L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'ORG-palm.03.L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-f_index.01.R'
-      has scale animation that will be discarded.\n\t'DEF-f_index.02.R' has scale
-      animation that will be discarded.\n\t'DEF-f_index.03.R' has scale animation
-      that will be discarded.\n\t'ORG-palm.02.R' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'DEF-f_middle.01.R' has
-      scale animation that will be discarded.\n\t'DEF-f_middle.02.R' has scale animation
-      that will be discarded.\n\t'DEF-f_middle.03.R' has scale animation that will
-      be discarded.\n\t'ORG-palm.03.R' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n\t'DEF-f_ring.01.R' has scale animation
-      that will be discarded.\n\t'DEF-f_ring.02.R' has scale animation that will
-      be discarded.\n\t'DEF-f_ring.03.R' has scale animation that will be discarded.\n\t'DEF-spine.004'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'rig|Run' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
-      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
-      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-spine.004'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'rig|Walk' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
-      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
-      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-spine.004'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'rig|Water' has import animation warnings that might lower retargeting quality:\nNote:
-      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
-      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
-      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-thumb.01.L'
-      has translation animation that will be discarded.\n\t'ORG-palm.02.L' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'ORG-palm.03.L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
-      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-f_index.01.R'
-      has scale animation that will be discarded.\n\t'DEF-f_index.02.R' has scale
-      animation that will be discarded.\n\t'DEF-f_index.03.R' has scale animation
-      that will be discarded.\n\t'DEF-thumb.01.R' has translation animation that
-      will be discarded.\n\t'DEF-thumb.01.R' has scale animation that will be discarded.\n\t'DEF-thumb.02.R'
-      has scale animation that will be discarded.\n\t'DEF-thumb.03.R' has scale animation
-      that will be discarded.\n\t'ORG-palm.02.R' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'DEF-f_middle.01.R' has
-      scale animation that will be discarded.\n\t'DEF-f_middle.02.R' has scale animation
-      that will be discarded.\n\t'DEF-f_middle.03.R' has scale animation that will
-      be discarded.\n\t'ORG-palm.03.R' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n\t'DEF-f_ring.01.R' has scale animation
-      that will be discarded.\n\t'DEF-f_ring.02.R' has scale animation that will
-      be discarded.\n\t'DEF-f_ring.03.R' has scale animation that will be discarded.\n\t'DEF-spine.004'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.004'
-      has scale animation that will be discarded.\n\t'DEF-neck' has scale animation
-      that will be discarded.\n\t'DEF-head' has scale animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -141,239 +54,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: rig|A_RESTPOSE
-      takeName: rig|A_RESTPOSE
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|HandWithHoe
-      takeName: rig|HandWithHoe
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|HandWithWateringCan
-      takeName: rig|HandWithWateringCan
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|Idle
-      takeName: rig|Idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 10
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|Plow
-      takeName: rig|Plow
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 20
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|Run
-      takeName: rig|Run
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 21
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|Walk
-      takeName: rig|Walk
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 28
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: rig|Water
-      takeName: rig|Water
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 25
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -789,38 +470,38 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Player(Clone)
+    - name: Characters(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Body
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Boots
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0.00000020641465, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Eyes
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Large trousers
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0.00000020641465, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Long hair
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: rig
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071067, y: 5.302452e-33, z: 5.302451e-33, w: 0.7071068}
       scale: {x: 100, y: 100, z: 100}
@@ -856,13 +537,13 @@ ModelImporter:
       scale: {x: 0.9999999, y: 0.9999998, z: 0.9999998}
     - name: DEF-upper_arm.L
       parentName: DEF-shoulder.L
-      position: {x: -0.0002, y: 0.00176, z: -0}
-      rotation: {x: 0.06394074, y: -0.35550985, z: 0.17139547, w: 0.9165959}
+      position: {x: 0.00004054728, y: 0.0018570966, z: 0.000008323876}
+      rotation: {x: 0.09323984, y: -0.5094884, z: 0.14448383, w: 0.8431206}
       scale: {x: 0.9995063, y: 1.0009886, z: 0.9995058}
     - name: DEF-forearm.L
       parentName: DEF-upper_arm.L
       position: {x: 0.0000000012479722, y: 0.0036855116, z: -5.7742e-10}
-      rotation: {x: 0.06203614, y: 0.015810167, z: -0.000984315, w: 0.99794817}
+      rotation: {x: 0.06203612, y: 0.015810167, z: -0.0009843142, w: 0.99794817}
       scale: {x: 0.99974525, y: 1.0005323, z: 0.9997228}
     - name: DEF-hand.L
       parentName: DEF-forearm.L
@@ -877,7 +558,7 @@ ModelImporter:
     - name: DEF-f_index.01.L
       parentName: ORG-palm.01.L
       position: {x: 0.000006588567, y: 0.00061442447, z: 0.000020550577}
-      rotation: {x: -0.098833695, y: 0.98576593, z: 0.09067902, w: -0.10136443}
+      rotation: {x: -0.098833665, y: 0.98576593, z: 0.09067899, w: -0.10136443}
       scale: {x: 1.0000001, y: 0.9999993, z: 1}
     - name: DEF-f_index.02.L
       parentName: DEF-f_index.01.L
@@ -966,8 +647,8 @@ ModelImporter:
       scale: {x: 1, y: 1.0000001, z: 0.99999994}
     - name: DEF-upper_arm.R
       parentName: DEF-shoulder.R
-      position: {x: 0.00009, y: 0.0018, z: 0}
-      rotation: {x: 0.06915127, y: 0.38293445, z: -0.16711566, w: 0.9058983}
+      position: {x: -0.000040547162, y: 0.0018570963, z: 0.0000083237255}
+      rotation: {x: 0.09323975, y: 0.5094886, z: -0.14448372, w: 0.8431206}
       scale: {x: 0.9995058, y: 1.0009888, z: 0.99950546}
     - name: DEF-forearm.R
       parentName: DEF-upper_arm.R
@@ -1125,27 +806,27 @@ ModelImporter:
       rotation: {x: -0.000056728513, y: 0.9785884, z: -0.20582685, w: -0.0002644296}
       scale: {x: 0.9999999, y: 0.99999976, z: 0.9999926}
     - name: Shoes
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Short hair
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Short trousers
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: Sleeveless
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
     - name: T-shirt
-      parentName: Player(Clone)
+      parentName: Characters(Clone)
       position: {x: -0.00000020641465, y: 0, z: 0}
       rotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
       scale: {x: 1, y: 1, z: 1}
@@ -1161,11 +842,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 562b92abf58bdeb419219b1d3870596e, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
