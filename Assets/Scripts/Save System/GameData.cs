@@ -13,11 +13,14 @@ public class GameData
 
     public void Create()
     {
+        gameElements = new List<GameElement>();
+
         foreach (GameObject gameElementGameObject in Game.Instance.GameElementGameObjects)
         {
             try
             {
-                gameElements.Add(createGameElementFromGameObject(gameElementGameObject));
+                GameElement gameElement = createGameElementFromGameObject(gameElementGameObject);
+                gameElements.Add(gameElement);
             }
             catch (UnityException e) { Debug.LogError(string.Format("Couldn't create {0} class. Error: {1}", gameElementGameObject.name, e));  }
         }

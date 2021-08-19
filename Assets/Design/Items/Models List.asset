@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1578ddecf9e817a42b3d1b30b313efcd, type: 3}
+  m_Name: Models List
+  m_EditorClassIdentifier: 
+  itemModels:
+  - name: Hoe
+    worldModel: {fileID: 4781592758002748978, guid: 54af38cdb334a1149b926b196a10f4c9, type: 3}
+    canBeInHand: 1
+  - name: Ridge
+    worldModel: {fileID: 3698662359342697876, guid: b802a273476823d448d3e7ff6773b0a8, type: 3}
+    canBeInHand: 0

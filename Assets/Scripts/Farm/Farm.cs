@@ -33,8 +33,7 @@ public class Farm : GameElement
 
     public static GameObject GetRidgePrefab()
     {
-        //return Farm.RidgePrefab();
-        return null;
+        return Game.Instance.ItemModels.Find(x => x.Name == "Ridge").WorldModel;
     }
 
     private void initializeTiles()

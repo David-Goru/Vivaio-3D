@@ -108,7 +108,13 @@ public class PlayerObject : MonoBehaviour
     {
         foreach (ItemModels itemModels in Game.Instance.ItemModels)
         {
-            itemModels.HandModel = mainHandModel.Find(itemModels.Name).gameObject;
+            if (itemModels.CanBeInHand == false) continue;
+
+            try
+            {
+                itemModels.HandModel = mainHandModel.Find(itemModels.Name).gameObject;
+            }
+            catch (UnityException e) { Debug.LogError(string.Format("Couldn't find {0} item in player hands. Error: {1}", itemModels.Name, e)); }
         }
     }
 

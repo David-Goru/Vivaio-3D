@@ -5,16 +5,11 @@ public class ItemModels
 {
     [SerializeField] private string name;
     [SerializeField] private GameObject worldModel;
+    [SerializeField] private bool canBeInHand = false;
     private GameObject handModel;
 
     public string Name { get => name; set => name = value; }
     public GameObject WorldModel { get => worldModel; set => worldModel = value; }
     public GameObject HandModel { get => handModel; set => handModel = value; }
-
-    public ItemModels(string name, GameObject worldModel, GameObject handModel)
-    {
-        this.name = name;
-        this.worldModel = worldModel;
-        this.handModel = handModel;
-    }
+    public bool CanBeInHand { get => canBeInHand; set => canBeInHand = value; }
 }
