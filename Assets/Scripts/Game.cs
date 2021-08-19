@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 
-public class World : MonoBehaviour
+public class Game : MonoBehaviour
 {
-    public static World Instance;
+    public static Game Instance;
     public static FileStream GameFile;
 
     [SerializeField] private List<ItemModels> itemModels = null;
@@ -13,9 +13,9 @@ public class World : MonoBehaviour
     private GameData data;
     public GameData Data { get => data; set => data = value; }
 
-    public GameObject UI;
     public GameObject Player;
     public GameObject Farm;
+    public GameObject UI;
     public GameObject AI;
 
     private void Start()
@@ -41,6 +41,7 @@ public class World : MonoBehaviour
     {
         Data.Player.Update();
         Data.Farm.Update();
+        Data.UI.Update();
         Data.AI.Update();
     }
 

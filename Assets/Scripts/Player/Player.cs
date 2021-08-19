@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Player
+public class Player : GameElement
 {
     public const float defaultSpeed = 1.25f;
     public const float runSpeed = 2.75f;
@@ -16,11 +16,11 @@ public class Player
     [System.NonSerialized] private PlayerObject playerObject;
     [System.NonSerialized] private string lastAnimation = "IDLE";
 
-    public void Instantiate()
+    public override void Instantiate()
     {
-        if (World.Instance.Player != null)
+        if (Game.Instance.Player != null)
         {
-            GameObject player = Object.Instantiate(World.Instance.Player);
+            GameObject player = Object.Instantiate(Game.Instance.Player);
             playerObject = player.GetComponent<PlayerObject>();
 
             if (playerObject != null)
@@ -32,10 +32,10 @@ public class Player
             }
             else Debug.Log("PlayerObject component not found in Player model.");
         }
-        else Debug.Log("Player prefab not found on World instance.");
+        else Debug.Log("Player prefab not found on Game instance.");
     }
 
-    public void Update()
+    public override void Update()
     {
         if (!canMove)
         {

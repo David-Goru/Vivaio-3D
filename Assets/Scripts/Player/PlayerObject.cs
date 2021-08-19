@@ -24,7 +24,7 @@ public class PlayerObject : MonoBehaviour
         handLayer = animator.GetLayerIndex("MainHandInUse");
         ChangeMainHand(HandType.RIGHT);
         
-        if (World.Instance != null) setUpItemsHandModels();
+        if (Game.Instance != null) setUpItemsHandModels();
     }
 
     public void UpdatePosition(Vector3 position)
@@ -106,7 +106,7 @@ public class PlayerObject : MonoBehaviour
 
     private void setUpItemsHandModels()
     {
-        foreach (ItemModels itemModels in World.Instance.ItemModels)
+        foreach (ItemModels itemModels in Game.Instance.ItemModels)
         {
             itemModels.HandModel = mainHandModel.Find(itemModels.Name).gameObject;
         }

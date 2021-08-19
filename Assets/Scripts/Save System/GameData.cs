@@ -6,30 +6,29 @@ using System.Runtime.Serialization;
 [System.Serializable]
 public class GameData
 {
-    private UI ui;
     private Player player;
     private Farm farm;
+    private UI ui;
     private AI ai;
 
     public Player Player { get => player; set => player = value; }
     public Farm Farm { get => farm; set => farm = value; }
-    public AI AI { get => ai; set => ai = value; }
     public UI UI { get => ui; set => ui = value; }
+    public AI AI { get => ai; set => ai = value; }
 
     public void Create()
     {
         player = new Player();
         farm = new Farm();
+        ui = new UI();
         ai = new AI();
     }
 
     public void Instantiate()
     {
-        if (World.Instance.UI != null) ui = Object.Instantiate(World.Instance.UI).GetComponent<UI>();
-        else Debug.Log("UI prefab not found on World instance.");
-
         player.Instantiate();
         farm.Instantiate();
+        ui.Instantiate();
         ai.Instantiate();
     }
 

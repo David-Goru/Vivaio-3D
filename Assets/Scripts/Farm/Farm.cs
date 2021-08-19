@@ -2,18 +2,18 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Farm
+public class Farm : GameElement
 {
     private List<Tile> tiles;
     private Vector3 size;
 
     [System.NonSerialized] private FarmObject farmObject;
 
-    public void Instantiate()
+    public override void Instantiate()
     {
-        if (World.Instance.Farm != null)
+        if (Game.Instance.Farm != null)
         {
-            GameObject model = Object.Instantiate(World.Instance.Farm);
+            GameObject model = Object.Instantiate(Game.Instance.Farm);
             farmObject = model.GetComponent<FarmObject>();
 
             if (farmObject != null)
@@ -24,7 +24,7 @@ public class Farm
             }
             else Debug.Log("FarmObject component not found in Farm model.");
         }
-        else Debug.Log("Farm prefab not found on World instance.");
+        else Debug.Log("Farm prefab not found on Game instance.");
     }
 
     public bool PlowAt(Vector3 position)
@@ -37,17 +37,12 @@ public class Farm
 
     public static GameObject GetRidgePrefab()
     {
-        return World.Instance.Data.Farm.RidgePrefab();
+        return Game.Instance.Data.Farm.RidgePrefab();
     }
 
     public GameObject RidgePrefab()
     {
         return farmObject.RidgePrefab;
-    }
-
-    public void Update()
-    {
-
     }
 
     private void initializeTiles()

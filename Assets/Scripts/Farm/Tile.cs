@@ -25,7 +25,7 @@ public class Tile
     {
         if (plowed == true) return false;
 
-        World.Instance.StartCoroutine(delayRidgeCreation(0.4f));
+        Game.Instance.StartCoroutine(delayRidgeCreation(0.4f));
         plowed = true;
         return true;
     }

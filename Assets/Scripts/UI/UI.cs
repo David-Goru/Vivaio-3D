@@ -1,17 +1,31 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
-public class UI : MonoBehaviour
+[System.Serializable]
+public class UI : GameElement
 {
     private List<UIElement> elements;
+    [System.NonSerialized] private UIObject uiObject;
 
-    private void Start()
+    public override void Instantiate()
     {
-        loadElements();
+        if (Game.Instance.UI != null)
+        {
+            GameObject ui = Object.Instantiate(Game.Instance.UI);
+            uiObject = ui.GetComponent<UIObject>();
+
+            if (uiObject != null)
+            {
+                uiObject.Data = this;
+            }
+            else Debug.Log("UIObject component not found in UI model.");
+
+            loadElements();
+        }
+        else Debug.Log("UI prefab not found on Game instance.");
     }
 
-    public void Update()
+    public override void Update()
     {
         foreach (UIElement element in elements)
         {
@@ -22,7 +36,7 @@ public class UI : MonoBehaviour
     private void loadElements()
     {
         elements = new List<UIElement>();
-        foreach (Transform child in transform)
+        foreach (Transform child in uiObject.transform)
         {
             UIElement element = getUIElement(child);
             if (element != null)
@@ -37,8 +51,8 @@ public class UI : MonoBehaviour
     {
         try
         {
-            Type type = Type.GetType(viewer.name);
-            UIElement element = (UIElement)Activator.CreateInstance(type);
+            System.Type type = System.Type.GetType(viewer.name);
+            UIElement element = (UIElement)System.Activator.CreateInstance(type);
             element.SetViewer(viewer);
             return element;
         }

@@ -1,22 +1,17 @@
 using UnityEngine;
 
 [System.Serializable]
-public class AI
+public class AI : GameElement
 {
-    public void Instantiate()
+    public override void Instantiate()
     {
-        if (World.Instance.AI != null)
+        if (Game.Instance.AI != null)
         {
-            GameObject model = Object.Instantiate(World.Instance.AI);
+            GameObject model = Object.Instantiate(Game.Instance.AI);
             AIObject modelScript = model.GetComponent<AIObject>();
             if (modelScript != null) modelScript.Data = this;
             else Debug.Log("AIObject component not found in AI model.");
         }
-        else Debug.Log("AI prefab not found on World instance.");
-    }
-
-    public void Update()
-    {
-
+        else Debug.Log("AI prefab not found on Game instance.");
     }
 }
