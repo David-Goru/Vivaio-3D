@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PlayerObject : MonoBehaviour
 {
     public LayerMask PlowableLayer;
+    public LayerMask WorldItemLayer;
     public Transform RightHandModel;
     public Transform LeftHandModel;
     public Transform PlayerModel;
@@ -16,15 +17,12 @@ public class PlayerObject : MonoBehaviour
     private int handLayer;
     private bool mainHandIsLeft;
     private Transform mainHandModel;
-    private Item currentItem;
 
     private void Start()
     {
         animator = PlayerModel.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
         ChangeMainHand(HandType.RIGHT);
-        
-        if (Game.Instance != null) setUpItemsHandModels();
     }
 
     public void UpdatePosition(Vector3 position)
@@ -77,24 +75,32 @@ public class PlayerObject : MonoBehaviour
         else if (type == HandType.RIGHT) mainHandIsLeft = false;
         else mainHandIsLeft = !mainHandIsLeft;
 
+        if (mainHandModel != null) mainHandModel.gameObject.SetActive(false);
         if (mainHandIsLeft)
         {
             mainHandModel = LeftHandModel;
-            if (currentItem != null)
+            if (Data != null && Data.ItemInHand != null)
             {
-                LeftHandModel.Find(currentItem.Name).gameObject.SetActive(true);
-                RightHandModel.Find(currentItem.Name).gameObject.SetActive(false);
+                Transform itemInLeftHand = LeftHandModel.Find(Data.ItemInHand.Name);
+                if (itemInLeftHand != null) itemInLeftHand.gameObject.SetActive(true);
+
+                Transform itemInRightHand = RightHandModel.Find(Data.ItemInHand.Name);
+                if (itemInRightHand != null) itemInRightHand.gameObject.SetActive(false);
             }
         }
         else
         {
             mainHandModel = RightHandModel;
-            if (currentItem != null)
+            if (Data != null && Data.ItemInHand != null)
             {
-                RightHandModel.Find(currentItem.Name).gameObject.SetActive(true);
-                LeftHandModel.Find(currentItem.Name).gameObject.SetActive(false);
+                Transform itemInRightHand = RightHandModel.Find(Data.ItemInHand.Name);
+                if (itemInRightHand != null) itemInRightHand.gameObject.SetActive(true);
+
+                Transform itemInLeftHand = LeftHandModel.Find(Data.ItemInHand.Name);
+                if (itemInLeftHand != null) itemInLeftHand.gameObject.SetActive(false);
             }
         }
+        mainHandModel.gameObject.SetActive(true);
 
         animator.SetBool("LeftHand", mainHandIsLeft);
     }
@@ -104,34 +110,28 @@ public class PlayerObject : MonoBehaviour
         animator.SetLayerWeight(handLayer, weightValue);
     }
 
-    private void setUpItemsHandModels()
+    public void ShowCurrentItemInHand()
     {
-        foreach (ItemModels itemModels in Game.Instance.ItemModels)
-        {
-            if (itemModels.CanBeInHand == false) continue;
+        Transform itemInHand = mainHandModel.Find(Data.ItemInHand.Name);
+        if (itemInHand == null) return;
 
-            try
-            {
-                itemModels.HandModel = mainHandModel.Find(itemModels.Name).gameObject;
-            }
-            catch (UnityException e) { Debug.LogError(string.Format("Couldn't find {0} item in player hands. Error: {1}", itemModels.Name, e)); }
-        }
+        mainHandModel.Find(Data.ItemInHand.Name).gameObject.SetActive(true);
     }
 
-    public void PickUpItem(Item newItem)
+    public void HideCurrentItemInHand()
     {
-        if (currentItem != null) return; // Check if can stack
+        Transform itemInHand = mainHandModel.Find(Data.ItemInHand.Name);
+        if (itemInHand == null) return;
 
-        newItem.PickUp();
-        currentItem = newItem;
+        mainHandModel.Find(Data.ItemInHand.Name).gameObject.SetActive(false);
     }
 
-    public void DropCurrentItem()
+    public void DropCurrentItemAtPlayerPosition()
     {
-        if (currentItem == null) return;
+        Transform transformPosition = mainHandModel.Find(Data.ItemInHand.Name);
+        if (transformPosition == null) transformPosition = transform;
 
-        currentItem.Drop(transform.position + Vector3.up * 0.5f + Vector3.forward * 0.25f + Vector3.right * (mainHandIsLeft ? -0.5f : 0.5f), transform.Find("Player model").rotation);
-        currentItem = null;
+        Data.ItemInHand.Drop(transformPosition.position, transformPosition.rotation);
     }
 
     public void UnblockMovement()

@@ -4,17 +4,23 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Player : GameElement
 {
-    public const float defaultSpeed = 1.25f;
-    public const float runSpeed = 2.75f;
+    private const float defaultSpeed = 1.25f;
+    private const float runSpeed = 2.75f;
+    private const float maxDistance = 2.5f;
 
     private Vector3 position = new Vector3(0, 0, 0);
     private List<AppearanceElement> appearanceElements;
+    private Item itemInHand = null;
 
     [System.NonSerialized] private bool canMove = true;
     [System.NonSerialized] private Vector3 lastFrameMovement;
     [System.NonSerialized] private float lastFrameSpeed;
     [System.NonSerialized] private PlayerObject playerObject;
     [System.NonSerialized] private string lastAnimation = "IDLE";
+
+    public PlayerObject PlayerObject { get => playerObject; }
+    public string LastAnimation { get => lastAnimation; set => lastAnimation = value; }
+    public Item ItemInHand { get => itemInHand; set => itemInHand = value; }
 
     public override void Instantiate()
     {
@@ -50,15 +56,8 @@ public class Player : GameElement
             lastFrameMovement = Vector3.zero;            
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            // if has tool in hands, Tool.Use();
-
-            /*playerObject.PickUpItem(new Item("Hoe", World.GetItemModels("Hoe")));
-            playerObject.DropCurrentItem();*/
-
-            TryPlow();
-        }
+        if (Input.GetMouseButtonDown(0)) leftClick();
+        else if (Input.GetKeyDown(KeyCode.G)) dropCurrentItem();
     }
 
     public override void FixedUpdate()
@@ -71,38 +70,62 @@ public class Player : GameElement
         }
     }
 
-    // Hoe.Try():
-    public void TryPlow()
+    private void leftClick()
+    {
+        if (!leftClickFloor() && itemInHand != null) itemInHand.Use(this);
+    }
+
+    private bool leftClickFloor()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100, playerObject.PlowableLayer))
+        if (Physics.Raycast(ray, out hit, 100, playerObject.WorldItemLayer))
         {
-            if (CheckDistance(hit.point))
-            {
-                lastAnimation = "PLOW";
-                Plow(hit);
-            }
+            if (CheckDistance(hit.point)) tryToPickUp(hit.transform.GetComponent<WorldItem>());
+            return true;
         }
+        return false;
     }
 
-    // Hoe.CheckDistance():
+    private void tryToPickUp(WorldItem worldItem)
+    {
+        if (itemInHand != null)
+        {
+            if (itemInHand.ItemModel != worldItem.Item.ItemModel) return;
+            else if (itemInHand.Stack >= itemInHand.ItemModel.MaxStack) return;
+        }
+
+        if (itemInHand == null)
+        {
+            itemInHand = worldItem.PickUp(worldItem.Item.Stack);
+            playerObject.ShowCurrentItemInHand();
+        }
+        else
+        {
+            int stackToTrade = worldItem.Item.Stack;
+            if (stackToTrade + itemInHand.Stack > itemInHand.ItemModel.MaxStack) stackToTrade = itemInHand.ItemModel.MaxStack - itemInHand.Stack;
+
+            itemInHand.Stack += stackToTrade;
+            worldItem.PickUp(stackToTrade);
+        }
+
+        //LastAnimation = "PICKUPITEM";
+    }
+
+    private void dropCurrentItem()
+    {
+        if (itemInHand == null) return;
+
+        //LastAnimation = "DROPITEM";
+        playerObject.HideCurrentItemInHand();
+        playerObject.DropCurrentItemAtPlayerPosition();
+        itemInHand = null;
+    }
+
     public bool CheckDistance(Vector3 targetPosition)
     {
-        float maxDistance = 2.5f;
         return playerObject.DistanceFrom(targetPosition) < maxDistance;
-    }
-
-    // Hoe.Use():
-    public void Plow(RaycastHit tile)
-    {
-        bool plowed = tile.transform.GetComponent<FarmObject>().PlowAt(tile.point);
-        if (plowed)
-        {
-            blockMovement();
-            playerObject.SetAnimation("PLOW");
-        }
     }
 
     private void walk()
@@ -128,13 +151,13 @@ public class Player : GameElement
 
     private void setAnimation(string newAnimation)
     {
-        if (lastAnimation == newAnimation) return;
+        if (LastAnimation == newAnimation) return;
 
-        lastAnimation = newAnimation;
+        LastAnimation = newAnimation;
         playerObject.SetAnimation(newAnimation);
     }
 
-    private void blockMovement()
+    public void BlockMovement()
     {
         canMove = false;
     }

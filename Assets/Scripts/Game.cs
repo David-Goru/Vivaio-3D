@@ -8,7 +8,7 @@ public class Game : MonoBehaviour
     public static FileStream GameFile;
 
     [SerializeField] private ItemModelsList itemModelsList = null;
-    public List<ItemModels> ItemModels { get => itemModelsList.ItemModels; }
+    public List<ItemModel> ItemModels { get => itemModelsList.ItemModels; }
 
     private GameData data;
     public GameData Data { get => data; set => data = value; }
@@ -29,9 +29,9 @@ public class Game : MonoBehaviour
         data.Instantiate();
     }
 
-    public static ItemModels GetItemModels(string name)
+    public static ItemModel GetItemModels(string name)
     {
-        return Instance.ItemModels.Find(x => x.Name == name);
+        return Instance.ItemModels.Find(x => x.name == name);
     }
 
     private void Update()
