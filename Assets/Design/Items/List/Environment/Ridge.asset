@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1578ddecf9e817a42b3d1b30b313efcd, type: 3}
-  m_Name: Models List
+  m_Script: {fileID: 11500000, guid: 06b5a9c83990bb64cbebd6f876d6ca64, type: 3}
+  m_Name: Ridge
   m_EditorClassIdentifier: 
-  itemModels:
-  - {fileID: 11400000, guid: d25b371dfb0c08049bc78c5dbc684084, type: 2}
-  - {fileID: 11400000, guid: 61f378b2744e5a244b969599151e0398, type: 2}
+  worldModel: {fileID: 3698662359342697876, guid: b802a273476823d448d3e7ff6773b0a8, type: 3}
+  canBeInHand: 0

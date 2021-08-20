@@ -5,26 +5,18 @@ public class Item
 {
     private string name;
     [System.NonSerialized] private GameObject worldObject;
-    [System.NonSerialized] private ItemModels itemModels;
+    [System.NonSerialized] private ItemModel itemModel;
+    private int stack = 0;
 
     public string Name { get => name; set => name = value; }
+    public ItemModel ItemModel { get => itemModel; set => itemModel = value; }
+    public int Stack { get => stack; set => stack = value; }
 
-    public Item(string name, ItemModels itemModels)
-    {
-        this.name = name;
-        this.itemModels = itemModels;
-    }
-
-    public void PickUp()
-    {
-        if (worldObject != null) Object.Destroy(worldObject);
-        itemModels.HandModel.SetActive(true);
-    }
+    public virtual void Use(Player player) { }
 
     public void Drop(Vector3 position, Quaternion rotation)
     {
-        worldObject = Object.Instantiate(itemModels.WorldModel, position, rotation);
+        worldObject = Object.Instantiate(itemModel.WorldModel, position, rotation);
         worldObject.GetComponent<WorldItem>().Item = this;
-        itemModels.HandModel.SetActive(false);
     }
 }

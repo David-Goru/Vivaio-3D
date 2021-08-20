@@ -49,6 +49,9 @@ MonoBehaviour:
   PlowableLayer:
     serializedVersion: 2
     m_Bits: 64
+  WorldItemLayer:
+    serializedVersion: 2
+    m_Bits: 128
   RightHandModel: {fileID: 1083850539658174486}
   LeftHandModel: {fileID: 1083850539265525009}
   PlayerModel: {fileID: 612530436553494597}
