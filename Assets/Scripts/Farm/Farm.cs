@@ -31,6 +31,14 @@ public class Farm : GameElement
         return tile.Plow();
     }
 
+    public bool WaterAt(Vector3 position)
+    {
+        Vector3 roundedPosition = new Vector3(Mathf.Round(position.x - 0.5f) + 0.5f, 0, Mathf.Round(position.z - 0.5f) + 0.5f);
+        Tile tile = tiles.Find(x => x.Position == roundedPosition);
+        if (tile == null) return false;
+        return tile.Water();
+    }
+
     public static GameObject GetRidgePrefab()
     {
         return Game.Instance.ItemModels.Find(x => x.name == "Ridge").WorldModel;

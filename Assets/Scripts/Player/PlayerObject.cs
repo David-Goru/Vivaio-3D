@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class PlayerObject : MonoBehaviour
 {
-    public LayerMask PlowableLayer;
     public LayerMask WorldItemLayer;
+    public LayerMask FarmTileLayer;
     public Transform RightHandModel;
     public Transform LeftHandModel;
     public Transform PlayerModel;

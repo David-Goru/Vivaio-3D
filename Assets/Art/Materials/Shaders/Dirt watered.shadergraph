@@ -1484,9 +1484,9 @@
     "m_Guid": {
         "m_GuidSerialized": "b6eaa063-de5e-4a53-acd2-85c7ea3876a0"
     },
-    "m_Name": "Wet_Dry",
+    "m_Name": "WetDry",
     "m_DefaultReferenceName": "Vector1_a0716575172f4d68a32284db1cc8e961",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "WetDry",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -1855,7 +1855,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "cc594f0b1bbf430db1922b4e5b784a67",
     "m_Id": 0,
-    "m_DisplayName": "Wet_Dry",
+    "m_DisplayName": "WetDry",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

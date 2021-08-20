@@ -8,11 +8,13 @@ using System.Collections.Generic;
 public class GameData
 {
     private List<GameElement> gameElements;
+    [System.NonSerialized] private Game game;
 
     public List<GameElement> GameElements { get => gameElements; set => gameElements = value; }
 
-    public void Create()
+    public void Create(Game game)
     {
+        this.game = game;
         gameElements = new List<GameElement>();
 
         foreach (GameObject gameElementGameObject in Game.Instance.GameElementGameObjects)
@@ -39,6 +41,7 @@ public class GameData
         System.Type type = System.Type.GetType(gameObject.name);
         GameElement gameElement = (GameElement)System.Activator.CreateInstance(type);
         gameElement.Prefab = gameObject;
+        gameElement.Game = game;
 
         return gameElement;
     }

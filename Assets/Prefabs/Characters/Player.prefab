@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802355d3006a838469cf5161a25d5258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlowableLayer:
-    serializedVersion: 2
-    m_Bits: 64
   WorldItemLayer:
     serializedVersion: 2
     m_Bits: 128
+  FarmTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
   RightHandModel: {fileID: 1083850539658174486}
   LeftHandModel: {fileID: 1083850539265525009}
   PlayerModel: {fileID: 612530436553494597}

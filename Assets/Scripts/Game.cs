@@ -22,7 +22,7 @@ public class Game : MonoBehaviour
         if (GameFile == null)
         {
             data = new GameData();
-            data.Create();
+            data.Create(this);
         }
         else data = GameData.Deserialize(GameFile);
 

@@ -13,4 +13,10 @@ public class FarmObject : MonoBehaviour
         if (farmScript != null) return farmScript.PlowAt(position);
         return false;
     }
+
+    public bool WaterAt(Vector3 position)
+    {
+        if (farmScript != null) return farmScript.WaterAt(position);
+        return false;
+    }
 }

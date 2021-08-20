@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Hoe : Item
+public class WateringCan : Item
 {
     public override void Use(Player player)
     {
@@ -11,19 +11,19 @@ public class Hoe : Item
         {
             if (player.CheckDistance(hit.point))
             {
-                player.LastAnimation = "PLOW";
-                Plow(hit, player);
+                player.LastAnimation = "WATER";
+                Water(hit, player);
             }
         }
     }
 
-    public void Plow(RaycastHit tile, Player player)
+    public void Water(RaycastHit tile, Player player)
     {
-        bool plowed = tile.transform.GetComponent<FarmObject>().PlowAt(tile.point);
-        if (plowed)
+        bool watered = tile.transform.GetComponent<FarmObject>().WaterAt(tile.point);
+        if (watered)
         {
             player.BlockMovement();
-            player.PlayerObject.SetAnimation("PLOW");
+            player.PlayerObject.SetAnimation("WATER");
         }
     }
 }
