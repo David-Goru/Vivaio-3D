@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class WateringCan : Item
 {
@@ -22,8 +23,22 @@ public class WateringCan : Item
         bool watered = tile.transform.GetComponent<FarmObject>().WaterAt(tile.point);
         if (watered)
         {
+            activateParticles(player);
             player.BlockMovement();
             player.PlayerObject.SetAnimation("WATER");
         }
+    }
+
+    private void activateParticles(Player player)
+    {
+        Transform particles = HandObject.transform.Find("Particles");
+        if (particles != null) player.PlayerObject.StartCoroutine(showParticles(particles.gameObject));
+    }
+
+    private IEnumerator showParticles(GameObject particles)
+    {
+        particles.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        particles.SetActive(false);
     }
 }

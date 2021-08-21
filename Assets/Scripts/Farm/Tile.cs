@@ -58,12 +58,16 @@ public class Tile
     private IEnumerator waterRidge()
     {
         Material material = ridge.transform.Find("Model").GetComponent<MeshRenderer>().material;
+        Transform water = ridge.transform.Find("Water");
+        water.gameObject.SetActive(true);
+
         float dryValue = 0;
         while (dryValue > -1)
         {
+            dryValue -= 0.05f;
             yield return new WaitForSeconds(0.05f);
             material.SetFloat("WetDry", dryValue);
-            dryValue -= 0.05f;
+            water.position += Vector3.up * 0.001f;
         }
     }
 

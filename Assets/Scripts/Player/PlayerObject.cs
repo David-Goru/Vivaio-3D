@@ -115,7 +115,10 @@ public class PlayerObject : MonoBehaviour
         Transform itemInHand = mainHandModel.Find(Data.ItemInHand.Name);
         if (itemInHand == null) return;
 
-        mainHandModel.Find(Data.ItemInHand.Name).gameObject.SetActive(true);
+        GameObject itemInHandModel = mainHandModel.Find(Data.ItemInHand.Name).gameObject;
+        itemInHandModel.SetActive(true);
+
+        Data.ItemInHand.HandObject = itemInHandModel;
     }
 
     public void HideCurrentItemInHand()
