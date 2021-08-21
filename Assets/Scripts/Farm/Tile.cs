@@ -67,7 +67,7 @@ public class Tile
             dryValue -= 0.05f;
             yield return new WaitForSeconds(0.05f);
             material.SetFloat("WetDry", dryValue);
-            water.position += Vector3.up * 0.001f;
+            water.position += Vector3.up * 0.0015f;
         }
     }
 
