@@ -1728,7 +1728,7 @@
     },
     "m_Name": "Fill",
     "m_DefaultReferenceName": "Vector1_fa7800bcb8b84d81a38d43c8f454922c",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "Fill",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

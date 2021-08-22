@@ -61,14 +61,43 @@ public class Tile
         Transform water = ridge.transform.Find("Water");
         water.gameObject.SetActive(true);
 
-        float dryValue = 0;
-        while (dryValue > -1)
+        float timer = 1.0f;
+        float tick = 0.05f;
+        float yCurrentPosition = -0.01f;
+        float yObjectivePosition = 0.02f;
+
+        float numberOfIterations = timer / tick;
+        float positionIncrement = (yObjectivePosition - yCurrentPosition) / numberOfIterations;
+        while (timer > 0.0f)
         {
-            dryValue -= 0.05f;
-            yield return new WaitForSeconds(0.05f);
-            material.SetFloat("WetDry", dryValue);
-            water.position += Vector3.up * 0.0015f;
+            timer -= tick;
+            yCurrentPosition += positionIncrement;
+            water.position += Vector3.up * positionIncrement;
+            yield return new WaitForSeconds(tick);
         }
+
+        float delay = 0.25f;
+        yield return new WaitForSeconds(delay);
+
+        timer = 5.0f;
+        yObjectivePosition = -0.01f;
+        float currentDryValue = 0.0f;
+        float objectiveDryValue = -1.0f;
+
+        numberOfIterations = timer / tick;
+        float positionReduction = (yObjectivePosition - yCurrentPosition) / numberOfIterations;
+        float dryReduction = (objectiveDryValue - currentDryValue) / numberOfIterations;
+        while (timer > 0.0f)
+        {
+            timer -= tick;
+            yCurrentPosition += positionReduction;
+            water.position += Vector3.up * positionReduction;
+            currentDryValue += dryReduction;
+            material.SetFloat("WetDry", currentDryValue);
+            yield return new WaitForSeconds(tick);
+        }
+
+        water.gameObject.SetActive(false);
     }
 
     private void createRidge()

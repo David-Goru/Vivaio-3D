@@ -137,6 +137,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7273442020832296225, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273442021236756450, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 8019099686357076561, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
       propertyPath: m_Name
       value: Player model

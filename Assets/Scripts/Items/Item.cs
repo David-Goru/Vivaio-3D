@@ -4,7 +4,7 @@
 public class Item
 {
     private string name;
-    [System.NonSerialized] private GameObject worldObject;
+    [System.NonSerialized] protected GameObject worldObject;
     [System.NonSerialized] private GameObject handObject;
     [System.NonSerialized] private ItemModel itemModel;
     private int stack = 0;
@@ -15,11 +15,13 @@ public class Item
     public int Stack { get => stack; set => stack = value; }
 
     public virtual void Use(Player player) { }
+    public virtual void UpdateVisuals() { }
 
     public void Drop(Vector3 position, Quaternion rotation)
     {
         handObject = null;
         worldObject = Object.Instantiate(itemModel.WorldModel, position, rotation);
         worldObject.GetComponent<WorldItem>().Item = this;
+        UpdateVisuals();
     }
 }

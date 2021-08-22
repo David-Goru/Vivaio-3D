@@ -119,6 +119,7 @@ public class PlayerObject : MonoBehaviour
         itemInHandModel.SetActive(true);
 
         Data.ItemInHand.HandObject = itemInHandModel;
+        Data.ItemInHand.UpdateVisuals();
     }
 
     public void HideCurrentItemInHand()

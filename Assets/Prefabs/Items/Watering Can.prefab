@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4777876695771855999}
   - component: {fileID: 8981439705742347483}
   m_Layer: 0
-  m_Name: Water of Watering can
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
