@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b5a9c83990bb64cbebd6f876d6ca64, type: 3}
+  m_Name: Carrot crop
+  m_EditorClassIdentifier: 
+  className: Carrot crop
+  worldModel: {fileID: 1446675675370548177, guid: c8035e62a8e18e04b853974e176f2a91, type: 3}
+  canBeInHand: 1
+  maxStack: 12

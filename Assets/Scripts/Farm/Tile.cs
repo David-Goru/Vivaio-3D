@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Tile
@@ -7,6 +8,7 @@ public class Tile
     private Vector3 position;
     private bool plowed;
     private bool watered;
+    private List<Crop> crops;
     [System.NonSerialized] private GameObject ridge;
 
     public Vector3 Position { get => position; set => position = value; }
@@ -15,6 +17,7 @@ public class Tile
     public Tile(Vector3 position)
     {
         this.position = position;
+        crops = new List<Crop>();
     }
 
     public void Load()
@@ -103,6 +106,10 @@ public class Tile
     private void createRidge()
     {
         ridge = Object.Instantiate(Farm.GetRidgePrefab(), position, Quaternion.identity);
+        crops.Add(new Crop(position + Vector3.right * 0.25f + Vector3.forward * 0.25f + Vector3.up * 0.0925f));
+        crops.Add(new Crop(position + Vector3.left * 0.25f + Vector3.forward * 0.25f + Vector3.up * 0.0925f));
+        crops.Add(new Crop(position + Vector3.right * 0.25f - Vector3.forward * 0.25f + Vector3.up * 0.0925f));
+        crops.Add(new Crop(position + Vector3.left * 0.25f - Vector3.forward * 0.25f + Vector3.up * 0.0925f));
     }
 
     private void removeRidge()
