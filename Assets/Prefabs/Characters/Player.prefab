@@ -43,19 +43,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 243026747723229190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802355d3006a838469cf5161a25d5258, type: 3}
+  m_Script: {fileID: 11500000, guid: 81a15730e08abfc47a21b298946c27b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WorldItemLayer:
+  worldItemLayer:
     serializedVersion: 2
     m_Bits: 128
-  FarmTileLayer:
+  farmTileLayer:
     serializedVersion: 2
     m_Bits: 64
-  RightHandModel: {fileID: 1083850539658174486}
-  LeftHandModel: {fileID: 1083850539265525009}
-  PlayerModel: {fileID: 612530436553494597}
-  Appearance: {fileID: 11400000, guid: 8f039ba7d4bf272419cc5d0f34d4daad, type: 2}
+  rightHandModel: {fileID: 1083850539658174486}
+  leftHandModel: {fileID: 1083850539265525009}
+  model: {fileID: 612530436553494597}
+  appearance: {fileID: 11400000, guid: 8f039ba7d4bf272419cc5d0f34d4daad, type: 2}
 --- !u!54 &6965182862526918569
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93,6 +93,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9113309630107522240}
     m_Modifications:
+    - target: {fileID: 3967611772352227733, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Name
+      value: Watering Can
+      objectReference: {fileID: 0}
+    - target: {fileID: 3967611772352227733, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315638141335698723, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Name
+      value: Watering Can
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315638141335698723, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479594772771773307, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7206392730634866923, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -149,7 +169,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player model
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8486362007016892832, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8486362007016892833, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
+    - {fileID: 6479594772771773306, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 64ddf52b7a4b9ae4b884d9eba8f989a9, type: 3}
 --- !u!4 &612530436553494597 stripped
 Transform:

@@ -77,8 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c779e3a74e07694478054e30f0dcbbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemModel: {fileID: 11400000, guid: 5c4166a725406414f9716eb2d3667456, type: 2}
-  stack: 1
+  info: {fileID: 11400000, guid: c48aa50af14749048b3598028949647f, type: 2}
+  startingStack: 1
+  specificValues:
+  - variableName: WaterAmount
+    value: 5
 --- !u!1 &3554192250529800187
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,11 +127,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3554192250529800187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b939927f2299a247a5ca0a239da4759, type: 3}
+  m_Script: {fileID: 11500000, guid: 783a7f042c19b7f4d97e6e4459befc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RidgePrefab: {fileID: 3698662359342697876, guid: b802a273476823d448d3e7ff6773b0a8, type: 3}
-  Ground: {fileID: 2357507719400706959}
+  ground: {fileID: 2357507719400706959}
+  ridgePrefab: {fileID: 3698662359342697876, guid: b802a273476823d448d3e7ff6773b0a8, type: 3}
 --- !u!65 &243098321546427366
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,8 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c779e3a74e07694478054e30f0dcbbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemModel: {fileID: 11400000, guid: d25b371dfb0c08049bc78c5dbc684084, type: 2}
-  stack: 1
+  info: {fileID: 11400000, guid: d25b371dfb0c08049bc78c5dbc684084, type: 2}
+  startingStack: 1
+  specificValues: []
 --- !u!1 &6125833345473073513
 GameObject:
   m_ObjectHideFlags: 0

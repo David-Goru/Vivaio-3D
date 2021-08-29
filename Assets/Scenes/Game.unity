@@ -268,12 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05dbb54c25a3df3438f71d9b38c099ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemModelsList: {fileID: 11400000, guid: 215970a2e75ab61419c80535c97b0dcc, type: 2}
-  GameElementGameObjects:
-  - {fileID: 243026747723229190, guid: c8e8ea3cc46e254479a99d3bf86256f9, type: 3}
-  - {fileID: 3554192250529800187, guid: acc08672a8153394fa650352710a162e, type: 3}
-  - {fileID: 2669162057040989662, guid: 9d344a84190b6fd47a520038269c2207, type: 3}
-  - {fileID: 7736635560149034464, guid: 726005ef44ad8c7499eaad46a68a3478, type: 3}
+  playerObject: {fileID: 243026747723229190, guid: c8e8ea3cc46e254479a99d3bf86256f9, type: 3}
+  farmObject: {fileID: 3554192250529800187, guid: acc08672a8153394fa650352710a162e, type: 3}
+  aiObject: {fileID: 7736635560149034464, guid: 726005ef44ad8c7499eaad46a68a3478, type: 3}
+  uiObject: {fileID: 2669162057040989662, guid: 9d344a84190b6fd47a520038269c2207, type: 3}
 --- !u!4 &535927899
 Transform:
   m_ObjectHideFlags: 0
