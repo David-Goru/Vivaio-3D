@@ -179,7 +179,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: 50, y: 350, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -389,7 +389,7 @@ AnimatorState:
   m_MirrorParameterActive: 1
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f7a09bb2271654f46a5275783c459265, type: 2}
+  m_Motion: {fileID: 7400000, guid: d0e82a8eedd17ea498432b3de2b12e8a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: LeftHand
@@ -523,7 +523,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: HandInUse
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -536,7 +536,7 @@ AnimatorState:
   m_MirrorParameterActive: 1
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f7a09bb2271654f46a5275783c459265, type: 2}
+  m_Motion: {fileID: 7400000, guid: d0e82a8eedd17ea498432b3de2b12e8a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: LeftHand
