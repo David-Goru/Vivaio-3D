@@ -36,6 +36,16 @@ public class Farm : MonoBehaviour
         return tile.Water();
     }
 
+    private IEnumerator createRidge(Vector3 position)
+    {
+        yield return new WaitForSeconds(0.35f);
+
+        Tile tile = Instantiate(ridgePrefab, position, Quaternion.identity).GetComponent<Tile>();
+        tile.Data = new TileData();
+        tile.Data.Position = position;
+        tiles.Add(tile);
+    }
+
     // NOT IMPLEMENTED YET
     public void Save()
     {
@@ -54,15 +64,5 @@ public class Farm : MonoBehaviour
             tile.Data = tileData;
             tiles.Add(tile);
         }
-    }
-
-    private IEnumerator createRidge(Vector3 position)
-    {
-        yield return new WaitForSeconds(0.35f);
-
-        Tile tile = Instantiate(ridgePrefab, position, Quaternion.identity).GetComponent<Tile>();
-        tile.Data = new TileData();
-        tile.Data.Position = position;
-        tiles.Add(tile);
     }
 }

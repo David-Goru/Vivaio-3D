@@ -81,7 +81,7 @@ MonoBehaviour:
   startingStack: 1
   specificValues:
   - variableName: WaterAmount
-    value: 5
+    value: 100
 --- !u!1 &3554192250529800187
 GameObject:
   m_ObjectHideFlags: 0

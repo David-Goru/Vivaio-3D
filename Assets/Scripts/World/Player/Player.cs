@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float defaultSpeed = 1.25f;
     [SerializeField] private float runSpeed = 2.75f;
-    [SerializeField] private float maxDistance = 2.5f;
+    [SerializeField] private float maxDistance = 1.5f;
     [SerializeField] private LayerMask worldItemLayer;
     [SerializeField] private LayerMask farmTileLayer;
     [SerializeField] private Transform rightHandModel;
