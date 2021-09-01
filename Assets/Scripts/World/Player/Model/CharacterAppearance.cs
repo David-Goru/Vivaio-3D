@@ -11,7 +11,7 @@ public class CharacterAppearance : ScriptableObject
         foreach (AppearanceElement element in elements)
         {
             if (element.OptionSelected == "None") continue;
-            GameObject elementObject = model.Find(element.BodyPartName.ToString()).Find(element.OptionSelected).gameObject;
+            GameObject elementObject = model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject;
             elementObject.SetActive(true);
             elementObject.GetComponent<SkinnedMeshRenderer>().material.color = element.Color;
         }
@@ -21,23 +21,13 @@ public class CharacterAppearance : ScriptableObject
     {
         if (element.OptionSelected == "None") return;
 
-        model.Find(element.BodyPartName.ToString()).Find(element.OptionSelected).gameObject.SetActive(false);
+        model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject.SetActive(false);
     }
 
     public void ShowBodyElement(Transform model, AppearanceElement element)
     {
         if (element.OptionSelected == "None") return;
 
-        model.Find(element.BodyPartName.ToString()).Find(element.OptionSelected).gameObject.SetActive(true);
+        model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject.SetActive(true);
     }
-}
-
-public enum BodyPart
-{
-    BODY,
-    EYES,
-    HAIR,
-    SHIRTS,
-    TROUSERS,
-    SHOES
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    private const float defaultSpeed = 1.25f;
-    private const float runSpeed = 2.75f;
-    private const float maxDistance = 2.5f;
-
+    [SerializeField] private float defaultSpeed = 1.25f;
+    [SerializeField] private float runSpeed = 2.75f;
+    [SerializeField] private float maxDistance = 2.5f;
     [SerializeField] private LayerMask worldItemLayer;
     [SerializeField] private LayerMask farmTileLayer;
     [SerializeField] private Transform rightHandModel;
@@ -16,13 +15,11 @@ public class Player : MonoBehaviour
 
     private PlayerData data;
     private Item itemInHand;
-    private List<AppearanceElement> appearanceElements;
     private bool canMove = true;
     private Vector3 lastFrameMovement;
     private float lastFrameSpeed;
     private string lastAnimation = "IDLE";
     private int handLayer;
-    private bool mainHandIsLeft;
     private Transform mainHandModel;
     private Animator animator;
 
@@ -35,53 +32,81 @@ public class Player : MonoBehaviour
         animator = model.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
         changeMainHand(HandType.RIGHT);
+
+        if (CharacterCreation.SelectedAppearance != null) setAppearance(CharacterCreation.SelectedAppearance);
     }
 
     private void Update()
     {
-        if (!canMove)
-        {
-            lastFrameMovement = Vector3.zero;
-            return;
-        }
+        if (canMove) checkInput();
+        else lastFrameMovement = Vector3.zero;        
+    }
 
+    private void FixedUpdate()
+    {
+        if (lastFrameMovement != Vector3.zero) updatePositionAndRotation();
+    }
+
+    private void checkInput()
+    {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             if (Input.GetButton("Run")) run();
-            else walk();         
+            else walk();
         }
         else if (lastFrameMovement != Vector3.zero)
         {
             SetAnimation("IDLE");
-            lastFrameMovement = Vector3.zero;            
+            lastFrameMovement = Vector3.zero;
         }
 
         if (Input.GetMouseButtonDown(0)) leftClick();
         else if (Input.GetKeyDown(KeyCode.G)) dropCurrentItem();
     }
 
-    private void FixedUpdate()
+    private void updatePositionAndRotation()
     {
-        if (lastFrameMovement != Vector3.zero)
-        {
-            Vector3 direction = lastFrameMovement * Time.deltaTime * lastFrameSpeed;
-            Vector3 position = transform.position + direction * 10000;
-            Vector3 lookPosition = new Vector3(position.x, transform.position.y, position.z);
+        Vector3 direction = lastFrameMovement * Time.deltaTime * lastFrameSpeed;
+        Vector3 position = transform.position + direction * 10000;
+        Vector3 lookPosition = new Vector3(position.x, transform.position.y, position.z);
 
-            transform.Translate(direction);
-            model.LookAt(lookPosition);
+        transform.Translate(direction);
+        model.LookAt(lookPosition);
 
-            data.Position = transform.position;
-            data.Rotation = model.eulerAngles;
-        }
+        data.Position = transform.position;
+        data.Rotation = model.eulerAngles;
     }
 
-    public void SetAnimation(string newAnimation)
+    private void walk()
     {
-        if (lastAnimation == newAnimation) return;
+        SetAnimation("WALK");
+        lastFrameMovement = getLastFrameMovement();
+        lastFrameSpeed = defaultSpeed;
+    }
 
-        lastAnimation = newAnimation;
-        animator.SetTrigger(newAnimation);
+    private void run()
+    {
+        SetAnimation("RUN");
+        lastFrameMovement = getLastFrameMovement();
+        lastFrameSpeed = runSpeed;
+    }
+
+    private Vector3 getLastFrameMovement()
+    {
+        Vector3 movementDirectionAndMagnitude = Vector3.right * Input.GetAxis("Horizontal") + Vector3.forward * Input.GetAxis("Vertical");
+        return Vector3.ClampMagnitude(movementDirectionAndMagnitude, 1.0f); // Clamp to avoid faster diagonal movement
+    }
+
+    private float distanceFrom(Vector3 targetPosition)
+    {
+        return Vector3.Distance(transform.position, targetPosition);
+    }
+
+    private void setAppearance(List<AppearanceElement> appearanceElements)
+    {
+        if (data != null) data.AppearanceElements = appearanceElements;
+        Transform model = transform.Find("Player model");
+        appearance.SetAppearance(model, appearanceElements);
     }
 
     private void leftClick()
@@ -131,6 +156,7 @@ public class Player : MonoBehaviour
             item.PickUp(stackToTrade);
         }
 
+        setHandInUse();
         //LastAnimation = "PICKUPITEM";
     }
 
@@ -145,62 +171,13 @@ public class Player : MonoBehaviour
         data.ItemInHand = null;
     }
 
-    public bool CheckDistance(Vector3 targetPosition)
+    private void changeMainHand(HandType type = HandType.RIGHT)
     {
-        return distanceFrom(targetPosition) < maxDistance;
-    }
-
-    private void walk()
-    {
-        SetAnimation("WALK");
-        lastFrameMovement = getLastFrameMovement();
-        
-        lastFrameSpeed = defaultSpeed;
-    }
-
-    private void run()
-    {
-        SetAnimation("RUN");
-        lastFrameMovement = getLastFrameMovement();
-        lastFrameSpeed = runSpeed;
-    }
-
-    private Vector3 getLastFrameMovement()
-    {
-        Vector3 movementDirectionAndMagnitude = Vector3.right* Input.GetAxis("Horizontal") + Vector3.forward * Input.GetAxis("Vertical");
-        return Vector3.ClampMagnitude(movementDirectionAndMagnitude, 1.0f); // Clamp to avoid faster diagonal movement
-    }
-
-    private float distanceFrom(Vector3 targetPosition)
-    {
-        return Vector3.Distance(transform.position, targetPosition);
-    }
-
-    private void setAppearance(List<AppearanceElement> appearanceElements)
-    {
-        Transform model = transform.Find("Player model");
-        appearance.SetAppearance(model, appearanceElements);
-    }
-
-    // PlayerHand
-    private void setHandInUse()
-    {
-        changeHandWeight(1.0f);
-    }
-
-    private void unSetHandInUse()
-    {
-        changeHandWeight(0.0f);
-    }
-
-    private void changeMainHand(HandType type = HandType.DEFAULT)
-    {
-        if (type == HandType.LEFT) mainHandIsLeft = true;
-        else if (type == HandType.RIGHT) mainHandIsLeft = false;
-        else mainHandIsLeft = !mainHandIsLeft;
+        if (Data != null) data.MainHand = type;
+        animator.SetBool("LeftHand", type == HandType.LEFT);
 
         if (mainHandModel != null) mainHandModel.gameObject.SetActive(false);
-        if (mainHandIsLeft)
+        if (type == HandType.LEFT)
         {
             mainHandModel = leftHandModel;
             if (Data != null && Data.ItemInHand != null)
@@ -225,13 +202,6 @@ public class Player : MonoBehaviour
             }
         }
         mainHandModel.gameObject.SetActive(true);
-
-        animator.SetBool("LeftHand", mainHandIsLeft);
-    }
-
-    private void changeHandWeight(float weightValue)
-    {
-        animator.SetLayerWeight(handLayer, weightValue);
     }
 
     private void showCurrentItemInHand()
@@ -263,6 +233,35 @@ public class Player : MonoBehaviour
         GameObject itemOnWorld = Instantiate(itemInHand.Info.WorldModel, dropTransform.position, dropTransform.rotation);
         itemOnWorld.GetComponent<Item>().Data = itemInHand.Data;
         itemOnWorld.GetComponent<Item>().Info = itemInHand.Info;
+        unSetHandInUse();
+    }
+
+    private void setHandInUse()
+    {
+        changeHandWeight(1.0f);
+    }
+
+    private void unSetHandInUse()
+    {
+        changeHandWeight(0.0f);
+    }
+
+    private void changeHandWeight(float weightValue)
+    {
+        animator.SetLayerWeight(handLayer, weightValue);
+    }
+
+    public void SetAnimation(string newAnimation)
+    {
+        if (lastAnimation == newAnimation) return;
+
+        lastAnimation = newAnimation;
+        animator.SetTrigger(newAnimation);
+    }
+
+    public bool CheckDistance(Vector3 targetPosition)
+    {
+        return distanceFrom(targetPosition) < maxDistance;
     }
 
     public void BlockMovement()
@@ -274,18 +273,4 @@ public class Player : MonoBehaviour
     {
         canMove = true;
     }
-}
-
-public enum HandType
-{
-    RIGHT,
-    LEFT,
-    DEFAULT
-}
-
-public enum Animations
-{
-    IDLE,
-    WALK,
-    PLOW
 }

@@ -63,7 +63,7 @@ public class AppearanceElementSelector
 
     private void changeElement(int increment)
     {
-        AppearanceElement appearanceElement = CharacterCreation.SelectedAppearance.Find(x => x.BodyPartName == bodyPart);
+        AppearanceElement appearanceElement = CharacterCreation.SelectedAppearance.Find(x => x.BodyPart == bodyPart);
         int characterBodyElementID = CharacterCreation.SelectedAppearance.IndexOf(appearanceElement);
 
         CharacterCreation.Instance.HideBodyElement(appearanceElement);
@@ -88,6 +88,6 @@ public class AppearanceElementSelector
             element.GetComponent<SkinnedMeshRenderer>().material.color = color;
         }
 
-        CharacterCreation.SelectedAppearance.Find(x => x.BodyPartName == bodyPart).Color = color;
+        CharacterCreation.SelectedAppearance.Find(x => x.BodyPart == bodyPart).Color = color;
     }
 }
