@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a15730e08abfc47a21b298946c27b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSpeed: 1.25
+  runSpeed: 2.75
+  maxDistance: 1.5
   worldItemLayer:
     serializedVersion: 2
     m_Bits: 128
