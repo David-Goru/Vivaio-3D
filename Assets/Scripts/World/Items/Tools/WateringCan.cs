@@ -29,7 +29,7 @@ public class WateringCan : Item
         {
             activateParticles(player);
             player.BlockMovement();
-            player.SetAnimation("WATER");
+            player.SetAnimation(AnimationType.WATER);
             player.StartCoroutine(updateWaterAmount(-1));
         }
     }

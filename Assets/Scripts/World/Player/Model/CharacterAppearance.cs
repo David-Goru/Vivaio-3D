@@ -17,17 +17,17 @@ public class CharacterAppearance : ScriptableObject
         }
     }
 
-    public void HideBodyElement(Transform model, AppearanceElement element)
+    public void HideBodyElement(Transform model, AppearanceElement element, string option)
     {
-        if (element.OptionSelected == "None") return;
+        if (option == "None") return;
 
-        model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject.SetActive(false);
+        model.Find(element.BodyPart.ToString()).Find(option).gameObject.SetActive(false);
     }
 
-    public void ShowBodyElement(Transform model, AppearanceElement element)
+    public void ShowBodyElement(Transform model, AppearanceElement element, string option)
     {
-        if (element.OptionSelected == "None") return;
+        if (option == "None") return;
 
-        model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject.SetActive(true);
+        model.Find(element.BodyPart.ToString()).Find(option).gameObject.SetActive(true);
     }
 }

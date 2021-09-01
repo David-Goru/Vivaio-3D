@@ -8,12 +8,16 @@ public class AppearanceElementSelector
     [SerializeField] private BodyPart bodyPart;
     [SerializeField] private bool canBeNone = false;
     [SerializeField] private List<Color> colors;
-    [System.NonSerialized] private Transform model;
-    [System.NonSerialized] private Transform uiPanel;
-    [System.NonSerialized] private Text optionText;
-    [System.NonSerialized] private List<string> options;
+
+    private int index;
+    private int optionID;
+    private Transform model;
+    private Transform uiPanel;
+    private Text optionText;
+    private List<string> options;
 
     public BodyPart BodyPart { get => bodyPart; set => bodyPart = value; }
+    public List<string> Options { get => options; }
 
     public void SetUpSelector(Transform model, GameObject panelPrefab, GameObject colorPrefab, Transform parent)
     {
@@ -22,8 +26,11 @@ public class AppearanceElementSelector
         loadPanel(panelPrefab, parent);
         loadColors(colorPrefab);
 
-        CharacterCreation.AddSelectedAppearance(new AppearanceElement(bodyPart, options[0], colors[0]));
-        changeColor(colors[0]);
+        optionID = 0;
+        index = CharacterCreation.SelectedAppearance.Count;
+        CharacterCreation.SelectedAppearance.Add(new AppearanceElement(bodyPart, options[optionID], colors[optionID]));
+
+        changeColor(colors[optionID]);
     }
 
     private void loadPanel(GameObject prefab, Transform parent)
@@ -49,7 +56,6 @@ public class AppearanceElementSelector
         options = new List<string>();
         if (canBeNone) options.Add("None");
         foreach (Transform element in model.Find(bodyPart.ToString())) options.Add(element.name);
-
         if (options.Count == 0) options.Add("None");
     }
 
@@ -63,22 +69,18 @@ public class AppearanceElementSelector
 
     private void changeElement(int increment)
     {
-        AppearanceElement appearanceElement = CharacterCreation.SelectedAppearance.Find(x => x.BodyPart == bodyPart);
-        int characterBodyElementID = CharacterCreation.SelectedAppearance.IndexOf(appearanceElement);
+        if (options.Count < 2) return;
 
-        CharacterCreation.Instance.HideBodyElement(appearanceElement);
+        CharacterCreation.Instance.HideBodyElement(CharacterCreation.SelectedAppearance[index], options[optionID]);
 
-        int currentID = options.IndexOf(appearanceElement.OptionSelected);
-        int maxID = options.Count - 1;
+        int maxOptionID = options.Count - 1;
+        optionID += increment;
+        if (optionID < 0) optionID = maxOptionID;
+        else if (optionID > maxOptionID) optionID = 0;
 
-        currentID += increment;
-        if (currentID < 0) currentID = maxID;
-        else if (currentID > maxID) currentID = 0;
-
-        CharacterCreation.SelectedAppearance[characterBodyElementID].OptionSelected = options[currentID];
-        optionText.text = options[currentID];
-
-        CharacterCreation.Instance.ShowBodyElement(appearanceElement);
+        CharacterCreation.Instance.ShowBodyElement(CharacterCreation.SelectedAppearance[index], options[optionID]);
+        CharacterCreation.SelectedAppearance[index].OptionSelected = options[optionID];
+        optionText.text = options[optionID];
     }
 
     private void changeColor(Color color)
@@ -88,6 +90,6 @@ public class AppearanceElementSelector
             element.GetComponent<SkinnedMeshRenderer>().material.color = color;
         }
 
-        CharacterCreation.SelectedAppearance.Find(x => x.BodyPart == bodyPart).Color = color;
+        CharacterCreation.SelectedAppearance[index].Color = color;
     }
 }

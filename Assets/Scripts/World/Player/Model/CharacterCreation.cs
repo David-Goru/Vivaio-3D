@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,37 +10,58 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private GameObject characterModelPrefab;
     [SerializeField] private CharacterAppearance characterModel;
 
-    private string lastAnimation = "IDLE";
+    private AnimationType lastAnimation = AnimationType.IDLE;
     private Transform model;
     private Animator animator;
-    public static List<AppearanceElement> SelectedAppearance;
+
+    public CharacterAppearance CharacterModel { get => characterModel; }
+    public AnimationType LastAnimation { get => lastAnimation; }
+    public Transform Model { get => model; }
+    public Animator Animator { get => animator; }
 
     public static CharacterCreation Instance;
+    public static List<AppearanceElement> SelectedAppearance;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
-        model = Instantiate(characterModelPrefab).transform.Find("Player model");
-        animator = model.GetComponent<Animator>();
+        SelectedAppearance = new List<AppearanceElement>();
+
+        initializeComponents();
         initializeSelectors();
     }
 
     private void Update()
     {
-        if (isRotatingModel()) rotateModel();
-
-        if (!isMovingModel()) changeAnimation("IDLE");
-        else if (isRunning()) changeAnimation("RUN");
-        else changeAnimation("WALK");
+        checkMovement();
+        checkRotation();
     }
 
-    private void changeAnimation(string newAnimation)
+    private void initializeComponents()
     {
-        if (lastAnimation != newAnimation)
+        model = Instantiate(characterModelPrefab).transform;
+        model.SetParent(transform);
+        animator = model.GetComponent<Animator>();
+    }
+
+    private void initializeSelectors()
+    {
+        foreach (AppearanceElementSelector selector in characterModel.AppearanceElementSelectors)
         {
-            lastAnimation = newAnimation;
-            animator.SetTrigger(newAnimation);
+            selector.SetUpSelector(model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
         }
+    }
+
+    private void checkMovement() 
+    {
+        if (!isMovingModel()) changeAnimation(AnimationType.IDLE);
+        else if (isRunning()) changeAnimation(AnimationType.RUN);
+        else changeAnimation(AnimationType.WALK);
+    }
+
+    private void checkRotation()
+    {
+        if (isRotatingModel()) rotateModel();
     }
 
     private bool isRotatingModel()
@@ -63,36 +85,29 @@ public class CharacterCreation : MonoBehaviour
         model.Rotate(Vector3.up, angle);
     }
 
-    private void initializeSelectors()
+    private void changeAnimation(AnimationType newAnimation)
     {
-        AppearanceElementSelector[] appearanceElements = characterModel.AppearanceElementSelectors;
-        SelectedAppearance = new List<AppearanceElement>();
-
-        for (int i = 0; i < appearanceElements.Length; i++)
+        if (lastAnimation != newAnimation)
         {
-            appearanceElements[i].SetUpSelector(model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
+            lastAnimation = newAnimation;
+            animator.SetTrigger(newAnimation.ToString());
         }
     }
 
-    public void HideBodyElement(AppearanceElement appearanceElement)
+    public void HideBodyElement(AppearanceElement appearanceElement, string option)
     {
-        characterModel.HideBodyElement(model, appearanceElement);
+        characterModel.HideBodyElement(model, appearanceElement, option);
     }
 
-    public void ShowBodyElement(AppearanceElement appearanceElement)
+    public void ShowBodyElement(AppearanceElement appearanceElement, string option)
     {
-        characterModel.ShowBodyElement(model, appearanceElement);
-    }
-
-    public static void AddSelectedAppearance(AppearanceElement appearanceElement)
-    {
-        if (SelectedAppearance == null) SelectedAppearance = new List<AppearanceElement>();
-        SelectedAppearance.Add(appearanceElement);
+        characterModel.ShowBodyElement(model, appearanceElement, option);
     }
 
     // TEST
     public void TestPlay()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        Destroy(gameObject);
+        Instantiate(Resources.Load<GameObject>("Game"));
     }
 }

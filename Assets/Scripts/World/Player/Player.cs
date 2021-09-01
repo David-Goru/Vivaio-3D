@@ -18,14 +18,15 @@ public class Player : MonoBehaviour
     private bool canMove = true;
     private Vector3 lastFrameMovement;
     private float lastFrameSpeed;
-    private string lastAnimation = "IDLE";
+    private AnimationType lastAnimation = AnimationType.IDLE;
     private int handLayer;
     private Transform mainHandModel;
     private Animator animator;
 
     public PlayerData Data { get => data; set => data = value; }
     public LayerMask FarmTileLayer { get => farmTileLayer; set => farmTileLayer = value; }
-    public string LastAnimation { get => lastAnimation; set => lastAnimation = value; }
+    public AnimationType LastAnimation { get => lastAnimation; set => lastAnimation = value; }
+    public Animator Animator { get => animator; }
 
     private void Start()
     {
@@ -33,7 +34,12 @@ public class Player : MonoBehaviour
         handLayer = animator.GetLayerIndex("MainHandInUse");
         changeMainHand(HandType.RIGHT);
 
-        if (CharacterCreation.SelectedAppearance != null) setAppearance(CharacterCreation.SelectedAppearance);
+        if (CharacterCreation.SelectedAppearance != null)
+        {
+            if (data != null) data.AppearanceElements = CharacterCreation.SelectedAppearance;
+            setAppearance(CharacterCreation.SelectedAppearance);
+        }
+        else if (data != null) setAppearance(data.AppearanceElements);
     }
 
     private void Update()
@@ -56,7 +62,7 @@ public class Player : MonoBehaviour
         }
         else if (lastFrameMovement != Vector3.zero)
         {
-            SetAnimation("IDLE");
+            SetAnimation(AnimationType.IDLE);
             lastFrameMovement = Vector3.zero;
         }
 
@@ -79,14 +85,14 @@ public class Player : MonoBehaviour
 
     private void walk()
     {
-        SetAnimation("WALK");
+        SetAnimation(AnimationType.WALK);
         lastFrameMovement = getLastFrameMovement();
         lastFrameSpeed = defaultSpeed;
     }
 
     private void run()
     {
-        SetAnimation("RUN");
+        SetAnimation(AnimationType.RUN);
         lastFrameMovement = getLastFrameMovement();
         lastFrameSpeed = runSpeed;
     }
@@ -103,8 +109,7 @@ public class Player : MonoBehaviour
     }
 
     private void setAppearance(List<AppearanceElement> appearanceElements)
-    {
-        if (data != null) data.AppearanceElements = appearanceElements;
+    {        
         Transform model = transform.Find("Player model");
         appearance.SetAppearance(model, appearanceElements);
     }
@@ -251,12 +256,12 @@ public class Player : MonoBehaviour
         animator.SetLayerWeight(handLayer, weightValue);
     }
 
-    public void SetAnimation(string newAnimation)
+    public void SetAnimation(AnimationType newAnimation)
     {
         if (lastAnimation == newAnimation) return;
 
         lastAnimation = newAnimation;
-        animator.SetTrigger(newAnimation);
+        animator.SetTrigger(newAnimation.ToString());
     }
 
     public bool CheckDistance(Vector3 targetPosition)

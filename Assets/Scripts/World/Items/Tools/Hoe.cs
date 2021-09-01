@@ -19,7 +19,7 @@ public class Hoe : Item
         if (plowed)
         {
             player.BlockMovement();
-            player.SetAnimation("PLOW");
+            player.SetAnimation(AnimationType.PLOW);
         }
     }
 }
