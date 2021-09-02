@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterCreation : MonoBehaviour
 {
+    [SerializeField] private Color defaultButtonColor;
+    [SerializeField] private Color selectedButtonColor;
     [SerializeField] private Transform appearanceElementsContainer;
     [SerializeField] private GameObject appearanceElementPrefab;
     [SerializeField] private GameObject appearanceColorPrefab;
     [SerializeField] private GameObject characterModelPrefab;
     [SerializeField] private CharacterAppearance characterModel;
+    [SerializeField] private Transform mainHandPanel;
 
     private AnimationType lastAnimation = AnimationType.IDLE;
     private Transform model;
@@ -20,13 +24,15 @@ public class CharacterCreation : MonoBehaviour
     public Animator Animator { get => animator; }
 
     public static CharacterCreation Instance;
-    public static List<AppearanceElement> SelectedAppearance;
 
     private void Awake()
     {
         Instance = this;
-        SelectedAppearance = new List<AppearanceElement>();
+        SaveSystem.SetGameData();
+        SaveSystem.GameData.Player = new PlayerData();
+        SaveSystem.GameData.Player.AppearanceElements = new List<AppearanceElement>();
 
+        initializeMainHand();
         initializeComponents();
         initializeSelectors();
     }
@@ -50,6 +56,11 @@ public class CharacterCreation : MonoBehaviour
         {
             selector.SetUpSelector(model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
         }
+    }
+
+    private void initializeMainHand()
+    {
+        mainHandPanel.Find(SaveSystem.GameData.Player.MainHand.ToString()).GetComponent<Image>().color = selectedButtonColor;
     }
 
     private void checkMovement() 
@@ -102,6 +113,13 @@ public class CharacterCreation : MonoBehaviour
     public void ShowBodyElement(AppearanceElement appearanceElement, string option)
     {
         characterModel.ShowBodyElement(model, appearanceElement, option);
+    }
+
+    public void ChangeMainHand(string newMainHand)
+    {
+        mainHandPanel.Find(SaveSystem.GameData.Player.MainHand.ToString()).GetComponent<Image>().color = defaultButtonColor;
+        mainHandPanel.Find(newMainHand).GetComponent<Image>().color = selectedButtonColor;
+        SaveSystem.GameData.Player.MainHand = newMainHand == "LEFT" ? HandType.LEFT : HandType.RIGHT;
     }
 
     // TEST

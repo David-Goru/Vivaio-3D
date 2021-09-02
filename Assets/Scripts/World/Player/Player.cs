@@ -32,14 +32,9 @@ public class Player : MonoBehaviour
     {
         animator = model.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
-        changeMainHand(HandType.RIGHT);
+        changeMainHand(data.MainHand);
 
-        if (CharacterCreation.SelectedAppearance != null)
-        {
-            if (data != null) data.AppearanceElements = CharacterCreation.SelectedAppearance;
-            setAppearance(CharacterCreation.SelectedAppearance);
-        }
-        else if (data != null) setAppearance(data.AppearanceElements);
+        if (data != null) setAppearance(data.AppearanceElements);
     }
 
     private void Update()
