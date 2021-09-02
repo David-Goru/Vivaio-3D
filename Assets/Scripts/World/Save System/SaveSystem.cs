@@ -5,15 +5,17 @@ using System.Runtime.Serialization;
 
 public class SaveSystem
 {
-    public static FileStream GameFile;
+    public static GameData GameData;
 
     public static GameData GetGameData()
     {
-        GameData data = new GameData();
-        if (GameFile == null) data = new GameData();
-        else data = Deserialize(GameFile);
+        if (GameData != null) return GameData;
+        return new GameData();
+    }
 
-        return data;
+    public static void SetGameData()
+    {
+        if (GameData == null) GameData = new GameData();
     }
 
     public static bool Serialize(GameData data, string path)

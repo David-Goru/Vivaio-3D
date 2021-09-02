@@ -48,10 +48,24 @@ public class CharacterCreationTest
     }
 
     [UnityTest]
+    public IEnumerator GameDataExists()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Assert.IsNotNull(SaveSystem.GameData);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerDataExists()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Assert.IsNotNull(SaveSystem.GameData.Player);
+    }
+
+    [UnityTest]
     public IEnumerator SelectedAppearanceListExists()
     {
         yield return new WaitForSeconds(0.1f);
-        Assert.IsNotNull(CharacterCreation.SelectedAppearance);
+        Assert.IsNotNull(SaveSystem.GameData.Player.AppearanceElements);
     }
 
     [UnityTest]

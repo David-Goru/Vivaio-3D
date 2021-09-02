@@ -27,8 +27,8 @@ public class AppearanceElementSelector
         loadColors(colorPrefab);
 
         optionID = 0;
-        index = CharacterCreation.SelectedAppearance.Count;
-        CharacterCreation.SelectedAppearance.Add(new AppearanceElement(bodyPart, options[optionID], colors[optionID]));
+        index = SaveSystem.GameData.Player.AppearanceElements.Count;
+        SaveSystem.GameData.Player.AppearanceElements.Add(new AppearanceElement(bodyPart, options[optionID], colors[optionID]));
 
         changeColor(colors[optionID]);
     }
@@ -71,15 +71,15 @@ public class AppearanceElementSelector
     {
         if (options.Count < 2) return;
 
-        CharacterCreation.Instance.HideBodyElement(CharacterCreation.SelectedAppearance[index], options[optionID]);
+        CharacterCreation.Instance.HideBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], options[optionID]);
 
         int maxOptionID = options.Count - 1;
         optionID += increment;
         if (optionID < 0) optionID = maxOptionID;
         else if (optionID > maxOptionID) optionID = 0;
 
-        CharacterCreation.Instance.ShowBodyElement(CharacterCreation.SelectedAppearance[index], options[optionID]);
-        CharacterCreation.SelectedAppearance[index].OptionSelected = options[optionID];
+        CharacterCreation.Instance.ShowBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], options[optionID]);
+        SaveSystem.GameData.Player.AppearanceElements[index].OptionSelected = options[optionID];
         optionText.text = options[optionID];
     }
 
@@ -90,6 +90,6 @@ public class AppearanceElementSelector
             element.GetComponent<SkinnedMeshRenderer>().material.color = color;
         }
 
-        CharacterCreation.SelectedAppearance[index].Color = color;
+        SaveSystem.GameData.Player.AppearanceElements[index].Color = color;
     }
 }
