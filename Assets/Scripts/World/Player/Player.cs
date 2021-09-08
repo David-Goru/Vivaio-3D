@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         animator = model.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
         changeMainHand(data.MainHand);
+        Game.Instance.CameraController.Objective = transform;
 
         if (data != null) setAppearance(data.AppearanceElements);
     }

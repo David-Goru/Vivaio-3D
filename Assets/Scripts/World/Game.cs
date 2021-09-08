@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    [SerializeField] private GameObject cameraObject;
     [SerializeField] private GameObject playerObject;
     [SerializeField] private GameObject farmObject;
     [SerializeField] private GameObject aiObject;
     [SerializeField] private GameObject uiObject;
 
     private GameData data;
+    private CameraController cameraController;
     private Player player;
     private Farm farm;
     private AI ai;
     private UI ui;
 
     public GameData Data { get => data; set => data = value; }
+    public CameraController CameraController { get => cameraController; set => cameraController = value; }
     public UI Ui { get => ui; set => ui = value; }
 
     public static Game Instance;
@@ -28,6 +31,7 @@ public class Game : MonoBehaviour
 
     private void initializeGameElements()
     {
+        cameraController = Instantiate(cameraObject).GetComponent<CameraController>();
         player = Instantiate(playerObject).GetComponent<Player>();
         player.Data = data.Player;
         farm = Instantiate(farmObject).GetComponent<Farm>();
