@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxDistance = 1.5f;
     [SerializeField] private LayerMask worldItemLayer;
     [SerializeField] private LayerMask farmTileLayer;
+    [SerializeField] private LayerMask cropPositionLayer;
     [SerializeField] private Transform rightHandModel;
     [SerializeField] private Transform leftHandModel;
     [SerializeField] private Transform model;
@@ -24,9 +25,10 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     public PlayerData Data { get => data; set => data = value; }
-    public LayerMask FarmTileLayer { get => farmTileLayer; set => farmTileLayer = value; }
+    public LayerMask FarmTileLayer { get => farmTileLayer; }
     public AnimationType LastAnimation { get => lastAnimation; set => lastAnimation = value; }
     public Animator Animator { get => animator; }
+    public LayerMask CropPositionLayer { get => cropPositionLayer; }
 
     private void Start()
     {

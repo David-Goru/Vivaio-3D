@@ -1,18 +1,17 @@
+using UnityEngine;
+
 [System.Serializable]
 public class CropData
 {
     private string name;
-    private int level;
-    private CropState state;
+    private Vector3 position;
+    private int stage;
+    private int quality;
+    private bool watered;
 
     public string Name { get => name; set => name = value; }
-    public int Level { get => level; set => level = value; }
-    public CropState State { get => state; set => state = value; }
-}
-
-public enum CropState
-{
-    PLANTED,
-    HARVESTED,
-    DRIED
+    public Vector3 Position { get => position; set => position = value; }
+    public int Stage { get => stage; set => stage = value; }
+    public int Quality { get => quality; set => quality = value; }
+    public bool Watered { get => watered; set => watered = value; }
 }

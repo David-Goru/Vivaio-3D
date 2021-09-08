@@ -17,6 +17,11 @@ public class Farm : MonoBehaviour
         tiles = new List<Tile>();
     }
 
+    public void NewDay()
+    {
+        foreach (Tile tile in tiles) tile.NewDay();
+    }
+
     public bool PlowAt(Vector3 position)
     {
         Vector3 roundedPosition = new Vector3(Mathf.Round(position.x - 0.5f) + 0.5f, 0, Mathf.Round(position.z - 0.5f) + 0.5f);
@@ -34,6 +39,13 @@ public class Farm : MonoBehaviour
         Tile tile = tiles.Find(x => x.Data.Position == roundedPosition);
         if (tile == null) return false;
         return tile.Water();
+    }
+
+    public bool PlantAt(CropInfo cropInfo, Vector3 tilePosition, Vector3 cropPosition)
+    {        
+        Tile tile = tiles.Find(x => x.Data.Position == tilePosition);
+        if (tile == null) return false;
+        return tile.Plant(cropInfo, cropPosition);
     }
 
     private IEnumerator createRidge(Vector3 position)

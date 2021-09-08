@@ -15,6 +15,14 @@ public class Tile : MonoBehaviour
         StartCoroutine(delayRidgeCreation(0.4f));
     }
 
+    public bool Plant(CropInfo cropInfo, Vector3 position)
+    {
+        if (crops.Exists(x => x.Position == position)) return false;
+
+        crops.Add(new Crop(cropInfo, position, data.Watered));
+        return true;
+    }
+
     public bool Water()
     {
         if (data.Watered == true) return false;
@@ -22,6 +30,19 @@ public class Tile : MonoBehaviour
         StartCoroutine(waterRidge());
         data.Watered = true;
         return true;
+    }
+
+    public Item Harvest(Vector3 position)
+    {
+        Crop crop = crops.Find(x => x.Position == position);
+        if (crop == null) return new Item();
+        return crop.Harvest();
+    }
+
+    public void NewDay()
+    {
+        removeWater();
+        foreach (Crop crop in crops) crop.NewDay();
     }
 
     private IEnumerator delayRidgeCreation(float delay)
@@ -54,6 +75,8 @@ public class Tile : MonoBehaviour
         float delay = 0.25f;
         yield return new WaitForSeconds(delay);
 
+        foreach (Crop crop in crops) crop.Water();
+
         timer = 5.0f;
         yObjectivePosition = -0.01f;
         float currentDryValue = 0.0f;
@@ -73,5 +96,12 @@ public class Tile : MonoBehaviour
         }
 
         water.gameObject.SetActive(false);
+    }
+
+    private void removeWater()
+    {
+        data.Watered = false;
+        Material material = transform.Find("Model").GetComponent<MeshRenderer>().material;
+        material.SetFloat("WetDry", 0);
     }
 }
