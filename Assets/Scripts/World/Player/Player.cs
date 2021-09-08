@@ -71,9 +71,10 @@ public class Player : MonoBehaviour
         Vector3 direction = lastFrameMovement * Time.deltaTime * lastFrameSpeed;
         Vector3 position = transform.position + direction * 10000;
         Vector3 lookPosition = new Vector3(position.x, transform.position.y, position.z);
+        Quaternion rotation = Quaternion.Euler(0, Game.Instance.CameraController.transform.eulerAngles.y, 0);
 
-        transform.Translate(direction);
-        model.LookAt(lookPosition);
+        transform.Translate(rotation * direction);
+        model.LookAt(rotation * lookPosition);
 
         data.Position = transform.position;
         data.Rotation = model.eulerAngles;
