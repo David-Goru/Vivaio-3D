@@ -115,7 +115,11 @@ public class Player : MonoBehaviour
 
     private void leftClick()
     {
-        if (!leftClickFloor() && itemInHand != null) itemInHand.Use(this);
+        if (!leftClickFloor() && itemInHand != null)
+        {
+            itemInHand.Use(this);
+            data.ItemInHand = itemInHand.Data;
+        }
     }
 
     private bool leftClickFloor()
@@ -133,32 +137,28 @@ public class Player : MonoBehaviour
 
     private void tryToPickUp(Item item)
     {
-        if (itemInHand != null)
+        if (data.ItemInHand != null)
         {
-            if (itemInHand.Data.Name != item.Data.Name) return;
-            else if (itemInHand.Data.CurrentStack >= itemInHand.Info.MaxStack) return;
+            if (data.ItemInHand.Name != item.Data.Name) return;
+            else if (data.ItemInHand.CurrentStack >= itemInHand.Info.MaxStack) return;
         }
 
-        if (itemInHand == null)
+        if (data.ItemInHand == null)
         {
             item.PickUp(item.Data.CurrentStack);
             data.ItemInHand = item.Data;
-            showCurrentItemInHand();
-
-            if (itemInHand != null)
-            {
-                itemInHand.Data = item.Data;
-                itemInHand.Info = item.Info;
-            }
+            showNewItemInHand(item.Info);
         }
         else
         {
             int stackToTrade = item.Data.CurrentStack;
-            if (stackToTrade + itemInHand.Data.CurrentStack > itemInHand.Info.MaxStack) stackToTrade = itemInHand.Info.MaxStack - itemInHand.Data.CurrentStack;
+            if (stackToTrade + data.ItemInHand.CurrentStack > itemInHand.Info.MaxStack) stackToTrade = itemInHand.Info.MaxStack - data.ItemInHand.CurrentStack;
 
-            itemInHand.Data.CurrentStack += stackToTrade;
+            data.ItemInHand.CurrentStack += stackToTrade;
             item.PickUp(stackToTrade);
         }
+
+        if (itemInHand != null) itemInHand.Data = data.ItemInHand;        
 
         setHandInUse();
         //LastAnimation = "PICKUPITEM";
@@ -166,76 +166,62 @@ public class Player : MonoBehaviour
 
     private void dropCurrentItem()
     {
-        if (itemInHand == null) return;
+        if (data.ItemInHand == null) return;
 
         //LastAnimation = "DROPITEM";
         hideCurrentItemInHand();
         dropCurrentItemAtPlayerPosition();
-        itemInHand = null;
         data.ItemInHand = null;
+        itemInHand = null;
     }
 
     private void changeMainHand(HandType type = HandType.RIGHT)
     {
-        if (Data != null) data.MainHand = type;
+        if (data != null) data.MainHand = type;
         animator.SetBool("LeftHand", type == HandType.LEFT);
 
-        if (mainHandModel != null) mainHandModel.gameObject.SetActive(false);
-        if (type == HandType.LEFT)
-        {
-            mainHandModel = leftHandModel;
-            if (Data != null && Data.ItemInHand != null)
-            {
-                Transform itemInLeftHand = leftHandModel.Find(Data.ItemInHand.Name);
-                if (itemInLeftHand != null) itemInLeftHand.gameObject.SetActive(true);
-
-                Transform itemInRightHand = rightHandModel.Find(Data.ItemInHand.Name);
-                if (itemInRightHand != null) itemInRightHand.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            mainHandModel = rightHandModel;
-            if (Data != null && Data.ItemInHand != null)
-            {
-                Transform itemInRightHand = rightHandModel.Find(Data.ItemInHand.Name);
-                if (itemInRightHand != null) itemInRightHand.gameObject.SetActive(true);
-
-                Transform itemInLeftHand = leftHandModel.Find(Data.ItemInHand.Name);
-                if (itemInLeftHand != null) itemInLeftHand.gameObject.SetActive(false);
-            }
-        }
-        mainHandModel.gameObject.SetActive(true);
+        changeHandState(type == HandType.RIGHT ? rightHandModel : leftHandModel, true);
+        changeHandState(type == HandType.RIGHT ? leftHandModel : rightHandModel, false);
     }
 
-    private void showCurrentItemInHand()
+    private void changeHandState(Transform hand, bool newState)
     {
-        Transform itemInHandModel = mainHandModel.Find(Data.ItemInHand.Name);
-        if (itemInHandModel == null) return;
+        if (newState == true) mainHandModel = hand;
+        hand.gameObject.SetActive(newState);
+
+        if (data != null && data.ItemInHand != null)
+        {
+            Transform itemInHand = hand.Find(data.ItemInHand.Name);
+            if (itemInHand != null) itemInHand.gameObject.SetActive(newState);
+            else hand.Find("Item").gameObject.SetActive(newState);
+        }
+    }
+
+    private void showNewItemInHand(ItemInfo info)
+    {
+        Transform itemInHandModel = mainHandModel.Find(info.HandItemName);
+        if (itemInHandModel == null) itemInHandModel = mainHandModel.Find("Item");
 
         itemInHandModel.gameObject.SetActive(true);
         itemInHand = itemInHandModel.GetComponent<Item>();
+        itemInHand.Info = info;
     }
 
     private void hideCurrentItemInHand()
     {
-        Transform itemInHand = mainHandModel.Find(Data.ItemInHand.Name);
-        if (itemInHand == null) return;
+        Transform itemInHandModel = mainHandModel.Find(itemInHand.Info.HandItemName);
+        if (itemInHandModel == null) itemInHandModel = mainHandModel.Find("Item");
 
-        mainHandModel.Find(Data.ItemInHand.Name).gameObject.SetActive(false);
+        itemInHandModel.gameObject.SetActive(false);
     }
 
     private void dropCurrentItemAtPlayerPosition()
     {
-        Transform dropTransform = mainHandModel.Find(itemInHand.Data.Name);
-        if (dropTransform == null)
-        {
-            dropTransform = transform;
-            dropTransform.eulerAngles = model.eulerAngles;
-        }
+        Transform dropTransform = mainHandModel.Find(itemInHand.Info.HandItemName);
+        if (dropTransform == null) dropTransform = mainHandModel.Find("Item"); 
 
         GameObject itemOnWorld = Instantiate(itemInHand.Info.WorldModel, dropTransform.position, dropTransform.rotation);
-        itemOnWorld.GetComponent<Item>().Data = itemInHand.Data;
+        itemOnWorld.GetComponent<Item>().Data = data.ItemInHand;
         itemOnWorld.GetComponent<Item>().Info = itemInHand.Info;
         unSetHandInUse();
     }

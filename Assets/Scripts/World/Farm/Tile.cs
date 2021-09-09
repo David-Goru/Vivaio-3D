@@ -41,8 +41,8 @@ public class Tile : MonoBehaviour
 
     public void NewDay()
     {
-        removeWater();
         foreach (Crop crop in crops) crop.NewDay();
+        removeWater();
     }
 
     private IEnumerator delayRidgeCreation(float delay)
@@ -100,8 +100,12 @@ public class Tile : MonoBehaviour
 
     private void removeWater()
     {
+        StopAllCoroutines();
         data.Watered = false;
         Material material = transform.Find("Model").GetComponent<MeshRenderer>().material;
         material.SetFloat("WetDry", 0);
+        Transform water = transform.Find("Water");
+        water.gameObject.SetActive(false);
+        water.position = new Vector3(water.position.x, -0.01f, water.position.z);
     }
 }

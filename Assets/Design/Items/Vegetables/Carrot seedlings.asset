@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42c3f2aedf488ed4f8d433723bba823f, type: 3}
-  m_Name: Carrot seeds
+  m_Name: Carrot seedlings
   m_EditorClassIdentifier: 
   className: Seed
+  handItemName: Carrot seedlings
   maxStack: 12
   worldModel: {fileID: 4801165888313889496, guid: bbb5f98203d6c594581a419d34213467, type: 3}
   cropModel: {fileID: 1446675675370548177, guid: c8035e62a8e18e04b853974e176f2a91, type: 3}

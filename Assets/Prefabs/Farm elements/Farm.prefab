@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c779e3a74e07694478054e30f0dcbbb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: c48aa50af14749048b3598028949647f, type: 2}
+  info: {fileID: 11400000, guid: 74ed5e23dfab03a41ab7aaae59611ed3, type: 2}
   startingStack: 1
   specificValues:
   - variableName: WaterAmount
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: f1429f63e5a54e340b3e64667a12ca48, type: 2}
-  startingStack: 5
+  startingStack: 12
   specificValues: []
 --- !u!1 &7352536407497987088
 GameObject:

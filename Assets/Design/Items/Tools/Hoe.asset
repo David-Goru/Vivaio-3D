@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hoe
   m_EditorClassIdentifier: 
   className: Hoe
-  worldModel: {fileID: 4781592758002748978, guid: 54af38cdb334a1149b926b196a10f4c9, type: 3}
-  canBeInHand: 1
+  handItemName: Hoe
   maxStack: 1
+  worldModel: {fileID: 4781592758002748978, guid: 54af38cdb334a1149b926b196a10f4c9, type: 3}
