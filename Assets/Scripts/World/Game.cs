@@ -17,6 +17,7 @@ public class Game : MonoBehaviour
 
     public GameData Data { get => data; set => data = value; }
     public CameraController CameraController { get => cameraController; set => cameraController = value; }
+    public Player Player { get => player; }
     public Farm Farm { get => farm; set => farm = value; }
     public UI Ui { get => ui; set => ui = value; }
 

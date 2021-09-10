@@ -21,8 +21,8 @@ public class Seed : Item
         bool planted = Game.Instance.Farm.PlantAt((CropInfo)info, tilePosition, cropPosition);
         if (planted)
         {
-            player.BlockMovement();
-            player.SetAnimation(AnimationType.PLOW); // AnimationType.PLANT
+            player.Block();
+            player.Animations.Set(AnimationType.PLOW); // AnimationType.PLANT
         }
     }
 }

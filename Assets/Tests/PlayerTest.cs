@@ -15,11 +15,11 @@ public class PlayerTest
     }
 
     [UnityTest]
-    public IEnumerator AnimatorExists()
+    public IEnumerator AnimationsExists()
     {
         yield return new WaitForSeconds(0.1f);
 
-        Assert.IsNotNull(player.Animator);
+        Assert.IsNotNull(player.Animations);
     }
 
     [TearDown]

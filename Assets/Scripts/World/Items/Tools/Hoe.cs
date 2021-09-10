@@ -18,8 +18,8 @@ public class Hoe : Item
         bool plowed = tile.transform.GetComponent<Farm>().PlowAt(tile.point);
         if (plowed)
         {
-            player.BlockMovement();
-            player.SetAnimation(AnimationType.PLOW);
+            player.Block();
+            player.Animations.Set(AnimationType.PLOW);
         }
     }
 }

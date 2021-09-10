@@ -28,8 +28,8 @@ public class WateringCan : Item
         if (watered)
         {
             activateParticles(player);
-            player.BlockMovement();
-            player.SetAnimation(AnimationType.WATER);
+            player.Block();
+            player.Animations.Set(AnimationType.WATER);
             player.StartCoroutine(updateWaterAmount(-1));
         }
     }
