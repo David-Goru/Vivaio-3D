@@ -2,18 +2,15 @@
 
 public class Item : MonoBehaviour
 {
-    protected ItemInfo info;
-    protected ItemData data;
-
-    public ItemInfo Info { get => info; set => info = value; }
-    public ItemData Data { get => data; set => data = value; }
+    [HideInInspector] public ItemInfo Info;
+    [HideInInspector] public ItemData Data;
 
     public virtual void Use(Player player) { }
     public virtual void UpdateVisuals() { }
 
     public Item PickUp(int amount)
     {
-        if (amount >= data.CurrentStack) Destroy(gameObject);
+        if (amount >= Data.CurrentStack) Destroy(gameObject);
         return this;
     }
 }

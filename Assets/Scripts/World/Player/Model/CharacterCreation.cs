@@ -11,17 +11,13 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private GameObject appearanceElementPrefab;
     [SerializeField] private GameObject appearanceColorPrefab;
     [SerializeField] private GameObject characterModelPrefab;
-    [SerializeField] private CharacterAppearance characterModel;
     [SerializeField] private Transform mainHandPanel;
 
-    private AnimationType lastAnimation = AnimationType.IDLE;
-    private Transform model;
-    private Animator animator;
+    public CharacterAppearance CharacterModel;
 
-    public CharacterAppearance CharacterModel { get => characterModel; }
-    public AnimationType LastAnimation { get => lastAnimation; }
-    public Transform Model { get => model; }
-    public Animator Animator { get => animator; }
+    [NonSerialized] public AnimationType LastAnimation = AnimationType.IDLE;
+    [NonSerialized] public Transform Model;
+    [NonSerialized] public Animator Animator;
 
     public static CharacterCreation Instance;
 
@@ -45,16 +41,16 @@ public class CharacterCreation : MonoBehaviour
 
     private void initializeComponents()
     {
-        model = Instantiate(characterModelPrefab).transform;
-        model.SetParent(transform);
-        animator = model.GetComponent<Animator>();
+        Model = Instantiate(characterModelPrefab).transform;
+        Model.SetParent(transform);
+        Animator = Model.GetComponent<Animator>();
     }
 
     private void initializeSelectors()
     {
-        foreach (AppearanceElementSelector selector in characterModel.AppearanceElementSelectors)
+        foreach (AppearanceElementSelector selector in CharacterModel.AppearanceElementSelectors)
         {
-            selector.SetUpSelector(model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
+            selector.SetUpSelector(Model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
         }
     }
 
@@ -93,26 +89,26 @@ public class CharacterCreation : MonoBehaviour
     private void rotateModel()
     {
         float angle = -Input.GetAxis("Horizontal") / 3.0f;
-        model.Rotate(Vector3.up, angle);
+        Model.Rotate(Vector3.up, angle);
     }
 
     private void changeAnimation(AnimationType newAnimation)
     {
-        if (lastAnimation != newAnimation)
+        if (LastAnimation != newAnimation)
         {
-            lastAnimation = newAnimation;
-            animator.SetTrigger(newAnimation.ToString());
+            LastAnimation = newAnimation;
+            Animator.SetTrigger(newAnimation.ToString());
         }
     }
 
     public void HideBodyElement(AppearanceElement appearanceElement, string option)
     {
-        characterModel.HideBodyElement(model, appearanceElement, option);
+        CharacterModel.HideBodyElement(Model, appearanceElement, option);
     }
 
     public void ShowBodyElement(AppearanceElement appearanceElement, string option)
     {
-        characterModel.ShowBodyElement(model, appearanceElement, option);
+        CharacterModel.ShowBodyElement(Model, appearanceElement, option);
     }
 
     public void ChangeMainHand(string newMainHand)

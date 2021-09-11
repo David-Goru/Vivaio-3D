@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Reflection;
 
 public class CreateWorldItem : MonoBehaviour
 {
@@ -17,22 +18,21 @@ public class CreateWorldItem : MonoBehaviour
 
         for (int i = 0; i < specificValues.Length; i++)
         {
-            System.Reflection.PropertyInfo info = itemData.GetType().GetProperty(specificValues[i].VariableName);
-            if (info != null) info.SetValue(itemData, specificValues[i].Value);
+            FieldInfo field = itemData.GetType().GetField(specificValues[i].VariableName);
+            if (field != null) field.SetValue(itemData, specificValues[i].Value);
         }
 
         Item item = Instantiate(info.WorldModel, transform.position, transform.rotation).GetComponent<Item>();
         item.Info = info;
         item.Data = itemData;
+
+        Destroy(gameObject);
     }
 }
 
 [System.Serializable]
 public class SpecificValue
 {
-    [SerializeField] private string variableName;
-    [SerializeField] private int value;
-
-    public string VariableName { get => variableName; set => variableName = value; }
-    public int Value { get => value; set => this.value = value; }
+    public string VariableName;
+    public int Value;
 }

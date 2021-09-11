@@ -8,18 +8,12 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject aiObject;
     [SerializeField] private GameObject uiObject;
 
-    private GameData data;
-    private CameraController cameraController;
-    private Player player;
-    private Farm farm;
-    private AI ai;
-    private UI ui;
-
-    public GameData Data { get => data; set => data = value; }
-    public CameraController CameraController { get => cameraController; set => cameraController = value; }
-    public Player Player { get => player; }
-    public Farm Farm { get => farm; set => farm = value; }
-    public UI Ui { get => ui; set => ui = value; }
+    [HideInInspector] public GameData Data;
+    [HideInInspector] public CameraController CameraController;
+    [HideInInspector] public Player Player;
+    [HideInInspector] public Farm Farm;
+    [HideInInspector] public AI AI;
+    [HideInInspector] public UI UI;
 
     public static Game Instance;
 
@@ -27,19 +21,19 @@ public class Game : MonoBehaviour
     {
         Instance = this;
 
-        data = SaveSystem.GetGameData();
+        Data = SaveSystem.GetGameData();
         initializeGameElements();
     }
 
     private void initializeGameElements()
     {
-        cameraController = Instantiate(cameraObject).GetComponent<CameraController>();
-        player = Instantiate(playerObject).GetComponent<Player>();
-        player.Data = data.Player;
-        farm = Instantiate(farmObject).GetComponent<Farm>();
-        farm.Data = data.Farm;
-        ai = Instantiate(aiObject).GetComponent<AI>();
-        ai.Data = data.AI;
-        ui = Instantiate(uiObject).GetComponent<UI>();
+        CameraController = Instantiate(cameraObject).GetComponent<CameraController>();
+        Player = Instantiate(playerObject).GetComponent<Player>();
+        Player.Data = Data.Player;
+        Farm = Instantiate(farmObject).GetComponent<Farm>();
+        Farm.Data = Data.Farm;
+        AI = Instantiate(aiObject).GetComponent<AI>();
+        AI.Data = Data.AI;
+        UI = Instantiate(uiObject).GetComponent<UI>();
     }
 }

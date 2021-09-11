@@ -59,6 +59,18 @@ public class PlayerInventory
         itemInHand = null;
     }
 
+    public void ReduceCurrentItemStack(int amount)
+    {
+        itemInHand.Data.CurrentStack -= amount;
+
+        if (itemInHand.Data.CurrentStack == 0)
+        {
+            hideCurrentItemInHand();
+            itemInHand = null;
+            player.Data.ItemInHand = null;
+        }
+    }
+
     private void showNewItemInHand(ItemInfo info)
     {
         Transform itemInHandModel = player.Animations.GetHandModel(info.HandItemName);

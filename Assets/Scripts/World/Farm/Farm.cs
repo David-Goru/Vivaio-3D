@@ -7,10 +7,9 @@ public class Farm : MonoBehaviour
     [SerializeField] private MeshFilter ground;
     [SerializeField] private GameObject ridgePrefab;
 
-    private FarmData data;
     private List<Tile> tiles;
 
-    public FarmData Data { get => data; set => data = value; }
+    [HideInInspector] public FarmData Data;
 
     private void Start()
     {
@@ -61,16 +60,16 @@ public class Farm : MonoBehaviour
     // NOT IMPLEMENTED YET
     public void Save()
     {
-        data.Tiles = new List<TileData>();
+        Data.Tiles = new List<TileData>();
         foreach (Tile tile in tiles)
         {
-            data.Tiles.Add(tile.Data);
+            Data.Tiles.Add(tile.Data);
         }
     }
 
     public void Load()
     {
-        foreach (TileData tileData in data.Tiles)
+        foreach (TileData tileData in Data.Tiles)
         {
             Tile tile = Instantiate(ridgePrefab, tileData.Position, Quaternion.identity).GetComponent<Tile>();
             tile.Data = tileData;

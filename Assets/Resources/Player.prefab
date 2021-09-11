@@ -49,19 +49,27 @@ MonoBehaviour:
   defaultSpeed: 1.25
   runSpeed: 2.75
   maxDistance: 1.5
-  worldItemLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  farmTileLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  cropPositionLayer:
-    serializedVersion: 2
-    m_Bits: 512
   rightHandModel: {fileID: 1083850539658174486}
   leftHandModel: {fileID: 1083850539265525009}
-  model: {fileID: 612530436553494597}
   appearance: {fileID: 11400000, guid: 8f039ba7d4bf272419cc5d0f34d4daad, type: 2}
+  FarmTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  CropPositionLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  WorldItemLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  Model: {fileID: 612530436553494597}
+  Data:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0}
+    ItemInHand:
+      Name: 
+      CurrentStack: 0
+    MainHand: 0
+    AppearanceElements: []
 --- !u!54 &6965182862526918569
 Rigidbody:
   m_ObjectHideFlags: 0

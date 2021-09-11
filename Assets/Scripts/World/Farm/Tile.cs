@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
-    private TileData data;
     private List<Crop> crops;
 
-    public TileData Data { get => data; set => data = value; }
+    [HideInInspector] public TileData Data;
 
     public void Start()
     {
@@ -19,16 +18,16 @@ public class Tile : MonoBehaviour
     {
         if (crops.Exists(x => x.Position == position)) return false;
 
-        crops.Add(new Crop(cropInfo, position, data.Watered));
+        crops.Add(new Crop(cropInfo, position, Data.Watered));
         return true;
     }
 
     public bool Water()
     {
-        if (data.Watered == true) return false;
+        if (Data.Watered == true) return false;
 
         StartCoroutine(waterRidge());
-        data.Watered = true;
+        Data.Watered = true;
         return true;
     }
 
@@ -101,7 +100,7 @@ public class Tile : MonoBehaviour
     private void removeWater()
     {
         StopAllCoroutines();
-        data.Watered = false;
+        Data.Watered = false;
         Material material = transform.Find("Model").GetComponent<MeshRenderer>().material;
         material.SetFloat("WetDry", 0);
         Transform water = transform.Find("Water");

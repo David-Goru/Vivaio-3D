@@ -11,15 +11,12 @@ public class WateringCan : Item
 
     public override void Use(Player player)
     {
-        if (((WateringCanData)data).WaterAmount <= 0) return;
+        if (((WateringCanData)Data).WaterAmount <= 0) return;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100, player.FarmTileLayer))
-        {
-            if (player.CheckDistance(hit.point)) Water(hit, player);
-        }
+        if (Physics.Raycast(ray, out hit, 100, player.FarmTileLayer) && player.CheckDistance(hit.point)) Water(hit, player);
     }
 
     public void Water(RaycastHit tile, Player player)
@@ -37,7 +34,7 @@ public class WateringCan : Item
     private void setWaterAmount(Transform waterObject)
     {
         Material waterMaterial = waterObject.GetComponent<MeshRenderer>().material;
-        waterMaterial.SetFloat("Fill", (float)((WateringCanData)data).WaterAmount / (float)((WaterContainerInfo)info).MaxWaterAmount);
+        waterMaterial.SetFloat("Fill", (float)((WateringCanData)Data).WaterAmount / (float)((WaterContainerInfo)Info).MaxWaterAmount);
     }
 
     private IEnumerator updateWaterAmount(int waterAmountChange)
@@ -48,22 +45,22 @@ public class WateringCan : Item
         float timer = 0.5f;
         float tick = 0.05f;        
 
-        int objectiveWaterAmount = ((WateringCanData)data).WaterAmount + waterAmountChange;
-        if (objectiveWaterAmount > ((WaterContainerInfo)info).MaxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)info).MaxWaterAmount;
+        int objectiveWaterAmount = ((WateringCanData)Data).WaterAmount + waterAmountChange;
+        if (objectiveWaterAmount > ((WaterContainerInfo)Info).MaxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)Info).MaxWaterAmount;
         else if (objectiveWaterAmount < 0) objectiveWaterAmount = 0;
 
-        float currentWaterAmount = ((WateringCanData)data).WaterAmount;
+        float currentWaterAmount = ((WateringCanData)Data).WaterAmount;
         float numberOfIterations = timer / tick;
         float amountChange = (objectiveWaterAmount - currentWaterAmount) / numberOfIterations;
         while (timer > 0.0f)
         {
             timer -= tick;
             currentWaterAmount += amountChange;
-            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)info).MaxWaterAmount);
+            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)Info).MaxWaterAmount);
             yield return new WaitForSeconds(tick);
         }
 
-        ((WateringCanData)data).WaterAmount = Mathf.RoundToInt(currentWaterAmount);
+        ((WateringCanData)Data).WaterAmount = Mathf.RoundToInt(currentWaterAmount);
     }
 
     private void activateParticles(Player player)

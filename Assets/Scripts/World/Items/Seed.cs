@@ -18,10 +18,10 @@ public class Seed : Item
         Vector3 cropPosition = cropTransform.position;
         Vector3 tilePosition = cropTransform.parent.position;
 
-        bool planted = Game.Instance.Farm.PlantAt((CropInfo)info, tilePosition, cropPosition);
+        bool planted = Game.Instance.Farm.PlantAt((CropInfo)Info, tilePosition, cropPosition);
         if (planted)
         {
-            player.Block();
+            player.Block(() => player.Inventory.ReduceCurrentItemStack(1));
             player.Animations.Set(AnimationType.PLOW); // AnimationType.PLANT
         }
     }

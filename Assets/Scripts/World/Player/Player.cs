@@ -1,38 +1,36 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float defaultSpeed = 1.25f;
     [SerializeField] private float runSpeed = 2.75f;
     [SerializeField] private float maxDistance = 1.5f;
-    [SerializeField] private LayerMask worldItemLayer;
-    [SerializeField] private LayerMask farmTileLayer;
-    [SerializeField] private LayerMask cropPositionLayer;
     [SerializeField] private Transform rightHandModel;
     [SerializeField] private Transform leftHandModel;
-    [SerializeField] private Transform model;
     [SerializeField] private CharacterAppearance appearance;
 
     private bool canMove = true;
-    private PlayerMovement movement;
-    private PlayerAnimations animations;
-    private PlayerInventory inventory;
-    private PlayerData data;
+    private UnityAction onUnblockAction;
 
-    public LayerMask FarmTileLayer { get => farmTileLayer; }
-    public LayerMask CropPositionLayer { get => cropPositionLayer; }
-    public Transform Model { get => model; }
-    public PlayerData Data { get => data; set => data = value; }
-    public PlayerAnimations Animations { get => animations; set => animations = value; }
+    public LayerMask FarmTileLayer;
+    public LayerMask CropPositionLayer;
+    public LayerMask WorldItemLayer;
+    public Transform Model;
+
+    [HideInInspector] public PlayerMovement Movement;
+    [HideInInspector] public PlayerAnimations Animations;
+    [HideInInspector] public PlayerInventory Inventory;
+    [HideInInspector] public PlayerData Data;
 
     private void Start()
     {
-        movement = new PlayerMovement(this, defaultSpeed, runSpeed);
-        animations = new PlayerAnimations(this, rightHandModel, leftHandModel);
-        inventory = new PlayerInventory(this);
+        Movement = new PlayerMovement(this, defaultSpeed, runSpeed);
+        Animations = new PlayerAnimations(this, rightHandModel, leftHandModel);
+        Inventory = new PlayerInventory(this);
         Game.Instance.CameraController.Objective = transform;
 
-        if (data != null) appearance.SetAppearance(model, data.AppearanceElements);
+        if (Data != null) appearance.SetAppearance(Model, Data.AppearanceElements);
     }
 
     private void Update()
@@ -42,20 +40,20 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movement.FixedUpdate();
+        Movement.FixedUpdate();
     }
 
     private void checkInput()
     {
-        movement.Update();
+        Movement.Update();
 
         if (Input.GetMouseButtonDown(0)) leftClick();
-        else if (Input.GetKeyDown(KeyCode.G)) inventory.DropCurrentItem();
+        else if (Input.GetKeyDown(KeyCode.G)) Inventory.DropCurrentItem();
     }
 
     private void leftClick()
     {
-        if (!leftClickFloor()) inventory.LeftClick();
+        if (!leftClickFloor()) Inventory.LeftClick();
     }
 
     private bool leftClickFloor()
@@ -63,9 +61,9 @@ public class Player : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100, worldItemLayer))
+        if (Physics.Raycast(ray, out hit, 100, WorldItemLayer))
         {
-            if (CheckDistance(hit.point)) inventory.TryToPickUp(hit.transform.GetComponent<Item>());
+            if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Item>());
             return true;
         }
         return false;
@@ -76,15 +74,21 @@ public class Player : MonoBehaviour
         return Vector3.Distance(transform.position, targetPosition) < maxDistance;
     }
 
-    public void Block()
+    public void Block(UnityAction unblockAction = null)
     {
         canMove = false;
-        movement.Block();
+        Movement.Block();
+        onUnblockAction = unblockAction;
     }
 
     public void Unblock()
     {
         canMove = true;
-        animations.Set(AnimationType.NONE);
+        Animations.Set(AnimationType.NONE);
+        if (onUnblockAction != null)
+        {
+            onUnblockAction();
+            onUnblockAction = null;
+        }
     }
 }
