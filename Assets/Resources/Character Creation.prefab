@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4b4b3876abef84c99ddfc7fffc9c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelRotationSpeed: 3
   defaultButtonColor: {r: 0.5568628, g: 0.4392157, b: 0.62352943, a: 0.78431374}
   selectedButtonColor: {r: 0.44572207, g: 0.62352943, b: 0.4392157, a: 0.78431374}
   appearanceElementsContainer: {fileID: 671173888934891050}
@@ -446,11 +447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882818360606771559, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8292755762585725995, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_Size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8350206230287375965, guid: d40e4e0a3630df44abcc6389a6f9ff2d, type: 3}
       propertyPath: m_Name

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterCreation : MonoBehaviour
 {
+    [SerializeField] private float modelRotationSpeed = 0.0f;
     [SerializeField] private Color defaultButtonColor;
     [SerializeField] private Color selectedButtonColor;
     [SerializeField] private Transform appearanceElementsContainer;
@@ -33,10 +34,14 @@ public class CharacterCreation : MonoBehaviour
         initializeSelectors();
     }
 
+    private void FixedUpdate()
+    {
+        checkRotation();
+    }
+
     private void Update()
     {
         checkMovement();
-        checkRotation();
     }
 
     private void initializeComponents()
@@ -88,7 +93,7 @@ public class CharacterCreation : MonoBehaviour
 
     private void rotateModel()
     {
-        float angle = -Input.GetAxis("Horizontal") / 3.0f;
+        float angle = -Input.GetAxis("Horizontal") * modelRotationSpeed;
         Model.Rotate(Vector3.up, angle);
     }
 

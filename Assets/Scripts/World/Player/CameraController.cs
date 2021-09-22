@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     [HideInInspector] public Transform Objective;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Objective == null) return;
 

@@ -52,7 +52,8 @@ public class PlayerMovement
         Quaternion rotation = Quaternion.Euler(0, Game.Instance.CameraController.transform.eulerAngles.y, 0);
 
         player.transform.Translate(rotation * direction);
-        player.Model.LookAt(rotation * lookPosition);
+        Quaternion targetRotation = Quaternion.LookRotation(rotation * lookPosition);
+        player.Model.rotation = Quaternion.RotateTowards(player.Model.rotation, targetRotation, 540.0f * Time.deltaTime);
 
         player.Data.Position = player.transform.position;
         player.Data.Rotation = player.Model.eulerAngles;
