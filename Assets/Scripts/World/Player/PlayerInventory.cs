@@ -51,12 +51,14 @@ public class PlayerInventory
     public void DropCurrentItem()
     {
         if (player.Data.ItemInHand == null) return;
-
-        //LastAnimation = "DROPITEM";
+        
         hideCurrentItemInHand();
         dropCurrentItemAtPlayerPosition();
         player.Data.ItemInHand = null;
         itemInHand = null;
+
+        player.Animations.UnSetHandInUse();
+        //LastAnimation = "DROPITEM";
     }
 
     public void ReduceCurrentItemStack(int amount)
@@ -66,6 +68,7 @@ public class PlayerInventory
         if (itemInHand.Data.CurrentStack == 0)
         {
             hideCurrentItemInHand();
+            player.Animations.UnSetHandInUse();
             itemInHand = null;
             player.Data.ItemInHand = null;
         }
@@ -91,6 +94,5 @@ public class PlayerInventory
         GameObject itemOnWorld = Object.Instantiate(itemInHand.Info.WorldModel, dropTransform.position, dropTransform.rotation);
         itemOnWorld.GetComponent<Item>().Data = player.Data.ItemInHand;
         itemOnWorld.GetComponent<Item>().Info = itemInHand.Info;
-        player.Animations.UnSetHandInUse();
     }
 }

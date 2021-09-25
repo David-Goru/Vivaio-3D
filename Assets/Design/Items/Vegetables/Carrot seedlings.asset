@@ -15,7 +15,7 @@ MonoBehaviour:
   ClassName: Seed
   HandItemName: Carrot seedlings
   MaxStack: 12
-  WorldModel: {fileID: 4801165888313889496, guid: bbb5f98203d6c594581a419d34213467, type: 3}
+  WorldModel: {fileID: 8766073862432077592, guid: c974ca8eb722feb44b92379ee472dc60, type: 3}
   CropModel: {fileID: 1446675675370548177, guid: c8035e62a8e18e04b853974e176f2a91, type: 3}
   YieldType: Carrot
   MaxYieldAmount: 2
