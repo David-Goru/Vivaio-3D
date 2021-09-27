@@ -15,10 +15,7 @@ public class Seed : Item
 
     public void Plant(Transform cropTransform, Player player)
     {
-        Vector3 cropPosition = cropTransform.position;
-        Vector3 tilePosition = cropTransform.parent.position;
-
-        bool planted = Game.Instance.Farm.PlantAt((CropInfo)Info, tilePosition, cropPosition);
+        bool planted = Game.Instance.Farm.PlantAt((CropInfo)Info, cropTransform.position);
         if (planted)
         {
             player.Block(() => player.Inventory.ReduceCurrentItemStack(1));

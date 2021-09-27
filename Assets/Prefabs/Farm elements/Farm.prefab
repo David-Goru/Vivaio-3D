@@ -132,7 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 2357507719400706959}
-  ridgePrefab: {fileID: 3698662359342697876, guid: b802a273476823d448d3e7ff6773b0a8, type: 3}
+  ridgePrefabs:
+  - {fileID: 2138513563920170494, guid: 970cb7b578d816b44bbd2930f44b9cb8, type: 3}
+  - {fileID: 3699107303133382054, guid: 6f0fdf2c57a06704fbeba002ec48fb71, type: 3}
+  - {fileID: 2237828714904391710, guid: 28a4a2466545a184f8be65835270e279, type: 3}
+  - {fileID: 8224585746914480315, guid: 5ebeb7a14e3e2f047ab53440314aa1d5, type: 3}
+  tilesPerUnit: 2
+  cropOffsetY: 0.075
   Data:
     Tiles: []
 --- !u!65 &243098321546427366

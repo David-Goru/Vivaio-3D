@@ -5,11 +5,15 @@ using System.Collections.Generic;
 public class Farm : MonoBehaviour
 {
     [SerializeField] private MeshFilter ground;
-    [SerializeField] private GameObject ridgePrefab;
+    [SerializeField] private GameObject[] ridgePrefabs;
+    [SerializeField] private int tilesPerUnit = 0;
+    [SerializeField] private float cropOffsetY = 0.0f;
 
     private List<Tile> tiles;
 
     [HideInInspector] public FarmData Data;
+
+    public float CropOffsetY { get => cropOffsetY; }
 
     private void Start()
     {
@@ -23,7 +27,7 @@ public class Farm : MonoBehaviour
 
     public bool PlowAt(Vector3 position)
     {
-        Vector3 roundedPosition = new Vector3(Mathf.Round(position.x - 0.5f) + 0.5f, 0, Mathf.Round(position.z - 0.5f) + 0.5f);
+        Vector3 roundedPosition = new Vector3(Mathf.Round(position.x * tilesPerUnit) / tilesPerUnit, 0, Mathf.Round(position.z * tilesPerUnit) / tilesPerUnit);
         Tile tile = tiles.Find(x => x.Data.Position == roundedPosition);
         if (tile != null) return false;
 
@@ -34,15 +38,15 @@ public class Farm : MonoBehaviour
 
     public bool WaterAt(Vector3 position)
     {
-        Vector3 roundedPosition = new Vector3(Mathf.Round(position.x - 0.5f) + 0.5f, 0, Mathf.Round(position.z - 0.5f) + 0.5f);
+        Vector3 roundedPosition = new Vector3(Mathf.Round(position.x * tilesPerUnit) / tilesPerUnit, 0, Mathf.Round(position.z * tilesPerUnit) / tilesPerUnit);
         Tile tile = tiles.Find(x => x.Data.Position == roundedPosition);
         if (tile == null) return false;
         return tile.Water();
     }
 
-    public bool PlantAt(CropInfo cropInfo, Vector3 tilePosition, Vector3 cropPosition)
-    {        
-        Tile tile = tiles.Find(x => x.Data.Position == tilePosition);
+    public bool PlantAt(CropInfo cropInfo, Vector3 cropPosition)
+    {
+        Tile tile = tiles.Find(x => x.Data.Position == cropPosition);
         if (tile == null) return false;
         return tile.Plant(cropInfo, cropPosition);
     }
@@ -51,9 +55,11 @@ public class Farm : MonoBehaviour
     {
         yield return new WaitForSeconds(0.35f);
 
-        Tile tile = Instantiate(ridgePrefab, position, Quaternion.identity).GetComponent<Tile>();
+        int ridgePrefabId = Random.Range(0, ridgePrefabs.Length);
+        Tile tile = Instantiate(ridgePrefabs[ridgePrefabId], position, Quaternion.identity).GetComponent<Tile>();
         tile.Data = new TileData();
         tile.Data.Position = position;
+        tile.Data.RidgePrefabId = ridgePrefabId;
         tiles.Add(tile);
     }
 
@@ -71,7 +77,7 @@ public class Farm : MonoBehaviour
     {
         foreach (TileData tileData in Data.Tiles)
         {
-            Tile tile = Instantiate(ridgePrefab, tileData.Position, Quaternion.identity).GetComponent<Tile>();
+            Tile tile = Instantiate(ridgePrefabs[tileData.RidgePrefabId], tileData.Position, Quaternion.identity).GetComponent<Tile>();
             tile.Data = tileData;
             tiles.Add(tile);
         }

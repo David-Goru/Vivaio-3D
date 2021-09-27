@@ -34,7 +34,7 @@ public class WateringCan : Item
     private void setWaterAmount(Transform waterObject)
     {
         Material waterMaterial = waterObject.GetComponent<MeshRenderer>().material;
-        waterMaterial.SetFloat("Fill", (float)((WateringCanData)Data).WaterAmount / (float)((WaterContainerInfo)Info).MaxWaterAmount);
+        waterMaterial.SetFloat("Fill", ((WateringCanData)Data).WaterAmount / ((WaterContainerInfo)Info).MaxWaterAmount);
     }
 
     private IEnumerator updateWaterAmount(int waterAmountChange)

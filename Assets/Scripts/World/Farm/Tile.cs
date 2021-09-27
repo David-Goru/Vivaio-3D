@@ -4,21 +4,20 @@ using System.Collections.Generic;
 
 public class Tile : MonoBehaviour
 {
-    private List<Crop> crops;
+    private Crop crop;
 
     [HideInInspector] public TileData Data;
 
     public void Start()
     {
-        crops = new List<Crop>();
         StartCoroutine(delayRidgeCreation(0.4f));
     }
 
     public bool Plant(CropInfo cropInfo, Vector3 position)
     {
-        if (crops.Exists(x => x.Position == position)) return false;
+        if (crop != null) return false;
 
-        crops.Add(new Crop(cropInfo, position, Data.Watered));
+        crop = new Crop(cropInfo, position, Data.Watered);
         return true;
     }
 
@@ -33,14 +32,13 @@ public class Tile : MonoBehaviour
 
     public Item Harvest(Vector3 position)
     {
-        Crop crop = crops.Find(x => x.Position == position);
         if (crop == null) return new Item();
         return crop.Harvest();
     }
 
     public void NewDay()
     {
-        foreach (Crop crop in crops) crop.NewDay();
+        if (crop != null) crop.NewDay();
         removeWater();
     }
 
@@ -74,11 +72,11 @@ public class Tile : MonoBehaviour
         float delay = 0.25f;
         yield return new WaitForSeconds(delay);
 
-        foreach (Crop crop in crops) crop.Water();
+        if (crop != null) crop.Water();
 
-        timer = 5.0f;
+        timer = 15.0f;
         yObjectivePosition = -0.01f;
-        float currentDryValue = 0.0f;
+        float currentDryValue = 0.5f;
         float objectiveDryValue = -1.0f;
 
         numberOfIterations = timer / tick;

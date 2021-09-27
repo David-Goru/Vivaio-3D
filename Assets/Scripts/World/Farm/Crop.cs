@@ -17,7 +17,7 @@ public class Crop
         data.Position = position;
         data.Watered = wateredOnStart;
 
-        cropObject = Object.Instantiate(info.CropModel, position, Quaternion.identity);
+        cropObject = Object.Instantiate(info.CropModel, position + Vector3.up * Game.Instance.Farm.CropOffsetY, Quaternion.identity);
         data.Quality = info.StartingQuality;
         data.Stage = info.StartingStage;
         showVisuals();
