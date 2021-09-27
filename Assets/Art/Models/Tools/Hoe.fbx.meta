@@ -2,10 +2,7 @@ fileFormatVersion: 2
 guid: db473fd6f1630b449aacbc83e50e45ee
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: 1253145370914345201
-    second: Hoe|Idle
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
