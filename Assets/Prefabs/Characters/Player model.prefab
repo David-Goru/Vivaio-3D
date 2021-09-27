@@ -4321,6 +4321,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7172256721524547768}
     m_Modifications:
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411815281199660021, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777876695771855999, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -430255808390497009, guid: a3546f81d949456489ca8256ab773a18, type: 3}
     - target: {fileID: 8089918522674333843, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
       propertyPath: m_Name
       value: Watering Can
@@ -4404,6 +4436,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7172256719825372607}
     m_Modifications:
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 680014070736292402, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411815281199660021, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701362431955342934, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777876695771855999, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -430255808390497009, guid: a3546f81d949456489ca8256ab773a18, type: 3}
     - target: {fileID: 8089918522674333843, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
       propertyPath: m_Name
       value: Watering Can
