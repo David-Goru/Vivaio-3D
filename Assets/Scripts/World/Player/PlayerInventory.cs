@@ -5,6 +5,8 @@ public class PlayerInventory
     private Player player;
     private Item itemInHand;
 
+    public bool InventoryIsEmpty { get => itemInHand == null; }
+
     public PlayerInventory(Player player)
     {
         this.player = player;

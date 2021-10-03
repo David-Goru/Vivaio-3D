@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public LayerMask FarmTileLayer;
     public LayerMask CropPositionLayer;
     public LayerMask WorldItemLayer;
+    public LayerMask WeedLayer;
     public Transform Model;
 
     [HideInInspector] public PlayerMovement Movement;
@@ -66,6 +67,13 @@ public class Player : MonoBehaviour
             if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Item>());
             return true;
         }
+
+        if (Inventory.InventoryIsEmpty && Physics.Raycast(ray, out hit, 100, WeedLayer))
+        {
+            if (CheckDistance(hit.point)) Game.Instance.Farm.PullWeed(hit.transform.GetComponent<Weed>());
+            return true;
+        }
+
         return false;
     }
 

@@ -58,6 +58,12 @@ public class Farm : MonoBehaviour
         return tile.Plant(cropInfo, cropPosition);
     }
 
+    public void PullWeed(Weed weed)
+    {
+        weeds.Remove(weed);
+        weed.Pull();
+    }
+
     private IEnumerator createRidge(Vector3 position)
     {
         yield return new WaitForSeconds(0.35f);

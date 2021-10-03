@@ -61,6 +61,9 @@ MonoBehaviour:
   WorldItemLayer:
     serializedVersion: 2
     m_Bits: 128
+  WeedLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Model: {fileID: 612530436553494597}
   Data:
     Position: {x: 0, y: 0, z: 0}
