@@ -4,4 +4,5 @@ using System.Collections.Generic;
 public class FarmData
 {
     public List<TileData> Tiles;
+    public List<WeedData> Weeds;
 }

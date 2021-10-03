@@ -137,10 +137,15 @@ MonoBehaviour:
   - {fileID: 3699107303133382054, guid: 6f0fdf2c57a06704fbeba002ec48fb71, type: 3}
   - {fileID: 2237828714904391710, guid: 28a4a2466545a184f8be65835270e279, type: 3}
   - {fileID: 8224585746914480315, guid: 5ebeb7a14e3e2f047ab53440314aa1d5, type: 3}
+  weedPrefabs:
+  - {fileID: 4167158142508598805, guid: 332934a3fdc42274ebc0afa6bf545479, type: 3}
   tilesPerUnit: 2
   cropOffsetY: 0.075
+  farmSize: 100
+  initialWeeds: 1500
   Data:
     Tiles: []
+    Weeds: []
 --- !u!65 &243098321546427366
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,7 +157,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 300, y: 0.1, z: 300}
+  m_Size: {x: 200, y: 0.1, z: 200}
   m_Center: {x: 0, y: -0.05, z: 0}
 --- !u!1 &3879762962765255360
 GameObject:
@@ -628,6 +633,14 @@ PrefabInstance:
     - target: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
       propertyPath: m_LocalPosition.x
