@@ -48,3 +48,22 @@ MonoBehaviour:
   farmObject: {fileID: 3554192250529800187, guid: acc08672a8153394fa650352710a162e, type: 3}
   aiObject: {fileID: 7736635560149034464, guid: 726005ef44ad8c7499eaad46a68a3478, type: 3}
   uiObject: {fileID: 2669162057040989662, guid: 9d344a84190b6fd47a520038269c2207, type: 3}
+  spawnPosition: {x: 90, y: 0, z: 90}
+  Data:
+    ItemsOnWorld: []
+    Player:
+      Position: {x: 0, y: 0, z: 0}
+      Rotation: {x: 0, y: 0, z: 0}
+      ItemInHand:
+        Name: 
+        CurrentStack: 0
+      MainHand: 0
+      AppearanceElements: []
+    Farm:
+      Tiles: []
+      Weeds: []
+  CameraController: {fileID: 0}
+  Player: {fileID: 0}
+  Farm: {fileID: 0}
+  AI: {fileID: 0}
+  UI: {fileID: 0}

@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject farmObject;
     [SerializeField] private GameObject aiObject;
     [SerializeField] private GameObject uiObject;
+    [SerializeField] private Vector3 spawnPosition;
 
     [HideInInspector] public GameData Data;
     [HideInInspector] public CameraController CameraController;
@@ -27,8 +28,8 @@ public class Game : MonoBehaviour
 
     private void initializeGameElements()
     {
-        CameraController = Instantiate(cameraObject).GetComponent<CameraController>();
-        Player = Instantiate(playerObject).GetComponent<Player>();
+        CameraController = Instantiate(cameraObject, spawnPosition, Quaternion.identity).GetComponent<CameraController>();
+        Player = Instantiate(playerObject, spawnPosition, Quaternion.identity).GetComponent<Player>();
         Player.Data = Data.Player;
         Farm = Instantiate(farmObject).GetComponent<Farm>();
         Farm.Data = Data.Farm;

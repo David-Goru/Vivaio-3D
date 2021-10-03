@@ -46,14 +46,13 @@ public class PlayerMovement
 
     private void updatePositionAndRotation()
     {
-        Vector3 direction = lastFrameMovement * Time.deltaTime * lastFrameSpeed;
-        Vector3 position = player.transform.position + direction * 10000;
-        Vector3 lookPosition = new Vector3(position.x, player.transform.position.y, position.z);
-        Quaternion rotation = Quaternion.Euler(0, Game.Instance.CameraController.transform.eulerAngles.y, 0);
+        Vector3 newPosition = player.transform.position + lastFrameMovement * 1000000;
+        Vector3 lookPosition = new Vector3(newPosition.x, player.transform.position.y, newPosition.z);
+        Quaternion cameraRotation = Quaternion.Euler(0, Game.Instance.CameraController.transform.eulerAngles.y, 0);
 
-        player.transform.Translate(rotation * direction);
-        Quaternion targetRotation = Quaternion.LookRotation(rotation * lookPosition);
+        Quaternion targetRotation = Quaternion.LookRotation(cameraRotation * lookPosition);
         player.Model.rotation = Quaternion.RotateTowards(player.Model.rotation, targetRotation, 540.0f * Time.deltaTime);
+        player.transform.Translate(cameraRotation * lastFrameMovement * Time.deltaTime * lastFrameSpeed);
 
         player.Data.Position = player.transform.position;
         player.Data.Rotation = player.Model.eulerAngles;
