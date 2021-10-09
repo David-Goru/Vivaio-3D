@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c3f2aedf488ed4f8d433723bba823f, type: 3}
+  m_Name: Chard seedlings
+  m_EditorClassIdentifier: 
+  ClassName: Seed
+  HandItemName: Chard seedlings
+  MaxStack: 12
+  WorldModel: {fileID: 7663842073244943590, guid: 1a3ddb9e149afdd46b90d19767c141a4, type: 3}
+  CropModel: {fileID: 6867226016869857854, guid: 217ae013572532d40ade03243a291b23, type: 3}
+  YieldType: Chard
+  MaxYieldAmount: 1
+  MinYieldAmount: 1
+  StartingQuality: 50
+  StartingStage: 1
+  MaxStage: 4

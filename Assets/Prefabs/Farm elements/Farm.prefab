@@ -62,7 +62,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8818928226881042165}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431118622351920969
 GameObject:
@@ -88,13 +88,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431118622351920969}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 92, y: 2, z: 92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8818928226881042165}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
 --- !u!114 &1776896486765353067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,7 @@ Transform:
   - {fileID: 8706513899788569355}
   - {fileID: 5189552268341667893}
   - {fileID: 2678313932732820957}
+  - {fileID: 2397507624094059082}
   - {fileID: 5581428297722644906}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -657,6 +658,52 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &7866965959146072931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2397507624094059082}
+  - component: {fileID: 5610565220218693500}
+  m_Layer: 0
+  m_Name: Test Chard Seeds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2397507624094059082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866965959146072931}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 87, y: 2, z: 92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8818928226881042165}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &5610565220218693500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866965959146072931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c779e3a74e07694478054e30f0dcbbb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 11400000, guid: a8b8b167d1423f54e830608de89add6e, type: 2}
+  startingStack: 12
+  specificValues: []
 --- !u!1001 &2797454814687974582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -784,14 +831,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
---- !u!4 &1664176076241361962 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
-  m_PrefabInstance: {fileID: 3677275041615559914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!33 &2357507719400706959 stripped
 MeshFilter:
   m_CorrespondingSourceObject: {fileID: 1423070332297244517, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
+  m_PrefabInstance: {fileID: 3677275041615559914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1664176076241361962 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2598604988866781376, guid: f6e4242bff097df41a72c362af2b9dd5, type: 3}
   m_PrefabInstance: {fileID: 3677275041615559914}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3959273984211849362

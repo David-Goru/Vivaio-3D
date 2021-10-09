@@ -27,6 +27,7 @@ public class Tile : MonoBehaviour
 
         StartCoroutine(waterRidge());
         Data.Watered = true;
+        if (crop != null) crop.Water();
         return true;
     }
 
@@ -71,8 +72,6 @@ public class Tile : MonoBehaviour
 
         float delay = 0.25f;
         yield return new WaitForSeconds(delay);
-
-        if (crop != null) crop.Water();
 
         timer = 15.0f;
         yObjectivePosition = -0.01f;
