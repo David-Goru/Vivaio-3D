@@ -7,6 +7,7 @@ public class Farm : MonoBehaviour
     [SerializeField] private MeshFilter ground;
     [SerializeField] private GameObject[] ridgePrefabs;
     [SerializeField] private GameObject[] weedPrefabs;
+    [SerializeField] private ItemInfo weedInfo;
     [SerializeField] private int tilesPerUnit = 0;
     [SerializeField] private float cropOffsetY = 0.0f;
     [SerializeField] private int farmSize = 0;
@@ -17,6 +18,7 @@ public class Farm : MonoBehaviour
 
     [HideInInspector] public FarmData Data;
 
+    public ItemInfo WeedInfo { get => weedInfo; }
     public float CropOffsetY { get => cropOffsetY; }
 
     private void Start()
@@ -61,7 +63,6 @@ public class Farm : MonoBehaviour
     public void PullWeed(Weed weed)
     {
         weeds.Remove(weed);
-        weed.Pull();
     }
 
     private IEnumerator createRidge(Vector3 position)
@@ -87,10 +88,13 @@ public class Farm : MonoBehaviour
 
             Weed weed = Instantiate(weedPrefabs[modelId], randomPositions[i], Quaternion.Euler(0, yRotation, 0)).GetComponent<Weed>();
             WeedData weedData = new WeedData();
+            weedData.CurrentStack = 1;
+            weedData.Name = "Weed";
             weedData.Position = randomPositions[i];
             weedData.YRotation = yRotation;
             weedData.ModelId = modelId;
             weed.Data = weedData;
+            weed.Info = weedInfo;
 
             weeds.Add(weed);
         }
@@ -144,7 +148,7 @@ public class Farm : MonoBehaviour
         Data.Weeds = new List<WeedData>();
         foreach (Weed weed in weeds)
         {
-            Data.Weeds.Add(weed.Data);
+            Data.Weeds.Add((WeedData)weed.Data);
         }
     }
 

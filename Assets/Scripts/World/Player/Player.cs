@@ -68,9 +68,9 @@ public class Player : MonoBehaviour
             return true;
         }
 
-        if (Inventory.InventoryIsEmpty && Physics.Raycast(ray, out hit, 100, WeedLayer))
+        if (Physics.Raycast(ray, out hit, 100, WeedLayer))
         {
-            if (CheckDistance(hit.point)) Game.Instance.Farm.PullWeed(hit.transform.GetComponent<Weed>());
+            if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Weed>());
             return true;
         }
 

@@ -23,12 +23,6 @@ public class PlayerInventory
 
     public void TryToPickUp(Item item)
     {
-        if (player.Data.ItemInHand != null)
-        {
-            if (player.Data.ItemInHand.Name != item.Data.Name) return;
-            else if (player.Data.ItemInHand.CurrentStack >= itemInHand.Info.MaxStack) return;
-        }
-
         if (player.Data.ItemInHand == null)
         {
             item.PickUp(item.Data.CurrentStack);
@@ -37,6 +31,9 @@ public class PlayerInventory
         }
         else
         {
+            if (player.Data.ItemInHand.Name != item.Data.Name) return;
+            else if (player.Data.ItemInHand.CurrentStack >= itemInHand.Info.MaxStack) return;
+
             int stackToTrade = item.Data.CurrentStack;
             if (stackToTrade + player.Data.ItemInHand.CurrentStack > itemInHand.Info.MaxStack) stackToTrade = itemInHand.Info.MaxStack - player.Data.ItemInHand.CurrentStack;
 

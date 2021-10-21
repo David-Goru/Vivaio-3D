@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
     public virtual void Use(Player player) { }
     public virtual void UpdateVisuals() { }
 
-    public Item PickUp(int amount)
+    public virtual Item PickUp(int amount)
     {
         if (amount >= Data.CurrentStack) Destroy(gameObject);
         return this;
