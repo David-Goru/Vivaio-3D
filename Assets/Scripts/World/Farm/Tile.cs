@@ -73,8 +73,8 @@ public class Tile : MonoBehaviour
         float delay = 0.25f;
         yield return new WaitForSeconds(delay);
 
-        timer = 15.0f;
-        yObjectivePosition = -0.01f;
+        timer = 10.0f;
+        yObjectivePosition = 0.01f;
         float currentDryValue = 0.5f;
         float objectiveDryValue = -1.0f;
 
@@ -90,8 +90,6 @@ public class Tile : MonoBehaviour
             material.SetFloat("WetDry", currentDryValue);
             yield return new WaitForSeconds(tick);
         }
-
-        water.gameObject.SetActive(false);
     }
 
     private void removeWater()
