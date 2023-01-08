@@ -54,8 +54,8 @@ public class PlayerMovement
         player.model.rotation = Quaternion.RotateTowards(player.model.rotation, targetRotation, 540.0f * Time.deltaTime);
         player.transform.Translate(cameraRotation * lastFrameMovement * Time.deltaTime * lastFrameSpeed);
 
-        player.data.Position = player.transform.position;
-        player.data.Rotation = player.model.eulerAngles;
+        player.data.position = player.transform.position;
+        player.data.rotation = player.model.eulerAngles;
     }
 
     private void Walk()

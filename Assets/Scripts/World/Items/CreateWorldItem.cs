@@ -9,11 +9,11 @@ public class CreateWorldItem : MonoBehaviour
 
     private void Start()
     {
-        var dataType = System.Type.GetType(info.ClassName + "Data") ?? System.Type.GetType("ItemData");
+        var dataType = System.Type.GetType(info.className + "Data") ?? System.Type.GetType("ItemData");
         var itemData = (ItemData)System.Activator.CreateInstance(dataType);
 
-        itemData.Name = info.name;
-        itemData.CurrentStack = startingStack;
+        itemData.name = info.name;
+        itemData.currentStack = startingStack;
 
         foreach (var specificValue in specificValues)
         {
@@ -21,7 +21,7 @@ public class CreateWorldItem : MonoBehaviour
             if (field != null) field.SetValue(itemData, specificValue.value);
         }
 
-        var item = Instantiate(info.WorldModel, transform.position, transform.rotation).GetComponent<Item>();
+        var item = Instantiate(info.worldModel, transform.position, transform.rotation).GetComponent<Item>();
         item.info = info;
         item.data = itemData;
 

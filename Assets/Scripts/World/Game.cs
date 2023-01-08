@@ -30,11 +30,11 @@ public class Game : MonoBehaviour
     {
         cameraController = Instantiate(cameraObject, spawnPosition, Quaternion.identity).GetComponent<CameraController>();
         player = Instantiate(playerObject, spawnPosition, Quaternion.identity).GetComponent<Player>();
-        player.data = data.Player;
+        player.data = data.player;
         farm = Instantiate(farmObject).GetComponent<Farm>();
-        farm.data = data.Farm;
+        farm.data = data.farm;
         ai = Instantiate(aiObject).GetComponent<AI>();
-        ai.data = data.AI;
+        ai.data = data.ai;
         ui = Instantiate(uiObject).GetComponent<UI>();
     }
 }

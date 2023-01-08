@@ -26,7 +26,7 @@ public class Farm : MonoBehaviour
         tiles = new List<Tile>();
         weeds = new List<Weed>();
 
-        if (data.Weeds == null) GenerateWeeds();
+        if (data.weeds == null) GenerateWeeds();
     }
 
     public void NewDay()
@@ -37,7 +37,7 @@ public class Farm : MonoBehaviour
     public bool PlowAt(Vector3 position)
     {
         var roundedPosition = new Vector3(Mathf.Round(position.x * tilesPerUnit) / tilesPerUnit, 0, Mathf.Round(position.z * tilesPerUnit) / tilesPerUnit);
-        var tile = tiles.Find(x => x.data.Position == roundedPosition);
+        var tile = tiles.Find(x => x.data.position == roundedPosition);
         if (tile != null) return false;
 
         StartCoroutine(CreateRidge(roundedPosition));
@@ -48,13 +48,13 @@ public class Farm : MonoBehaviour
     public bool WaterAt(Vector3 position)
     {
         var roundedPosition = new Vector3(Mathf.Round(position.x * tilesPerUnit) / tilesPerUnit, 0, Mathf.Round(position.z * tilesPerUnit) / tilesPerUnit);
-        var tile = tiles.Find(x => x.data.Position == roundedPosition);
+        var tile = tiles.Find(x => x.data.position == roundedPosition);
         return tile != null && tile.Water();
     }
 
     public bool PlantAt(CropInfo cropInfo, Vector3 cropPosition)
     {
-        var tile = tiles.Find(x => x.data.Position == cropPosition);
+        var tile = tiles.Find(x => x.data.position == cropPosition);
         return tile != null && tile.Plant(cropInfo, cropPosition);
     }
 
@@ -70,8 +70,8 @@ public class Farm : MonoBehaviour
         int ridgePrefabId = Random.Range(0, ridgePrefabs.Length);
         Tile tile = Instantiate(ridgePrefabs[ridgePrefabId], position, Quaternion.identity).GetComponent<Tile>();
         tile.data = new TileData();
-        tile.data.Position = position;
-        tile.data.RidgePrefabId = ridgePrefabId;
+        tile.data.position = position;
+        tile.data.ridgePrefabId = ridgePrefabId;
         tiles.Add(tile);
     }
 
@@ -87,11 +87,11 @@ public class Farm : MonoBehaviour
             var weed = Instantiate(weedPrefabs[modelId], randomPositions[i], Quaternion.Euler(0, yRotation, 0)).GetComponent<Weed>();
             var weedData = new WeedData
             {
-                CurrentStack = 1,
-                Name = "Weed",
-                Position = randomPositions[i],
-                YRotation = yRotation,
-                ModelId = modelId
+                currentStack = 1,
+                name = "Weed",
+                position = randomPositions[i],
+                yRotation = yRotation,
+                modelId = modelId
             };
             weed.data = weedData;
             weed.info = weedInfo;
@@ -137,31 +137,31 @@ public class Farm : MonoBehaviour
     // NOT IMPLEMENTED YET
     public void Save()
     {
-        data.Tiles = new List<TileData>();
+        data.tiles = new List<TileData>();
         foreach (var tile in tiles)
         {
-            data.Tiles.Add(tile.data);
+            data.tiles.Add(tile.data);
         }
 
-        data.Weeds = new List<WeedData>();
+        data.weeds = new List<WeedData>();
         foreach (var weed in weeds)
         {
-            data.Weeds.Add((WeedData)weed.data);
+            data.weeds.Add((WeedData)weed.data);
         }
     }
 
     public void Load()
     {
-        foreach (var tileData in data.Tiles)
+        foreach (var tileData in data.tiles)
         {
-            var tile = Instantiate(ridgePrefabs[tileData.RidgePrefabId], tileData.Position, Quaternion.identity).GetComponent<Tile>();
+            var tile = Instantiate(ridgePrefabs[tileData.ridgePrefabId], tileData.position, Quaternion.identity).GetComponent<Tile>();
             tile.data = tileData;
             tiles.Add(tile);
         }
 
-        foreach (var weedData in data.Weeds)
+        foreach (var weedData in data.weeds)
         {
-            var weed = Instantiate(weedPrefabs[weedData.ModelId], weedData.Position, Quaternion.Euler(0, weedData.YRotation, 0)).GetComponent<Weed>();
+            var weed = Instantiate(weedPrefabs[weedData.modelId], weedData.position, Quaternion.Euler(0, weedData.yRotation, 0)).GetComponent<Weed>();
             weed.data = weedData;
             weeds.Add(weed);
         }

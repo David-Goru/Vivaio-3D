@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
 
     public virtual Item PickUp(int amount)
     {
-        if (amount >= data.CurrentStack) Destroy(gameObject);
+        if (amount >= data.currentStack) Destroy(gameObject);
         return this;
     }
 }

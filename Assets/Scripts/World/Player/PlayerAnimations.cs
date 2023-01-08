@@ -18,7 +18,7 @@ public class PlayerAnimations
 
         animator = player.model.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
-        ChangeMainHand(player.data.MainHand);
+        ChangeMainHand(player.data.mainHand);
     }
 
     public void Set(AnimationType newAnimation)
@@ -41,7 +41,7 @@ public class PlayerAnimations
 
     private void ChangeMainHand(HandType type = HandType.RIGHT)
     {
-        if (player.data != null) player.data.MainHand = type;
+        if (player.data != null) player.data.mainHand = type;
         animator.SetBool("LeftHand", type == HandType.LEFT);
 
         ChangeHandState(type == HandType.RIGHT ? rightHandModel : leftHandModel, true);
@@ -63,8 +63,8 @@ public class PlayerAnimations
         if (newState == true) mainHandModel = hand;
         hand.gameObject.SetActive(newState);
 
-        if (player.data?.ItemInHand == null) return;
-        var itemInHand = hand.Find(player.data.ItemInHand.Name);
+        if (player.data?.itemInHand == null) return;
+        var itemInHand = hand.Find(player.data.itemInHand.name);
         if (itemInHand != null) itemInHand.gameObject.SetActive(newState);
         else hand.Find("Item").gameObject.SetActive(newState);
     }

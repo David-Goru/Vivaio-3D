@@ -3,16 +3,16 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameData
 {
-    public List<ItemData> ItemsOnWorld;
-    public PlayerData Player;
-    public FarmData Farm;
-    public AIData AI;
+    public List<ItemData> itemsOnWorld;
+    public PlayerData player;
+    public FarmData farm;
+    public AIData ai;
 
     public GameData()
     {
-        ItemsOnWorld = new List<ItemData>();
-        Player = new PlayerData();
-        Farm = new FarmData();
-        AI = new AIData();
+        itemsOnWorld = new List<ItemData>();
+        player = new PlayerData();
+        farm = new FarmData();
+        ai = new AIData();
     }
 }

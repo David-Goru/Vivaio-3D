@@ -8,38 +8,38 @@ public class Crop
     private readonly CropData data;
     private readonly CropInfo info;
 
-    public Vector3 Position => data.Position;
+    public Vector3 Position => data.position;
 
     public Crop(CropInfo info, Vector3 position, bool wateredOnStart)
     {
         this.info = info;
         data = new CropData
         {
-            Position = position,
-            Watered = wateredOnStart
+            position = position,
+            watered = wateredOnStart
         };
 
-        cropObject = Object.Instantiate(info.CropModel, position + Vector3.up * Game.Instance.farm.CropOffsetY, Quaternion.identity);
-        data.Quality = info.StartingQuality;
-        data.Stage = info.StartingStage;
+        cropObject = Object.Instantiate(info.cropModel, position + Vector3.up * Game.Instance.farm.CropOffsetY, Quaternion.identity);
+        data.quality = info.startingQuality;
+        data.stage = info.startingStage;
         ShowVisuals();
     }
 
     public void Water()
     {
-        data.Watered = true;
+        data.watered = true;
     }
 
     public void NewDay()
     {
-        if (data.Watered)
+        if (data.watered)
         {
             ImproveQuality(10);
             NextStage();
         }
         else WorsenQuality(10);
 
-        data.Watered = false;
+        data.watered = false;
         UpdateVisuals();
     }
 
@@ -48,41 +48,41 @@ public class Crop
         var crop = currentVisuals.AddComponent<Item>();
         var cropData = new ItemData
         {
-            CurrentStack = GetYieldAmount()
+            currentStack = GetYieldAmount()
         };
         crop.data = cropData;
 
-        if (data.Quality <= 0) cropData.Name = info.YieldType + " dried";
-        else if (data.Stage >= info.MaxStage) cropData.Name = info.YieldType;
-        else cropData.Name = "None";
+        if (data.quality <= 0) cropData.name = info.yieldType + " dried";
+        else if (data.stage >= info.maxStage) cropData.name = info.yieldType;
+        else cropData.name = "None";
 
         return crop;
     }
 
     private int GetYieldAmount()
     {
-        if (info.MinYieldAmount == info.MaxYieldAmount) return info.MinYieldAmount;
-        if (data.Quality < 25) return info.MinYieldAmount;
-        if (data.Quality > 75) return info.MaxYieldAmount;
-        return Random.Range(info.MinYieldAmount, info.MaxYieldAmount + 1);
+        if (info.minYieldAmount == info.maxYieldAmount) return info.minYieldAmount;
+        if (data.quality < 25) return info.minYieldAmount;
+        if (data.quality > 75) return info.maxYieldAmount;
+        return Random.Range(info.minYieldAmount, info.maxYieldAmount + 1);
     }
 
     private void ImproveQuality(int amount)
     {
-        data.Quality += amount;
-        if (data.Quality > 100) data.Quality = 100;
+        data.quality += amount;
+        if (data.quality > 100) data.quality = 100;
     }
 
     private void WorsenQuality(int amount)
     {
-        data.Quality -= amount;
-        if (data.Quality < 0) data.Quality = 0;
+        data.quality -= amount;
+        if (data.quality < 0) data.quality = 0;
     }
 
     private void NextStage()
     {
-        data.Stage++;
-        if (data.Stage > info.MaxStage) data.Stage = info.MaxStage;
+        data.stage++;
+        if (data.stage > info.maxStage) data.stage = info.maxStage;
     }
 
     private void UpdateVisuals()
@@ -98,7 +98,7 @@ public class Crop
 
     private void ShowVisuals()
     {
-        var newCurrentVisuals = cropObject.transform.Find((data.Quality <= 0 ? "Dry " : "") + data.Stage);
+        var newCurrentVisuals = cropObject.transform.Find((data.quality <= 0 ? "Dry " : "") + data.stage);
         if (newCurrentVisuals == null) return;
         
         currentVisuals = newCurrentVisuals.gameObject;

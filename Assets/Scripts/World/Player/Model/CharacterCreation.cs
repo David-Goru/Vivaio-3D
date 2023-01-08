@@ -26,9 +26,9 @@ public class CharacterCreation : MonoBehaviour
     {
         Instance = this;
         SaveSystem.SetGameData();
-        SaveSystem.GameData.Player = new PlayerData
+        SaveSystem.GameData.player = new PlayerData
         {
-            AppearanceElements = new List<AppearanceElement>()
+            appearanceElements = new List<AppearanceElement>()
         };
 
         InitializeMainHand();
@@ -63,7 +63,7 @@ public class CharacterCreation : MonoBehaviour
 
     private void InitializeMainHand()
     {
-        mainHandPanel.Find(SaveSystem.GameData.Player.MainHand.ToString()).GetComponent<Image>().color = selectedButtonColor;
+        mainHandPanel.Find(SaveSystem.GameData.player.mainHand.ToString()).GetComponent<Image>().color = selectedButtonColor;
     }
 
     private void CheckMovement() 
@@ -118,9 +118,9 @@ public class CharacterCreation : MonoBehaviour
 
     public void ChangeMainHand(string newMainHand)
     {
-        mainHandPanel.Find(SaveSystem.GameData.Player.MainHand.ToString()).GetComponent<Image>().color = defaultButtonColor;
+        mainHandPanel.Find(SaveSystem.GameData.player.mainHand.ToString()).GetComponent<Image>().color = defaultButtonColor;
         mainHandPanel.Find(newMainHand).GetComponent<Image>().color = selectedButtonColor;
-        SaveSystem.GameData.Player.MainHand = newMainHand == "LEFT" ? HandType.LEFT : HandType.RIGHT;
+        SaveSystem.GameData.player.mainHand = newMainHand == "LEFT" ? HandType.LEFT : HandType.RIGHT;
     }
 
     // TEST

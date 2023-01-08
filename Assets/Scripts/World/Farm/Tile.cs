@@ -17,16 +17,16 @@ public class Tile : MonoBehaviour
     {
         if (crop != null) return false;
 
-        crop = new Crop(cropInfo, position, data.Watered);
+        crop = new Crop(cropInfo, position, data.watered);
         return true;
     }
 
     public bool Water()
     {
-        if (data.Watered == true) return false;
+        if (data.watered == true) return false;
 
         StartCoroutine(WaterRidge());
-        data.Watered = true;
+        data.watered = true;
         crop?.Water();
         return true;
     }
@@ -94,7 +94,7 @@ public class Tile : MonoBehaviour
     private void RemoveWater()
     {
         StopAllCoroutines();
-        data.Watered = false;
+        data.watered = false;
         var material = transform.Find("Model").GetComponent<MeshRenderer>().material;
         material.SetFloat("WetDry", 0);
         var water = transform.Find("Water");

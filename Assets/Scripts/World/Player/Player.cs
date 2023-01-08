@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         Inventory = new PlayerInventory(this);
         Game.Instance.cameraController.objective = transform;
 
-        if (data != null) appearance.SetAppearance(model, data.AppearanceElements);
+        if (data != null) appearance.SetAppearance(model, data.appearanceElements);
     }
 
     private void Update()

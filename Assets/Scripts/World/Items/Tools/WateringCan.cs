@@ -31,7 +31,7 @@ public class WateringCan : Item
     private void SetWaterAmount(Transform waterObject)
     {
         var waterMaterial = waterObject.GetComponent<MeshRenderer>().material;
-        waterMaterial.SetFloat("Fill", ((WateringCanData)data).WaterAmount / ((WaterContainerInfo)info).MaxWaterAmount);
+        waterMaterial.SetFloat("Fill", ((WateringCanData)data).WaterAmount / ((WaterContainerInfo)info).maxWaterAmount);
     }
 
     private IEnumerator UpdateWaterAmount(int waterAmountChange)
@@ -43,7 +43,7 @@ public class WateringCan : Item
         const float tick = 0.05f;        
 
         var objectiveWaterAmount = ((WateringCanData)data).WaterAmount + waterAmountChange;
-        if (objectiveWaterAmount > ((WaterContainerInfo)info).MaxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)info).MaxWaterAmount;
+        if (objectiveWaterAmount > ((WaterContainerInfo)info).maxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)info).maxWaterAmount;
         else if (objectiveWaterAmount < 0) objectiveWaterAmount = 0;
 
         float currentWaterAmount = ((WateringCanData)data).WaterAmount;
@@ -53,7 +53,7 @@ public class WateringCan : Item
         {
             timer -= tick;
             currentWaterAmount += amountChange;
-            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)info).MaxWaterAmount);
+            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)info).maxWaterAmount);
             yield return new WaitForSeconds(tick);
         }
 

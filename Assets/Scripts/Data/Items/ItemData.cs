@@ -1,6 +1,6 @@
 [System.Serializable]
 public class ItemData
 {
-    public string Name;
-    public int CurrentStack;
+    public string name;
+    public int currentStack;
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class WeedData : ItemData
 {
-    public Vector3 Position;
-    public float YRotation;
-    public int ModelId;
+    public Vector3 position;
+    public float yRotation;
+    public int modelId;
 }
