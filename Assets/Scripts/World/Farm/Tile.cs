@@ -55,18 +55,17 @@ public class Tile : MonoBehaviour
         water.gameObject.SetActive(true);
 
         var timer = 1.0f;
-        const float tick = 0.05f;
         var yCurrentPosition = -0.01f;
         var yObjectivePosition = 0.02f;
 
-        var numberOfIterations = timer / tick;
+        var numberOfIterations = timer / GlobalVars.TimePerTick;
         var positionIncrement = (yObjectivePosition - yCurrentPosition) / numberOfIterations;
         while (timer > 0.0f)
         {
-            timer -= tick;
+            timer -= GlobalVars.TimePerTick;
             yCurrentPosition += positionIncrement;
             water.position += Vector3.up * positionIncrement;
-            yield return new WaitForSeconds(tick);
+            yield return new WaitForSeconds(GlobalVars.TimePerTick);
         }
 
         var delay = 0.25f;
@@ -77,17 +76,17 @@ public class Tile : MonoBehaviour
         var currentDryValue = 0.5f;
         var objectiveDryValue = -1.0f;
 
-        numberOfIterations = timer / tick;
+        numberOfIterations = timer / GlobalVars.TimePerTick;
         var positionReduction = (yObjectivePosition - yCurrentPosition) / numberOfIterations;
         var dryReduction = (objectiveDryValue - currentDryValue) / numberOfIterations;
         while (timer > 0.0f)
         {
-            timer -= tick;
+            timer -= GlobalVars.TimePerTick;
             yCurrentPosition += positionReduction;
             water.position += Vector3.up * positionReduction;
             currentDryValue += dryReduction;
             material.SetFloat("WetDry", currentDryValue);
-            yield return new WaitForSeconds(tick);
+            yield return new WaitForSeconds(GlobalVars.TimePerTick);
         }
     }
 

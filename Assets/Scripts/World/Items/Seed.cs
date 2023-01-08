@@ -4,7 +4,7 @@ public class Seed : Item
 {
     public override void Use(Player player)
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = GlobalVars.Camera.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out var hit, 100, player.cropPositionLayer)) return;
         if (player.CheckDistance(hit.point)) Plant(hit.transform, player);
     }

@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
     private bool LeftClickFloor()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = GlobalVars.Camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hit, 100, worldItemLayer))
         {
             if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Item>());

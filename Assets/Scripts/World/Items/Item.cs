@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 
     public virtual void Use(Player player) { }
     public virtual void UpdateVisuals() { }
+    public virtual void Reset() { }
 
     public virtual Item PickUp(int amount)
     {
