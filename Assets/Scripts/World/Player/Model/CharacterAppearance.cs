@@ -4,16 +4,16 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "Appearance", menuName = "Character/Appearance", order = 0)]
 public class CharacterAppearance : ScriptableObject
 {
-    public AppearanceElementSelector[] AppearanceElementSelectors;
+    public AppearanceElementSelector[] appearanceElementSelectors;
 
     public void SetAppearance(Transform model, List<AppearanceElement> elements)
     {
-        foreach (AppearanceElement element in elements)
+        foreach (var element in elements)
         {
-            if (element.OptionSelected == "None") continue;
-            GameObject elementObject = model.Find(element.BodyPart.ToString()).Find(element.OptionSelected).gameObject;
+            if (element.optionSelected == "None") continue;
+            var elementObject = model.Find(element.bodyPart.ToString()).Find(element.optionSelected).gameObject;
             elementObject.SetActive(true);
-            elementObject.GetComponent<SkinnedMeshRenderer>().material.color = element.Color;
+            elementObject.GetComponent<SkinnedMeshRenderer>().material.color = element.color;
         }
     }
 
@@ -21,13 +21,13 @@ public class CharacterAppearance : ScriptableObject
     {
         if (option == "None") return;
 
-        model.Find(element.BodyPart.ToString()).Find(option).gameObject.SetActive(false);
+        model.Find(element.bodyPart.ToString()).Find(option).gameObject.SetActive(false);
     }
 
     public void ShowBodyElement(Transform model, AppearanceElement element, string option)
     {
         if (option == "None") return;
 
-        model.Find(element.BodyPart.ToString()).Find(option).gameObject.SetActive(true);
+        model.Find(element.bodyPart.ToString()).Find(option).gameObject.SetActive(true);
     }
 }

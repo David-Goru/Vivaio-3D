@@ -11,8 +11,8 @@ public class NewDayButtonUI : UIElement
             return;
         }
 
-        Button nextDayButton = viewer.GetComponent<Button>();
-        if (nextDayButton != null) nextDayButton.onClick.AddListener(() => Game.Instance.Farm.NewDay());
+        var nextDayButton = viewer.GetComponent<Button>();
+        if (nextDayButton != null) nextDayButton.onClick.AddListener(() => Game.Instance.farm.NewDay());
         else Debug.Log("Button not found in NewDayButtonUI.");
     }
 }

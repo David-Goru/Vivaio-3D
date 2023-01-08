@@ -4,22 +4,16 @@ public class Seed : Item
 {
     public override void Use(Player player)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100, player.CropPositionLayer))
-        {
-            if (player.CheckDistance(hit.point)) Plant(hit.transform, player);
-        }
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out var hit, 100, player.cropPositionLayer)) return;
+        if (player.CheckDistance(hit.point)) Plant(hit.transform, player);
     }
 
-    public void Plant(Transform cropTransform, Player player)
+    private void Plant(Transform cropTransform, Player player)
     {
-        bool planted = Game.Instance.Farm.PlantAt((CropInfo)Info, cropTransform.position);
-        if (planted)
-        {
-            player.Block(() => player.Inventory.ReduceCurrentItemStack(1));
-            player.Animations.Set(AnimationType.PLOW); // AnimationType.PLANT
-        }
+        var planted = Game.Instance.farm.PlantAt((CropInfo)info, cropTransform.position);
+        if (!planted) return;
+        player.Block(() => player.Inventory.ReduceCurrentItemStack(1));
+        player.Animations.Set(AnimationType.PLOW); // AnimationType.PLANT
     }
 }

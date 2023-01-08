@@ -5,71 +5,68 @@ public class WateringCan : Item
 {
     private void Start()
     {
-        Transform waterObject = transform.Find("Water");
-        if (waterObject != null) setWaterAmount(waterObject);
+        var waterObject = transform.Find("Water");
+        if (waterObject != null) SetWaterAmount(waterObject);
     }
 
     public override void Use(Player player)
     {
-        if (((WateringCanData)Data).WaterAmount <= 0) return;
+        if (((WateringCanData)data).WaterAmount <= 0) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100, player.FarmTileLayer) && player.CheckDistance(hit.point)) Water(hit, player);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 100, player.farmTileLayer) && player.CheckDistance(hit.point)) 
+            Water(hit, player);
     }
 
-    public void Water(RaycastHit tile, Player player)
+    private void Water(RaycastHit tile, Player player)
     {
-        bool watered = tile.transform.GetComponent<Farm>().WaterAt(tile.point);
-        if (watered)
-        {
-            activateParticles(player);
-            player.Block();
-            player.Animations.Set(AnimationType.WATER);
-            player.StartCoroutine(updateWaterAmount(-1));
-        }
+        var watered = tile.transform.GetComponent<Farm>().WaterAt(tile.point);
+        if (!watered) return;
+        ActivateParticles(player);
+        player.Block();
+        player.Animations.Set(AnimationType.WATER);
+        player.StartCoroutine(UpdateWaterAmount(-1));
     }
 
-    private void setWaterAmount(Transform waterObject)
+    private void SetWaterAmount(Transform waterObject)
     {
-        Material waterMaterial = waterObject.GetComponent<MeshRenderer>().material;
-        waterMaterial.SetFloat("Fill", ((WateringCanData)Data).WaterAmount / ((WaterContainerInfo)Info).MaxWaterAmount);
+        var waterMaterial = waterObject.GetComponent<MeshRenderer>().material;
+        waterMaterial.SetFloat("Fill", ((WateringCanData)data).WaterAmount / ((WaterContainerInfo)info).MaxWaterAmount);
     }
 
-    private IEnumerator updateWaterAmount(int waterAmountChange)
+    private IEnumerator UpdateWaterAmount(int waterAmountChange)
     {
-        Material material = transform.Find("Water").GetComponent<MeshRenderer>().material;
+        var material = transform.Find("Water").GetComponent<MeshRenderer>().material;
         if (material == null) yield return null;
 
-        float timer = 0.5f;
-        float tick = 0.05f;        
+        var timer = 0.5f;
+        const float tick = 0.05f;        
 
-        int objectiveWaterAmount = ((WateringCanData)Data).WaterAmount + waterAmountChange;
-        if (objectiveWaterAmount > ((WaterContainerInfo)Info).MaxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)Info).MaxWaterAmount;
+        var objectiveWaterAmount = ((WateringCanData)data).WaterAmount + waterAmountChange;
+        if (objectiveWaterAmount > ((WaterContainerInfo)info).MaxWaterAmount) objectiveWaterAmount = ((WaterContainerInfo)info).MaxWaterAmount;
         else if (objectiveWaterAmount < 0) objectiveWaterAmount = 0;
 
-        float currentWaterAmount = ((WateringCanData)Data).WaterAmount;
-        float numberOfIterations = timer / tick;
-        float amountChange = (objectiveWaterAmount - currentWaterAmount) / numberOfIterations;
+        float currentWaterAmount = ((WateringCanData)data).WaterAmount;
+        var numberOfIterations = timer / tick;
+        var amountChange = (objectiveWaterAmount - currentWaterAmount) / numberOfIterations;
         while (timer > 0.0f)
         {
             timer -= tick;
             currentWaterAmount += amountChange;
-            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)Info).MaxWaterAmount);
+            material.SetFloat("Fill", currentWaterAmount / ((WaterContainerInfo)info).MaxWaterAmount);
             yield return new WaitForSeconds(tick);
         }
 
-        ((WateringCanData)Data).WaterAmount = Mathf.RoundToInt(currentWaterAmount);
+        ((WateringCanData)data).WaterAmount = Mathf.RoundToInt(currentWaterAmount);
     }
 
-    private void activateParticles(Player player)
+    private void ActivateParticles(Player player)
     {
-        Transform particles = transform.Find("Particles");
-        if (particles != null) player.StartCoroutine(showParticles(particles.gameObject));
+        var particles = transform.Find("Particles");
+        if (particles != null) player.StartCoroutine(ShowParticles(particles.gameObject));
     }
 
-    private IEnumerator showParticles(GameObject particles)
+    private IEnumerator ShowParticles(GameObject particles)
     {
         particles.SetActive(true);
         yield return new WaitForSeconds(1.0f);

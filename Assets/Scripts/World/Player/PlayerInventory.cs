@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerInventory
 {
-    private Player player;
+    private readonly Player player;
     private Item itemInHand;
 
-    public bool InventoryIsEmpty { get => itemInHand == null; }
+    public bool InventoryIsEmpty => itemInHand == null;
 
     public PlayerInventory(Player player)
     {
@@ -14,34 +14,32 @@ public class PlayerInventory
 
     public void LeftClick()
     {
-        if (itemInHand != null)
-        {
-            itemInHand.Use(player);
-            player.Data.ItemInHand = itemInHand.Data;
-        }
+        if (itemInHand == null) return;
+        itemInHand.Use(player);
+        player.data.ItemInHand = itemInHand.data;
     }
 
     public void TryToPickUp(Item item)
     {
-        if (player.Data.ItemInHand == null)
+        if (player.data.ItemInHand == null)
         {
-            item.PickUp(item.Data.CurrentStack);
-            player.Data.ItemInHand = item.Data;
-            showNewItemInHand(item.Info);
+            item.PickUp(item.data.CurrentStack);
+            player.data.ItemInHand = item.data;
+            ShowNewItemInHand(item.info);
         }
         else
         {
-            if (player.Data.ItemInHand.Name != item.Data.Name) return;
-            else if (player.Data.ItemInHand.CurrentStack >= itemInHand.Info.MaxStack) return;
+            if (player.data.ItemInHand.Name != item.data.Name) return;
+            if (player.data.ItemInHand.CurrentStack >= itemInHand.info.MaxStack) return;
 
-            int stackToTrade = item.Data.CurrentStack;
-            if (stackToTrade + player.Data.ItemInHand.CurrentStack > itemInHand.Info.MaxStack) stackToTrade = itemInHand.Info.MaxStack - player.Data.ItemInHand.CurrentStack;
+            var stackToTrade = item.data.CurrentStack;
+            if (stackToTrade + player.data.ItemInHand.CurrentStack > itemInHand.info.MaxStack) stackToTrade = itemInHand.info.MaxStack - player.data.ItemInHand.CurrentStack;
 
-            player.Data.ItemInHand.CurrentStack += stackToTrade;
+            player.data.ItemInHand.CurrentStack += stackToTrade;
             item.PickUp(stackToTrade);
         }
 
-        if (itemInHand != null) itemInHand.Data = player.Data.ItemInHand;
+        if (itemInHand != null) itemInHand.data = player.data.ItemInHand;
 
         player.Animations.SetHandInUse();
         //LastAnimation = "PICKUPITEM";
@@ -49,11 +47,11 @@ public class PlayerInventory
 
     public void DropCurrentItem()
     {
-        if (player.Data.ItemInHand == null) return;
+        if (player.data.ItemInHand == null) return;
         
-        hideCurrentItemInHand();
-        dropCurrentItemAtPlayerPosition();
-        player.Data.ItemInHand = null;
+        HideCurrentItemInHand();
+        DropCurrentItemAtPlayerPosition();
+        player.data.ItemInHand = null;
         itemInHand = null;
 
         player.Animations.UnSetHandInUse();
@@ -62,36 +60,36 @@ public class PlayerInventory
 
     public void ReduceCurrentItemStack(int amount)
     {
-        itemInHand.Data.CurrentStack -= amount;
+        itemInHand.data.CurrentStack -= amount;
 
-        if (itemInHand.Data.CurrentStack == 0)
+        if (itemInHand.data.CurrentStack == 0)
         {
-            hideCurrentItemInHand();
+            HideCurrentItemInHand();
             player.Animations.UnSetHandInUse();
             itemInHand = null;
-            player.Data.ItemInHand = null;
+            player.data.ItemInHand = null;
         }
     }
 
-    private void showNewItemInHand(ItemInfo info)
+    private void ShowNewItemInHand(ItemInfo info)
     {
-        Transform itemInHandModel = player.Animations.GetHandModel(info.HandItemName);
+        var itemInHandModel = player.Animations.GetHandModel(info.HandItemName);
         itemInHandModel.gameObject.SetActive(true);
         itemInHand = itemInHandModel.GetComponent<Item>();
-        itemInHand.Info = info;
+        itemInHand.info = info;
     }
 
-    private void hideCurrentItemInHand()
+    private void HideCurrentItemInHand()
     {
-        Transform itemInHandModel = player.Animations.GetHandModel(itemInHand.Info.HandItemName);
+        var itemInHandModel = player.Animations.GetHandModel(itemInHand.info.HandItemName);
         itemInHandModel.gameObject.SetActive(false);
     }
 
-    private void dropCurrentItemAtPlayerPosition()
+    private void DropCurrentItemAtPlayerPosition()
     {
-        Transform dropTransform = player.Animations.GetHandModel(itemInHand.Info.HandItemName);
-        GameObject itemOnWorld = Object.Instantiate(itemInHand.Info.WorldModel, dropTransform.position, dropTransform.rotation);
-        itemOnWorld.GetComponent<Item>().Data = player.Data.ItemInHand;
-        itemOnWorld.GetComponent<Item>().Info = itemInHand.Info;
+        var dropTransform = player.Animations.GetHandModel(itemInHand.info.HandItemName);
+        var itemOnWorld = Object.Instantiate(itemInHand.info.WorldModel, dropTransform.position, dropTransform.rotation);
+        itemOnWorld.GetComponent<Item>().data = player.data.ItemInHand;
+        itemOnWorld.GetComponent<Item>().info = itemInHand.info;
     }
 }

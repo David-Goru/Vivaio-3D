@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    public AIData Data;
+    public AIData data;
 }

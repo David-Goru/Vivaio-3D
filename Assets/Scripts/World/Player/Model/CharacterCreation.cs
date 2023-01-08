@@ -14,7 +14,7 @@ public class CharacterCreation : MonoBehaviour
     [SerializeField] private GameObject characterModelPrefab;
     [SerializeField] private Transform mainHandPanel;
 
-    public CharacterAppearance CharacterModel;
+    public CharacterAppearance characterModel;
 
     [NonSerialized] public AnimationType LastAnimation = AnimationType.IDLE;
     [NonSerialized] public Transform Model;
@@ -26,94 +26,94 @@ public class CharacterCreation : MonoBehaviour
     {
         Instance = this;
         SaveSystem.SetGameData();
-        SaveSystem.GameData.Player = new PlayerData();
-        SaveSystem.GameData.Player.AppearanceElements = new List<AppearanceElement>();
+        SaveSystem.GameData.Player = new PlayerData
+        {
+            AppearanceElements = new List<AppearanceElement>()
+        };
 
-        initializeMainHand();
-        initializeComponents();
-        initializeSelectors();
+        InitializeMainHand();
+        InitializeComponents();
+        InitializeSelectors();
     }
 
     private void FixedUpdate()
     {
-        checkRotation();
+        CheckRotation();
     }
 
     private void Update()
     {
-        checkMovement();
+        CheckMovement();
     }
 
-    private void initializeComponents()
+    private void InitializeComponents()
     {
         Model = Instantiate(characterModelPrefab).transform;
         Model.SetParent(transform);
         Animator = Model.GetComponent<Animator>();
     }
 
-    private void initializeSelectors()
+    private void InitializeSelectors()
     {
-        foreach (AppearanceElementSelector selector in CharacterModel.AppearanceElementSelectors)
+        foreach (var selector in characterModel.appearanceElementSelectors)
         {
             selector.SetUpSelector(Model, appearanceElementPrefab, appearanceColorPrefab, appearanceElementsContainer);
         }
     }
 
-    private void initializeMainHand()
+    private void InitializeMainHand()
     {
         mainHandPanel.Find(SaveSystem.GameData.Player.MainHand.ToString()).GetComponent<Image>().color = selectedButtonColor;
     }
 
-    private void checkMovement() 
+    private void CheckMovement() 
     {
-        if (!isMovingModel()) changeAnimation(AnimationType.IDLE);
-        else if (isRunning()) changeAnimation(AnimationType.RUN);
-        else changeAnimation(AnimationType.WALK);
+        if (!IsMovingModel()) ChangeAnimation(AnimationType.IDLE);
+        else if (IsRunning()) ChangeAnimation(AnimationType.RUN);
+        else ChangeAnimation(AnimationType.WALK);
     }
 
-    private void checkRotation()
+    private void CheckRotation()
     {
-        if (isRotatingModel()) rotateModel();
+        if (IsRotatingModel()) RotateModel();
     }
 
-    private bool isRotatingModel()
+    private static bool IsRotatingModel()
     {
         return Input.GetAxis("Horizontal") != 0;
     }
 
-    private bool isMovingModel()
+    private static bool IsMovingModel()
     {
         return Input.GetAxis("Vertical") > 0;
     }
 
-    private bool isRunning()
+    private static bool IsRunning()
     {
         return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
     }
 
-    private void rotateModel()
+    private void RotateModel()
     {
-        float angle = -Input.GetAxis("Horizontal") * modelRotationSpeed;
+        var angle = -Input.GetAxis("Horizontal") * modelRotationSpeed;
         Model.Rotate(Vector3.up, angle);
     }
 
-    private void changeAnimation(AnimationType newAnimation)
+    private void ChangeAnimation(AnimationType newAnimation)
     {
-        if (LastAnimation != newAnimation)
-        {
-            LastAnimation = newAnimation;
-            Animator.SetTrigger(newAnimation.ToString());
-        }
+        if (LastAnimation == newAnimation) return;
+        LastAnimation = newAnimation;
+        Animator.SetTrigger(newAnimation.ToString());
     }
 
     public void HideBodyElement(AppearanceElement appearanceElement, string option)
     {
-        CharacterModel.HideBodyElement(Model, appearanceElement, option);
+        characterModel.HideBodyElement(Model, appearanceElement, option);
     }
 
     public void ShowBodyElement(AppearanceElement appearanceElement, string option)
     {
-        CharacterModel.ShowBodyElement(Model, appearanceElement, option);
+        characterModel.ShowBodyElement(Model, appearanceElement, option);
     }
 
     public void ChangeMainHand(string newMainHand)

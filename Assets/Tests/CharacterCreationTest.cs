@@ -73,9 +73,9 @@ public class CharacterCreationTest
     {
         yield return new WaitForSeconds(0.1f);
 
-        foreach (AppearanceElementSelector selector in characterCreation.CharacterModel.AppearanceElementSelectors)
+        foreach (AppearanceElementSelector selector in characterCreation.characterModel.appearanceElementSelectors)
         {
-            Assert.Greater(selector.Options.Count, 0);
+            Assert.Greater(selector.options.Count, 0);
         }
     }
 

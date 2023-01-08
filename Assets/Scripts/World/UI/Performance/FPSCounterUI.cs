@@ -7,7 +7,7 @@ public class FPSCounterUI : UIElement
     private int frameCount = 0;
     private float deltaTime = 0.0f;
     private float fps = 0.0f;
-    private float updatesPerSecond = 5.0f;
+    private const float UpdatesPerSecond = 5.0f;
 
     public override void Initialize()
     {
@@ -24,18 +24,15 @@ public class FPSCounterUI : UIElement
     public override void Update()
     {
         if (viewer == null) return;
-
-        if (counterText != null)
-        {
-            frameCount++;
-            deltaTime += Time.deltaTime;
-            if (deltaTime > 1.0 / updatesPerSecond)
-            {
-                fps = frameCount / deltaTime;
-                frameCount = 0;
-                deltaTime -= 1.0f / updatesPerSecond;
-                counterText.text = fps.ToString("0.00").Replace(",", ".");
-            }
-        }
+        if (counterText == null) return;
+        
+        frameCount++;
+        deltaTime += Time.deltaTime;
+        if (!(deltaTime > 1.0 / UpdatesPerSecond)) return;
+        
+        fps = frameCount / deltaTime;
+        frameCount = 0;
+        deltaTime -= 1.0f / UpdatesPerSecond;
+        counterText.text = fps.ToString("0.00").Replace(",", ".");
     }
 }

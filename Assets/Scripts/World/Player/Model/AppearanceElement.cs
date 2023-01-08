@@ -3,14 +3,14 @@ using UnityEngine;
 [System.Serializable]
 public class AppearanceElement
 {
-    public BodyPart BodyPart;
-    public string OptionSelected;
-    public Color Color;
+    public BodyPart bodyPart;
+    public string optionSelected;
+    public Color color;
 
     public AppearanceElement(BodyPart bodyPart, string optionSelected, Color color)
     {
-        BodyPart = bodyPart;
-        OptionSelected = optionSelected;
-        Color = color;
+        this.bodyPart = bodyPart;
+        this.optionSelected = optionSelected;
+        this.color = color;
     }
 }

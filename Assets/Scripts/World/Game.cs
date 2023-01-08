@@ -9,12 +9,12 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject uiObject;
     [SerializeField] private Vector3 spawnPosition;
 
-    [HideInInspector] public GameData Data;
-    [HideInInspector] public CameraController CameraController;
-    [HideInInspector] public Player Player;
-    [HideInInspector] public Farm Farm;
-    [HideInInspector] public AI AI;
-    [HideInInspector] public UI UI;
+    [HideInInspector] public GameData data;
+    [HideInInspector] public CameraController cameraController;
+    [HideInInspector] public Player player;
+    [HideInInspector] public Farm farm;
+    [HideInInspector] public AI ai;
+    [HideInInspector] public UI ui;
 
     public static Game Instance;
 
@@ -22,19 +22,19 @@ public class Game : MonoBehaviour
     {
         Instance = this;
 
-        Data = SaveSystem.GetGameData();
-        initializeGameElements();
+        data = SaveSystem.GetGameData();
+        InitializeGameElements();
     }
 
-    private void initializeGameElements()
+    private void InitializeGameElements()
     {
-        CameraController = Instantiate(cameraObject, spawnPosition, Quaternion.identity).GetComponent<CameraController>();
-        Player = Instantiate(playerObject, spawnPosition, Quaternion.identity).GetComponent<Player>();
-        Player.Data = Data.Player;
-        Farm = Instantiate(farmObject).GetComponent<Farm>();
-        Farm.Data = Data.Farm;
-        AI = Instantiate(aiObject).GetComponent<AI>();
-        AI.Data = Data.AI;
-        UI = Instantiate(uiObject).GetComponent<UI>();
+        cameraController = Instantiate(cameraObject, spawnPosition, Quaternion.identity).GetComponent<CameraController>();
+        player = Instantiate(playerObject, spawnPosition, Quaternion.identity).GetComponent<Player>();
+        player.data = data.Player;
+        farm = Instantiate(farmObject).GetComponent<Farm>();
+        farm.data = data.Farm;
+        ai = Instantiate(aiObject).GetComponent<AI>();
+        ai.data = data.AI;
+        ui = Instantiate(uiObject).GetComponent<UI>();
     }
 }

@@ -14,81 +14,81 @@ public class AppearanceElementSelector
     private Transform uiPanel;
     private Text optionText;
 
-    public BodyPart BodyPart;
+    public BodyPart bodyPart;
 
-    [HideInInspector] public List<string> Options;
+    [HideInInspector] public List<string> options;
 
     public void SetUpSelector(Transform model, GameObject panelPrefab, GameObject colorPrefab, Transform parent)
     {
         this.model = model;
-        loadElements();
-        loadPanel(panelPrefab, parent);
-        loadColors(colorPrefab);
+        LoadElements();
+        LoadPanel(panelPrefab, parent);
+        LoadColors(colorPrefab);
 
         optionID = 0;
         index = SaveSystem.GameData.Player.AppearanceElements.Count;
-        SaveSystem.GameData.Player.AppearanceElements.Add(new AppearanceElement(BodyPart, Options[optionID], colors[optionID]));
+        SaveSystem.GameData.Player.AppearanceElements.Add(new AppearanceElement(bodyPart, options[optionID], colors[optionID]));
 
-        changeColor(colors[optionID]);
+        ChangeColor(colors[optionID]);
     }
 
-    private void loadPanel(GameObject prefab, Transform parent)
+    private void LoadPanel(GameObject prefab, Transform parent)
     {
         uiPanel = Object.Instantiate(prefab).transform;
-        uiPanel.transform.Find("Element name").GetComponent<Text>().text = BodyPart.ToString(); // Localization required
+        uiPanel.transform.Find("Element name").GetComponent<Text>().text = bodyPart.ToString(); // Localization required
         optionText = uiPanel.transform.Find("Option name").GetComponent<Text>();
-        optionText.text = Options[0]; // Localization required
-        uiPanel.transform.Find("Next option").GetComponent<Button>().onClick.AddListener(() => changeElement(1));
-        uiPanel.transform.Find("Previus option").GetComponent<Button>().onClick.AddListener(() => changeElement(-1));
+        optionText.text = options[0]; // Localization required
+        uiPanel.transform.Find("Next option").GetComponent<Button>().onClick.AddListener(() => ChangeElement(1));
+        uiPanel.transform.Find("Previus option").GetComponent<Button>().onClick.AddListener(() => ChangeElement(-1));
         uiPanel.transform.SetParent(parent);
     }
 
-    private void loadColors(GameObject prefab)
+    private void LoadColors(GameObject prefab)
     {
-        Transform colorPanel = uiPanel.transform.Find("Colors").Find("Viewport").Find("Content");
-        if (colors.Count > 0) foreach (Color color in colors) createColorButton(color, prefab, colorPanel);
-        else createColorButton(new Color(100, 100, 100), prefab, colorPanel);
+        var colorPanel = uiPanel.transform.Find("Colors").Find("Viewport").Find("Content");
+        if (colors.Count > 0) foreach (Color color in colors) CreateColorButton(color, prefab, colorPanel);
+        else CreateColorButton(new Color(100, 100, 100), prefab, colorPanel);
     }
 
-    private void loadElements()
+    private void LoadElements()
     {
-        Options = new List<string>();
-        if (canBeNone) Options.Add("None");
-        foreach (Transform element in model.Find(BodyPart.ToString())) Options.Add(element.name);
-        if (Options.Count == 0) Options.Add("None");
+        options = new List<string>();
+        if (canBeNone) options.Add("None");
+        foreach (Transform element in model.Find(bodyPart.ToString())) options.Add(element.name);
+        if (options.Count == 0) options.Add("None");
     }
 
-    private void createColorButton(Color color, GameObject prefab, Transform parent)
+    private void CreateColorButton(Color color, GameObject prefab, Transform parent)
     {
-        GameObject colorButton = Object.Instantiate(prefab);
+        var colorButton = Object.Instantiate(prefab);
         colorButton.GetComponent<Image>().color = color;
-        colorButton.GetComponent<Button>().onClick.AddListener(() => changeColor(color));
+        colorButton.GetComponent<Button>().onClick.AddListener(() => ChangeColor(color));
         colorButton.transform.SetParent(parent);
     }
 
-    private void changeElement(int increment)
+    private void ChangeElement(int increment)
     {
-        if (Options.Count < 2) return;
+        if (options.Count < 2) return;
 
-        CharacterCreation.Instance.HideBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], Options[optionID]);
+        CharacterCreation.Instance.HideBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], options[optionID]);
 
-        int maxOptionID = Options.Count - 1;
+        var maxOptionID = options.Count - 1;
         optionID += increment;
         if (optionID < 0) optionID = maxOptionID;
         else if (optionID > maxOptionID) optionID = 0;
 
-        CharacterCreation.Instance.ShowBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], Options[optionID]);
-        SaveSystem.GameData.Player.AppearanceElements[index].OptionSelected = Options[optionID];
-        optionText.text = Options[optionID];
+        CharacterCreation.Instance.ShowBodyElement(SaveSystem.GameData.Player.AppearanceElements[index], options[optionID]);
+        SaveSystem.GameData.Player.AppearanceElements[index].optionSelected = options[optionID];
+        optionText.text = options[optionID];
     }
 
-    private void changeColor(Color color)
+    private void ChangeColor(Color color)
     {
-        foreach (Transform element in model.Find(BodyPart.ToString()))
+        foreach (Transform element in model.Find(bodyPart.ToString()))
         {
             element.GetComponent<SkinnedMeshRenderer>().material.color = color;
         }
 
-        SaveSystem.GameData.Player.AppearanceElements[index].Color = color;
+        SaveSystem.GameData.Player.AppearanceElements[index].color = color;
     }
 }

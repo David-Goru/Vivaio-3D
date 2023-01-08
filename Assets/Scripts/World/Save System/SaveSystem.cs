@@ -9,19 +9,18 @@ public class SaveSystem
 
     public static GameData GetGameData()
     {
-        if (GameData != null) return GameData;
-        return new GameData();
+        return GameData ?? new GameData();
     }
 
     public static void SetGameData()
     {
-        if (GameData == null) GameData = new GameData();
+        GameData ??= new GameData();
     }
 
     public static bool Serialize(GameData data, string path)
     {
-        BinaryFormatter bf = GetBinaryFormatter();
-        FileStream file = File.Create(path);
+        var bf = GetBinaryFormatter();
+        var file = File.Create(path);
         bf.Serialize(file, data);
         file.Close();
 
@@ -30,17 +29,17 @@ public class SaveSystem
 
     public static GameData Deserialize(FileStream file)
     {
-        BinaryFormatter bf = GetBinaryFormatter();
-        GameData data = (GameData)bf.Deserialize(file);
+        var bf = GetBinaryFormatter();
+        var data = (GameData)bf.Deserialize(file);
         file.Close();
 
         return data;
     }
 
-    public static BinaryFormatter GetBinaryFormatter()
+    private static BinaryFormatter GetBinaryFormatter()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        SurrogateSelector surrogateSelector = new SurrogateSelector();
+        var bf = new BinaryFormatter();
+        var surrogateSelector = new SurrogateSelector();
         surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
         surrogateSelector.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
         bf.SurrogateSelector = surrogateSelector;

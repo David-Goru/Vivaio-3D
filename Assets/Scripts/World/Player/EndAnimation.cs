@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EndAnimation : StateMachineBehaviour
 {
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Game.Instance.Player.Unblock();
+        Game.Instance.player.Unblock();
     }
 }

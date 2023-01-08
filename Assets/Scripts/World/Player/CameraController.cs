@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [HideInInspector] public Transform Objective;
+    [HideInInspector] public Transform objective;
 
     private void FixedUpdate()
     {
-        if (Objective == null) return;
+        if (objective == null) return;
 
-        focusObjective();
-        checkRotation();
+        FocusObjective();
+        CheckRotation();
     }
 
-    private void focusObjective()
+    private void FocusObjective()
     {
-        transform.position = new Vector3(Objective.position.x, 0, Objective.position.z);
+        transform.position = new Vector3(objective.position.x, 0, objective.position.z);
     }
 
-    private void checkRotation()
+    private void CheckRotation()
     {
-        if (Input.GetMouseButton(2) && Input.GetAxis("Mouse X") != 0) rotate();
+        if (Input.GetMouseButton(2) && Input.GetAxis("Mouse X") != 0) Rotate();
     }
 
-    private void rotate()
+    private void Rotate()
     {
-        int direction = Input.GetAxis("Mouse X") > 0 ? 1 : -1;
+        var direction = Input.GetAxis("Mouse X") > 0 ? 1 : -1;
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + direction, transform.eulerAngles.z);
     }
 }

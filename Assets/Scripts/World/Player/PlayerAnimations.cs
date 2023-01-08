@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PlayerAnimations
 {
-    private Player player;
-    private Transform rightHandModel;
-    private Transform leftHandModel;
+    private readonly Player player;
+    private readonly Transform rightHandModel;
+    private readonly Transform leftHandModel;
     private AnimationType lastAnimation = AnimationType.IDLE;
-    private Animator animator;
+    private readonly Animator animator;
     private Transform mainHandModel;
-    private int handLayer;
+    private readonly int handLayer;
 
     public PlayerAnimations(Player player, Transform rightHandModel, Transform leftHandModel)
     {
@@ -16,9 +16,9 @@ public class PlayerAnimations
         this.rightHandModel = rightHandModel;
         this.leftHandModel = leftHandModel;
 
-        animator = player.Model.GetComponent<Animator>();
+        animator = player.model.GetComponent<Animator>();
         handLayer = animator.GetLayerIndex("MainHandInUse");
-        ChangeMainHand(player.Data.MainHand);
+        ChangeMainHand(player.data.MainHand);
     }
 
     public void Set(AnimationType newAnimation)
@@ -33,45 +33,43 @@ public class PlayerAnimations
 
     public Transform GetHandModel(string itemName)
     {
-        Transform itemInHandModel = mainHandModel.Find(itemName);
+        var itemInHandModel = mainHandModel.Find(itemName);
         if (itemInHandModel == null) itemInHandModel = mainHandModel.Find("Item");
 
         return itemInHandModel;
     }
 
-    public void ChangeMainHand(HandType type = HandType.RIGHT)
+    private void ChangeMainHand(HandType type = HandType.RIGHT)
     {
-        if (player.Data != null) player.Data.MainHand = type;
+        if (player.data != null) player.data.MainHand = type;
         animator.SetBool("LeftHand", type == HandType.LEFT);
 
-        changeHandState(type == HandType.RIGHT ? rightHandModel : leftHandModel, true);
-        changeHandState(type == HandType.RIGHT ? leftHandModel : rightHandModel, false);
+        ChangeHandState(type == HandType.RIGHT ? rightHandModel : leftHandModel, true);
+        ChangeHandState(type == HandType.RIGHT ? leftHandModel : rightHandModel, false);
     }
 
     public void SetHandInUse()
     {
-        changeHandWeight(1.0f);
+        ChangeHandWeight(1.0f);
     }
 
     public void UnSetHandInUse()
     {
-        changeHandWeight(0.0f);
+        ChangeHandWeight(0.0f);
     }
 
-    private void changeHandState(Transform hand, bool newState)
+    private void ChangeHandState(Transform hand, bool newState)
     {
         if (newState == true) mainHandModel = hand;
         hand.gameObject.SetActive(newState);
 
-        if (player.Data != null && player.Data.ItemInHand != null)
-        {
-            Transform itemInHand = hand.Find(player.Data.ItemInHand.Name);
-            if (itemInHand != null) itemInHand.gameObject.SetActive(newState);
-            else hand.Find("Item").gameObject.SetActive(newState);
-        }
+        if (player.data?.ItemInHand == null) return;
+        var itemInHand = hand.Find(player.data.ItemInHand.Name);
+        if (itemInHand != null) itemInHand.gameObject.SetActive(newState);
+        else hand.Find("Item").gameObject.SetActive(newState);
     }
 
-    private void changeHandWeight(float weightValue)
+    private void ChangeHandWeight(float weightValue)
     {
         animator.SetLayerWeight(handLayer, weightValue);
     }

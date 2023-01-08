@@ -13,68 +13,62 @@ public class Player : MonoBehaviour
     private bool canMove = true;
     private UnityAction onUnblockAction;
 
-    public LayerMask FarmTileLayer;
-    public LayerMask CropPositionLayer;
-    public LayerMask WorldItemLayer;
-    public LayerMask WeedLayer;
-    public Transform Model;
+    public LayerMask farmTileLayer;
+    public LayerMask cropPositionLayer;
+    public LayerMask worldItemLayer;
+    public LayerMask weedLayer;
+    public Transform model;
 
-    [HideInInspector] public PlayerMovement Movement;
-    [HideInInspector] public PlayerAnimations Animations;
-    [HideInInspector] public PlayerInventory Inventory;
-    [HideInInspector] public PlayerData Data;
+    private PlayerMovement movement;
+    public PlayerAnimations Animations;
+    public PlayerInventory Inventory;
+    [HideInInspector] public PlayerData data;
 
     private void Start()
     {
-        Movement = new PlayerMovement(this, defaultSpeed, runSpeed);
+        movement = new PlayerMovement(this, defaultSpeed, runSpeed);
         Animations = new PlayerAnimations(this, rightHandModel, leftHandModel);
         Inventory = new PlayerInventory(this);
-        Game.Instance.CameraController.Objective = transform;
+        Game.Instance.cameraController.objective = transform;
 
-        if (Data != null) appearance.SetAppearance(Model, Data.AppearanceElements);
+        if (data != null) appearance.SetAppearance(model, data.AppearanceElements);
     }
 
     private void Update()
     {
-        if (canMove) checkInput();
+        if (canMove) CheckInput();
     }
 
     private void FixedUpdate()
     {
-        Movement.FixedUpdate();
+        movement.FixedUpdate();
     }
 
-    private void checkInput()
+    private void CheckInput()
     {
-        Movement.Update();
+        movement.Update();
 
-        if (Input.GetMouseButtonDown(0)) leftClick();
+        if (Input.GetMouseButtonDown(0)) LeftClick();
         else if (Input.GetKeyDown(KeyCode.G)) Inventory.DropCurrentItem();
     }
 
-    private void leftClick()
+    private void LeftClick()
     {
-        if (!leftClickFloor()) Inventory.LeftClick();
+        if (!LeftClickFloor()) Inventory.LeftClick();
     }
 
-    private bool leftClickFloor()
+    private bool LeftClickFloor()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100, WorldItemLayer))
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 100, worldItemLayer))
         {
             if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Item>());
             return true;
         }
 
-        if (Physics.Raycast(ray, out hit, 100, WeedLayer))
-        {
-            if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Weed>());
-            return true;
-        }
-
-        return false;
+        if (!Physics.Raycast(ray, out hit, 100, weedLayer)) return false;
+        if (CheckDistance(hit.point)) Inventory.TryToPickUp(hit.transform.GetComponent<Weed>());
+        return true;
     }
 
     public bool CheckDistance(Vector3 targetPosition)
@@ -85,7 +79,7 @@ public class Player : MonoBehaviour
     public void Block(UnityAction unblockAction = null)
     {
         canMove = false;
-        Movement.Block();
+        movement.Block();
         onUnblockAction = unblockAction;
     }
 
@@ -93,10 +87,8 @@ public class Player : MonoBehaviour
     {
         canMove = true;
         Animations.Set(AnimationType.NONE);
-        if (onUnblockAction != null)
-        {
-            onUnblockAction();
-            onUnblockAction = null;
-        }
+        if (onUnblockAction == null) return;
+        onUnblockAction();
+        onUnblockAction = null;
     }
 }

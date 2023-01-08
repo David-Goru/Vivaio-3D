@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement
 {
-    private Player player;
-    private float defaultSpeed;
-    private float runSpeed;
+    private readonly Player player;
+    private readonly float defaultSpeed;
+    private readonly float runSpeed;
     private Vector3 lastFrameMovement;
     private float lastFrameSpeed;
 
@@ -17,12 +17,12 @@ public class PlayerMovement
 
     public void Update()
     {
-        checkInput();
+        CheckInput();
     }
 
     public void FixedUpdate()
     {
-        if (lastFrameMovement != Vector3.zero) updatePositionAndRotation();
+        if (lastFrameMovement != Vector3.zero) UpdatePositionAndRotation();
     }
 
     public void Block()
@@ -30,12 +30,12 @@ public class PlayerMovement
         lastFrameMovement = Vector3.zero;
     }
 
-    private void checkInput()
+    private void CheckInput()
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            if (Input.GetButton("Run")) run();
-            else walk();
+            if (Input.GetButton("Run")) Run();
+            else Walk();
         }
         else if (lastFrameMovement != Vector3.zero)
         {
@@ -44,37 +44,37 @@ public class PlayerMovement
         }
     }
 
-    private void updatePositionAndRotation()
+    private void UpdatePositionAndRotation()
     {
-        Vector3 newPosition = player.transform.position + lastFrameMovement * 1000000;
-        Vector3 lookPosition = new Vector3(newPosition.x, player.transform.position.y, newPosition.z);
-        Quaternion cameraRotation = Quaternion.Euler(0, Game.Instance.CameraController.transform.eulerAngles.y, 0);
+        var newPosition = player.transform.position + lastFrameMovement * 1000000;
+        var lookPosition = new Vector3(newPosition.x, player.transform.position.y, newPosition.z);
+        var cameraRotation = Quaternion.Euler(0, Game.Instance.cameraController.transform.eulerAngles.y, 0);
 
-        Quaternion targetRotation = Quaternion.LookRotation(cameraRotation * lookPosition);
-        player.Model.rotation = Quaternion.RotateTowards(player.Model.rotation, targetRotation, 540.0f * Time.deltaTime);
+        var targetRotation = Quaternion.LookRotation(cameraRotation * lookPosition);
+        player.model.rotation = Quaternion.RotateTowards(player.model.rotation, targetRotation, 540.0f * Time.deltaTime);
         player.transform.Translate(cameraRotation * lastFrameMovement * Time.deltaTime * lastFrameSpeed);
 
-        player.Data.Position = player.transform.position;
-        player.Data.Rotation = player.Model.eulerAngles;
+        player.data.Position = player.transform.position;
+        player.data.Rotation = player.model.eulerAngles;
     }
 
-    private void walk()
+    private void Walk()
     {
         player.Animations.Set(AnimationType.WALK);
-        lastFrameMovement = getLastFrameMovement();
+        lastFrameMovement = GetLastFrameMovement();
         lastFrameSpeed = defaultSpeed;
     }
 
-    private void run()
+    private void Run()
     {
         player.Animations.Set(AnimationType.RUN);
-        lastFrameMovement = getLastFrameMovement();
+        lastFrameMovement = GetLastFrameMovement();
         lastFrameSpeed = runSpeed;
     }
 
-    private Vector3 getLastFrameMovement()
+    private static Vector3 GetLastFrameMovement()
     {
-        Vector3 movementDirectionAndMagnitude = Vector3.right * Input.GetAxis("Horizontal") + Vector3.forward * Input.GetAxis("Vertical");
+        var movementDirectionAndMagnitude = Vector3.right * Input.GetAxis("Horizontal") + Vector3.forward * Input.GetAxis("Vertical");
         return Vector3.ClampMagnitude(movementDirectionAndMagnitude, 1.0f); // Clamp to avoid faster diagonal movement
     }
 }

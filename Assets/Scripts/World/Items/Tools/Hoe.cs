@@ -4,22 +4,16 @@ public class Hoe : Item
 {
     public override void Use(Player player)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100, player.FarmTileLayer))
-        {
-            if (player.CheckDistance(hit.point)) Plow(hit, player);
-        }
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out var hit, 100, player.farmTileLayer)) return;
+        if (player.CheckDistance(hit.point)) Plow(hit, player);
     }
 
-    public void Plow(RaycastHit tile, Player player)
+    private void Plow(RaycastHit tile, Player player)
     {
-        bool plowed = tile.transform.GetComponent<Farm>().PlowAt(tile.point);
-        if (plowed)
-        {
-            player.Block();
-            player.Animations.Set(AnimationType.PLOW);
-        }
+        var plowed = tile.transform.GetComponent<Farm>().PlowAt(tile.point);
+        if (!plowed) return;
+        player.Block();
+        player.Animations.Set(AnimationType.PLOW);
     }
 }

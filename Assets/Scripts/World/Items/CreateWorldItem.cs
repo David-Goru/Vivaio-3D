@@ -9,22 +9,21 @@ public class CreateWorldItem : MonoBehaviour
 
     private void Start()
     {
-        System.Type dataType = System.Type.GetType(info.ClassName + "Data");
-        if (dataType == null) dataType = System.Type.GetType("ItemData");
-        ItemData itemData = (ItemData)System.Activator.CreateInstance(dataType);
+        var dataType = System.Type.GetType(info.ClassName + "Data") ?? System.Type.GetType("ItemData");
+        var itemData = (ItemData)System.Activator.CreateInstance(dataType);
 
         itemData.Name = info.name;
         itemData.CurrentStack = startingStack;
 
-        for (int i = 0; i < specificValues.Length; i++)
+        foreach (var specificValue in specificValues)
         {
-            FieldInfo field = itemData.GetType().GetField(specificValues[i].VariableName);
-            if (field != null) field.SetValue(itemData, specificValues[i].Value);
+            var field = itemData.GetType().GetField(specificValue.variableName);
+            if (field != null) field.SetValue(itemData, specificValue.value);
         }
 
-        Item item = Instantiate(info.WorldModel, transform.position, transform.rotation).GetComponent<Item>();
-        item.Info = info;
-        item.Data = itemData;
+        var item = Instantiate(info.WorldModel, transform.position, transform.rotation).GetComponent<Item>();
+        item.info = info;
+        item.data = itemData;
 
         Destroy(gameObject);
     }
@@ -33,6 +32,6 @@ public class CreateWorldItem : MonoBehaviour
 [System.Serializable]
 public class SpecificValue
 {
-    public string VariableName;
-    public int Value;
+    public string variableName;
+    public int value;
 }

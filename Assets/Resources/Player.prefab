@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 612530436553494597}
   m_Father: {fileID: 0}
@@ -52,20 +53,20 @@ MonoBehaviour:
   rightHandModel: {fileID: 1083850539658174486}
   leftHandModel: {fileID: 1083850539265525009}
   appearance: {fileID: 11400000, guid: 8f039ba7d4bf272419cc5d0f34d4daad, type: 2}
-  FarmTileLayer:
+  farmTileLayer:
     serializedVersion: 2
     m_Bits: 64
-  CropPositionLayer:
+  cropPositionLayer:
     serializedVersion: 2
     m_Bits: 512
-  WorldItemLayer:
+  worldItemLayer:
     serializedVersion: 2
     m_Bits: 128
-  WeedLayer:
+  weedLayer:
     serializedVersion: 2
     m_Bits: 1024
-  Model: {fileID: 612530436553494597}
-  Data:
+  model: {fileID: 612530436553494597}
+  data:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0}
     ItemInHand:
