@@ -4,6 +4,7 @@ using System.Collections;
 public class WateringCan : Item
 {
     private static readonly int FillMaterialId = Shader.PropertyToID("Fill");
+    [SerializeField] private GameObject wateringParticles;
     
     private void Start()
     {
@@ -20,11 +21,17 @@ public class WateringCan : Item
             Water(hit, player);
     }
 
+    public override void Reset()
+    {
+        StopAllCoroutines();
+        if (wateringParticles != null) wateringParticles.SetActive(false);
+    }
+
     private void Water(RaycastHit tile, Player player)
     {
         var watered = tile.transform.GetComponent<Farm>().WaterAt(tile.point);
         if (!watered) return;
-        ActivateParticles(player);
+        ActivateParticles();
         player.Block();
         player.Animations.Set(AnimationType.WATER);
         player.StartCoroutine(UpdateWaterAmount(-1));
@@ -60,16 +67,17 @@ public class WateringCan : Item
         ((WateringCanData)data).WaterAmount = Mathf.RoundToInt(currentWaterAmount);
     }
 
-    private void ActivateParticles(Player player)
+    private void ActivateParticles()
     {
-        var particles = transform.Find("Particles");
-        if (particles != null) player.StartCoroutine(ShowParticles(particles.gameObject));
+        StartCoroutine(ShowParticles());
     }
 
-    private IEnumerator ShowParticles(GameObject particles)
+    private IEnumerator ShowParticles()
     {
-        particles.SetActive(true);
+        if (wateringParticles == null) yield return null;
+        
+        wateringParticles.SetActive(true);
         yield return new WaitForSeconds(1.0f);
-        particles.SetActive(false);
+        wateringParticles.SetActive(false);
     }
 }

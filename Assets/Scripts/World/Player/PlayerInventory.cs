@@ -88,6 +88,7 @@ public class PlayerInventory
     private void DropCurrentItemAtPlayerPosition()
     {
         var dropTransform = player.Animations.GetHandModel(itemInHand.info.handItemName);
+        dropTransform.GetComponent<Item>().Reset();
         var itemOnWorld = Object.Instantiate(itemInHand.info.worldModel, dropTransform.position, dropTransform.rotation);
         itemOnWorld.GetComponent<Item>().data = player.data.itemInHand;
         itemOnWorld.GetComponent<Item>().info = itemInHand.info;
