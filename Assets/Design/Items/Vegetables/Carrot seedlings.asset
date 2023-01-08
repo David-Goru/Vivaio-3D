@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c3f2aedf488ed4f8d433723bba823f, type: 3}
   m_Name: Carrot seedlings
   m_EditorClassIdentifier: 
-  ClassName: Seed
-  HandItemName: Carrot seedlings
-  MaxStack: 12
-  WorldModel: {fileID: 8766073862432077592, guid: c974ca8eb722feb44b92379ee472dc60, type: 3}
-  CropModel: {fileID: 1446675675370548177, guid: c8035e62a8e18e04b853974e176f2a91, type: 3}
-  YieldType: Carrot
-  MaxYieldAmount: 2
-  MinYieldAmount: 6
-  StartingQuality: 50
-  StartingStage: 1
-  MaxStage: 8
+  className: Seed
+  handItemName: Carrot seedlings
+  maxStack: 12
+  worldModel: {fileID: 8766073862432077592, guid: c974ca8eb722feb44b92379ee472dc60, type: 3}
+  cropModel: {fileID: 1446675675370548177, guid: c8035e62a8e18e04b853974e176f2a91, type: 3}
+  yieldType: Carrot
+  maxYieldAmount: 2
+  minYieldAmount: 6
+  startingQuality: 50
+  startingStage: 1
+  maxStage: 8

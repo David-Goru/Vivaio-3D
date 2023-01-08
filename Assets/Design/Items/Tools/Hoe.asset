@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b5a9c83990bb64cbebd6f876d6ca64, type: 3}
   m_Name: Hoe
   m_EditorClassIdentifier: 
-  ClassName: Hoe
-  HandItemName: Hoe
-  MaxStack: 1
-  WorldModel: {fileID: 4781592758002748978, guid: 54af38cdb334a1149b926b196a10f4c9, type: 3}
+  className: Hoe
+  handItemName: Hoe
+  maxStack: 1
+  worldModel: {fileID: 4781592758002748978, guid: 54af38cdb334a1149b926b196a10f4c9, type: 3}

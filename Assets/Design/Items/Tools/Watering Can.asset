@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7542df04bb56d97439c8810938a0256a, type: 3}
   m_Name: Watering Can
   m_EditorClassIdentifier: 
-  ClassName: WateringCan
-  HandItemName: Watering Can
-  MaxStack: 1
-  WorldModel: {fileID: 8089918522674333843, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
-  MaxWaterAmount: 10
+  className: WateringCan
+  handItemName: Watering Can
+  maxStack: 1
+  worldModel: {fileID: 8089918522674333843, guid: 1b71c7ce5ce8dc54095aadfae41bf4a4, type: 3}
+  maxWaterAmount: 10
